@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<carfleet>
+     <car id="1001">
+        <drivername>Brad Pitt</drivername>
+        <carbrand>Toyota</carbrand>
+        <manufactureyear>2021</manufactureyear>
+        <maxseatingcapacity>5</maxseatingcapacity>
+        <vehiclenumber>MH02BY2773</vehiclenumber>
+        <modelnumber>Camry</modelnumber>
+        <city>Boston</city>
+        <availability>available</availability>
+        <licenseexpirydate>02/01/2021</licenseexpirydate>
+    </car>
+    <car id="1002">
+         <drivername>John Smith</drivername>
+        <carbrand>BMW</carbrand>
+        <manufactureyear>2020</manufactureyear>
+        <maxseatingcapacity>8</maxseatingcapacity>
+        <vehiclenumber>AX109901</vehiclenumber>
+        <modelnumber>X3</modelnumber>
+        <city>Folsom</city>
+        <availability>unavailable</availability>
+        <licenseexpirydate>01/01/2020</licenseexpirydate>
+    </car>
+    <car id="1003">
+         <drivername>John Doe</drivername>
+        <carbrand>Audi</carbrand>
+        <manufactureyear>2019</manufactureyear>
+        <maxseatingcapacity>8</maxseatingcapacity>
+        <vehiclenumber>AL109901</vehiclenumber>
+        <modelnumber>A3</modelnumber>
+        <city>San Jose</city>
+        <availability>available</availability>
+        <licenseexpirydate>07/29/2024</licenseexpirydate>
+    </car>
+    <car id="1004">
+         <drivername>Susan Boyle</drivername>
+        <carbrand>Skoda</carbrand>
+        <manufactureyear>2018</manufactureyear>
+        <maxseatingcapacity>5</maxseatingcapacity>
+        <vehiclenumber>FL109902</vehiclenumber>
+        <modelnumber>Octavia</modelnumber>
+        <city>Sacramento</city>
+        <availability>available</availability>
+        <licenseexpirydate>12/01/2028</licenseexpirydate>
+    </car>
+    <car id="1005">
+         <drivername>Mary Jones</drivername>
+        <carbrand>KIA</carbrand>
+        <manufactureyear>2017</manufactureyear>
+        <maxseatingcapacity>6</maxseatingcapacity>
+        <vehiclenumber>MA108901</vehiclenumber>
+        <modelnumber>Rio</modelnumber>
+        <city>New York</city>
+        <availability>unavailable</availability>
+        <licenseexpirydate>08/07/2029</licenseexpirydate>
+    </car>
+    <car id="1006">
+         <drivername>Michael Williams</drivername>
+        <carbrand>Ford</carbrand>
+        <manufactureyear>2016</manufactureyear>
+        <maxseatingcapacity>10</maxseatingcapacity>
+        <vehiclenumber>NH107901</vehiclenumber>
+        <modelnumber>Mustang</modelnumber>
+        <city>New Jersey</city>
+        <availability>available</availability>
+        <licenseexpirydate>03/06/2026</licenseexpirydate>
+    </car>
+    <car id="1007">
+         <drivername>David Miller</drivername>
+        <carbrand>Dodge</carbrand>
+        <manufactureyear>2015</manufactureyear>
+        <maxseatingcapacity>6</maxseatingcapacity>
+        <vehiclenumber>PA103901</vehiclenumber>
+        <modelnumber>Challenger</modelnumber>
+        <city>Dallas</city>
+        <availability>unavailable</availability>
+        <licenseexpirydate>01/03/2022</licenseexpirydate>
+    </car>
+    <car id="1008">
+        <drivername>Michelle Gavin</drivername>
+        <carbrand>Toyota</carbrand>
+        <manufactureyear>2008</manufactureyear>
+        <maxseatingcapacity>3</maxseatingcapacity>
+        <vehiclenumber>A123</vehiclenumber>
+        <modelnumber>Prius</modelnumber>
+        <city>Boston</city>
+        <availability>available</availability>
+        <licenseexpirydate>12/05/2031</licenseexpirydate>
+    </car>
+     <car id="1009">
+        <drivername>Alexia Rosa</drivername>
+        <carbrand>BMW</carbrand>
+        <manufactureyear>2009</manufactureyear>
+        <maxseatingcapacity>4</maxseatingcapacity>
+        <vehiclenumber>LA642</vehiclenumber>
+        <modelnumber>Prius</modelnumber>
+        <city>Scranton</city>
+        <availability>unavailable</availability>
+        <licenseexpirydate>09/11/2029</licenseexpirydate>
+    </car>
+     <car id="1010">
+        <drivername>Lauryn Jordyn</drivername>
+        <carbrand>Chevrolet</carbrand>
+        <manufactureyear>1993</manufactureyear>
+        <maxseatingcapacity>5</maxseatingcapacity>
+        <vehiclenumber>BY561</vehiclenumber>
+        <modelnumber>Spark</modelnumber>
+        <city>Pittsburg</city>
+        <availability>available</availability>
+        <licenseexpirydate>08/07/2023</licenseexpirydate>
+    </car>
+     <car id="1011">
+        <drivername>Tony Kacey</drivername>
+        <carbrand>Nissan</carbrand>
+        <manufactureyear>1999</manufactureyear>
+        <maxseatingcapacity>6</maxseatingcapacity>
+        <vehiclenumber>AZ1564</vehiclenumber>
+        <modelnumber>Sentra</modelnumber>
+        <city>Syracuse</city>
+        <availability>unavailable</availability>
+        <licenseexpirydate>11/29/2037</licenseexpirydate>
+    </car>
+     <car id="1012">
+        <drivername>Eliott Val</drivername>
+        <carbrand>Honda</carbrand>
+        <manufactureyear>2021</manufactureyear>
+        <maxseatingcapacity>5</maxseatingcapacity>
+        <vehiclenumber>WR878</vehiclenumber>
+        <modelnumber>City</modelnumber>
+        <city>Rochester</city>
+        <availability>available</availability>
+        <licenseexpirydate>10/15/2029</licenseexpirydate>
+    </car>
+     <car id="1013">
+        <drivername>Pat Aubree</drivername>
+        <carbrand>Hyundai</carbrand>
+        <manufactureyear>2020</manufactureyear>
+        <maxseatingcapacity>4</maxseatingcapacity>
+        <vehiclenumber>MN641</vehiclenumber>
+        <modelnumber>i20</modelnumber>
+        <city>Cincinatti</city>
+        <availability>available</availability>
+        <licenseexpirydate>04/09/2011</licenseexpirydate>
+    </car>
+     <car id="1014">
+        <drivername>Jodie Erica</drivername>
+        <carbrand>Toyota</carbrand>
+        <manufactureyear>2015</manufactureyear>
+        <maxseatingcapacity>8</maxseatingcapacity>
+        <vehiclenumber>TW789</vehiclenumber>
+        <modelnumber>Sienna</modelnumber>
+        <city>Chicago</city>
+        <availability>available</availability>
+        <licenseexpirydate>01/30/2021</licenseexpirydate>
+    </car>
+     <car id="1015">
+        <drivername>Johnie Allycia</drivername>
+        <carbrand>BMW</carbrand>
+        <manufactureyear>2016</manufactureyear>
+        <maxseatingcapacity>5</maxseatingcapacity>
+        <vehiclenumber>BW678</vehiclenumber>
+        <modelnumber>i8</modelnumber>
+        <city>Tuscon</city>
+        <availability>unavailable</availability>
+        <licenseexpirydate>11/25/2031</licenseexpirydate>
+    </car>
+     <car id="1016">
+        <drivername>Meridith Camilla</drivername>
+        <carbrand>Audi</carbrand>
+        <manufactureyear>2017</manufactureyear>
+        <maxseatingcapacity>6</maxseatingcapacity>
+        <vehiclenumber>KO0981</vehiclenumber>
+        <modelnumber>Q3</modelnumber>
+        <city>Oklahama City</city>
+        <availability>available</availability>
+        <licenseexpirydate>08/22/2022</licenseexpirydate>
+    </car>
+     <car id="1017">
+        <drivername>Isaia Tushar</drivername>
+        <carbrand>Skoda</carbrand>
+        <manufactureyear>2001</manufactureyear>
+        <maxseatingcapacity>5</maxseatingcapacity>
+        <vehiclenumber>IOP99</vehiclenumber>
+        <modelnumber>Octavia</modelnumber>
+        <city>Hawaii</city>
+        <availability>unavailable</availability>
+        <licenseexpirydate>05/23/2041</licenseexpirydate>
+    </car>
+     <car id="1018">
+        <drivername>Anton Ludwig</drivername>
+        <carbrand>Mercedes</carbrand>
+        <manufactureyear>2007</manufactureyear>
+        <maxseatingcapacity>10</maxseatingcapacity>
+        <vehiclenumber>P089B</vehiclenumber>
+        <modelnumber>E-Class</modelnumber>
+        <city>Miami</city>
+        <availability>available</availability>
+        <licenseexpirydate>07/01/2051</licenseexpirydate>
+    </car>
+     <car id="1019">
+        <drivername>Breda Ljubomir</drivername>
+        <carbrand>Toyota</carbrand>
+        <manufactureyear>2003</manufactureyear>
+        <maxseatingcapacity>12</maxseatingcapacity>
+        <vehiclenumber>A780B</vehiclenumber>
+        <modelnumber>Mirai</modelnumber>
+        <city>Rayleigh</city>
+        <availability>available</availability>
+        <licenseexpirydate>05/01/2020</licenseexpirydate>
+    </car> 
+    <car id="1020">
+        <drivername>Lina Osvaldo</drivername>
+        <carbrand>Ford</carbrand>
+        <manufactureyear>2000</manufactureyear>
+        <maxseatingcapacity>10</maxseatingcapacity>
+        <vehiclenumber>A127Y</vehiclenumber>
+        <modelnumber>Fiesta</modelnumber>
+        <city>Los Angeles</city>
+        <availability>unavailable</availability>
+        <licenseexpirydate>05/04/2021</licenseexpirydate>
+    </car>
+</carfleet>

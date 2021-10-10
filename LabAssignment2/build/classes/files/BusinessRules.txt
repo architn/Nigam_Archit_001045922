@@ -1,0 +1,21 @@
+
+************************* Business Rules for Car Fleet Management System *****************************
+
+1. A User can enter records via UI, upload XML, or use internal XML file to enter car data.
+2. Validations that exist on UI:
+
+    i) User has to enter all fields while submitting data for new car profile
+    ii) User cannot create a car profile with expired license number from UI.
+    iii) User cannot create a car profile with duplicate vehicle number.
+
+3. Expired License Number records can be only inserted via XML (back-end)
+
+4. A car can have 3 statuses - Available for Ride, Unavailable for Ride, Booked for Ride.
+
+5. User can update/delete a car record if it is not booked for ride.
+
+6. Only cars with status as "Available for Ride" can be booked. Unavailable cars cannot be booked for ride.
+
+7. User can search a car via availability, brand, city, manufacture year, maximum seats, model number, and vehicle number.
+
+8. User cannot update Serial Number field after entry
