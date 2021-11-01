@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+<residents>
+    <resident id = "1">
+        <mrn>1001</mrn>
+    </resident>
+    <resident id = "2">
+        <mrn>1002</mrn>
+    </resident>
+   <resident id = "3">
+        <mrn>100</mrn>
+    </resident>
+   <resident id = "4">
+        <mrn>1004</mrn>
+    </resident>
+    <resident id = "5">
+        <mrn>1005</mrn>
+    </resident>
+    <resident id = "6">
+        <mrn>1006</mrn>
+    </resident>
+    <resident id = "7">
+        <mrn>1007</mrn>
+    </resident>
+   <resident id = "8">
+        <mrn>1008</mrn>
+    </resident>
+    <resident id = "9">
+        <mrn>1009</mrn>
+    </resident>
+    <resident id = "10">
+        <mrn>1010</mrn>
+    </resident>
+    <resident id = "11">
+        <mrn>1011</mrn>
+    </resident>
+    <resident id = "12">
+        <mrn>1012</mrn>
+    </resident>
+    <resident id = "13">
+        <mrn>1013</mrn>
+    </resident>
+    <resident id = "14">
+        <mrn>1014</mrn>
+    </resident>
+    <resident id = "15">
+        <mrn>1015</mrn>
+    </resident>
+    <resident id = "16">
+        <mrn>1016</mrn>
+    </resident>
+    <resident id = "17">
+        <mrn>1017</mrn>
+    </resident>
+    <resident id = "18">
+        <mrn>1018</mrn>
+    </resident>
+    <resident id = "19">
+        <mrn>1019</mrn>
+    </resident>
+     <resident id = "20">
+        <mrn>1020</mrn>
+    </resident>
+     <resident id = "21">
+        <mrn>1021</mrn>
+    </resident>
+    <resident id = "21">
+        <mrn>1022</mrn>
+    </resident>
+</residents>

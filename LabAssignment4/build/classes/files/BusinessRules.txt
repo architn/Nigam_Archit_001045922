@@ -1,0 +1,44 @@
+Following screens will be there:
+
+1. Register (Create), Update, Delete  Resident as Patient
+2. View Patients
+3. Add, View, Delete Vital Sign records for patient
+4. View Patients Medical Danger Levels by District
+5. View Patients Medical Danger Levels by City
+
+
+- Vital Signs addition for a patient will be counted as an encounter. 
+- Multiple encounters will go down in Encounter History for a patient
+- Records will include patient personal, demographic and medical data.
+
+System will evaluate patient's medical issues with 3 parameters:
+
+1. BMI - Underweight, Normal Weight, Overweight, Obesity
+2. Cholesterol - Desirable, Borderline high, high
+3. Blood Pressure - Normal, Elevated, Hypertension Stage 1, Hyper Tension Stage 2, Hypertensive Crisis
+
+System will provide the option to view which patients are in what category of danger with regards to all the 3 parameters
+System will also enable user to view which patients in which district/community are in danger.
+
+- Every patient needs to have at least one encounter record to be considered a patient.
+
+- If an encounter record does not exist for a patient, they are purely a resident
+
+- Every patient is a resident, but not all residents are patients.
+
+- System will not allow user to create, update or delete resident records. 
+
+Access levels:
+
+0 = Not logged in
+1 = Only access to Register Patients (Administrator, Non Medical Professional)
+2 = Access to Record Data (Doctor, Nurses, Medical Professionals)
+3 = Only access for Data Analysis (Auditors)
+
+The objective is to calculate the total number people in the community with 
+blood pressure that is abnormal for any of the age groups. Create data for at 
+least two communities and display abnormal cases for each community. 
+
+ 
+
+

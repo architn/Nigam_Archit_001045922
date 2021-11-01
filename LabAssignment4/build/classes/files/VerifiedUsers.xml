@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+<users>
+     <user id = "1">
+        <username>Auditor</username>
+        <password>test123</password>
+        <accessLevel>1</accessLevel>
+    </user>
+    <user id = "3">
+        <username>nurseR</username>
+        <password>IXlogin#1</password>
+        <accessLevel>2</accessLevel>
+    </user>
+    <user id = "4">
+        <username>doctorR</username>
+        <password>IXlogin#1</password>
+        <accessLevel>2</accessLevel>
+    </user>
+     <user id = "2">
+        <username>admin</username>
+        <password>admin123</password>
+        <accessLevel>3</accessLevel>
+    </user>
+</users>

@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!-- "Allston", "Back Bay", "Beacon Hill", "Fenway",
+    "North End", "Bay Village", "Downtown"-->
+
+<residents>
+    <resident id = "1">
+        <firstname>Patrick</firstname>
+        <lastname>Brewer</lastname>
+        <dateOfBirth>07/05/1965</dateOfBirth>
+        <gender>Male</gender>
+        <ssn>123987</ssn>
+        <address>7 Street Road</address>
+        <city>Boston</city>
+        <zipcode>02215</zipcode>
+        <state>MA</state>
+        <mrn>1001</mrn>
+        <isResidentAPatient>true</isResidentAPatient>
+    </resident>
+    <resident id = "2">
+        <firstname>Jocelyn</firstname>
+        <lastname>Shitt</lastname>
+        <dateOfBirth>05/28/1934</dateOfBirth>
+        <gender>Female</gender>
+        <ssn>046781</ssn>
+        <address>29 Rock Road</address>
+        <city>Boston</city>
+        <zipcode>54</zipcode>
+        <state>03451</state>
+        <mrn>1002</mrn>
+        <isResidentAPatient>true</isResidentAPatient>
+    </resident>
+     <resident id = "3">
+        <firstname>Ted</firstname>
+        <lastname>Mullens</lastname>
+        <dateOfBirth>01/09/1956</dateOfBirth>
+        <gender>Male</gender>
+        <ssn>12670</ssn>
+        <address>09 Folsom Road</address>
+        <city>Boston</city>
+        <zipcode>02115</zipcode>
+        <state>MA</state>
+        <mrn>1003</mrn>
+        <isResidentAPatient>true</isResidentAPatient>
+    </resident>
+     <resident id = "4">
+        <firstname>Ronnie</firstname>
+        <lastname>Lee</lastname>
+        <dateOfBirth>07/24/1973</dateOfBirth>
+        <gender>Female</gender>
+        <ssn>1457</ssn>
+        <address>10 Roxbury Street</address>
+        <city>Boston</city>
+        <zipcode>06771</zipcode>
+        <state>MA</state>
+        <mrn>1004</mrn>
+        <isResidentAPatient></isResidentAPatient>
+    </resident>
+     <resident id = "5">
+        <firstname>Mutt</firstname>
+        <lastname>Schitt</lastname>
+        <dateOfBirth>11/11/1999</dateOfBirth>
+        <gender>Male</gender>
+        <ssn>431896</ssn>
+        <address>Boston</address>
+        <city>Boston</city>
+        <zipcode>02578</zipcode>
+        <state>MA</state>
+        <mrn>1005</mrn>
+        <isResidentAPatient></isResidentAPatient>
+    </resident>
+     <resident id = "6">
+        <firstname>Bob</firstname>
+        <lastname>Curie</lastname>
+        <dateOfBirth>10/09/1983</dateOfBirth>
+        <gender>Male</gender>
+        <ssn>56790</ssn>
+        <address></address>
+        <city>Boston</city>
+        <zipcode>06541</zipcode>
+        <state>MA</state>
+        <mrn>1006</mrn>
+        <isResidentAPatient></isResidentAPatient>
+    </resident>
+     <resident id = "7">
+        <firstname>Gwen</firstname>
+        <lastname>Currie</lastname>
+        <dateOfBirth>12/07/2000</dateOfBirth>
+        <gender>Female</gender>
+        <ssn>34186</ssn>
+        <address></address>
+        <city>Boston</city>
+        <zipcode>08964</zipcode>
+        <state>MA</state>
+        <mrn>1007</mrn>
+        <isResidentAPatient>true</isResidentAPatient>
+    </resident>
+     <resident id = "8">
+        <firstname>Ray</firstname>
+        <lastname>Butani</lastname>
+        <dateOfBirth>10/18/1981</dateOfBirth>
+        <gender>Male</gender>
+        <ssn>48901</ssn>
+        <address></address>
+        <city>Boston</city>
+        <zipcode>02781</zipcode>
+        <state>MA</state>
+        <mrn>1008</mrn>
+        <isResidentAPatient>true</isResidentAPatient>
+    </resident>
+     <resident id = "9">
+        <firstname>Joe</firstname>
+        <lastname>Goldberg</lastname>
+        <dateOfBirth>11/23/1966</dateOfBirth>
+        <gender>Male</gender>
+        <ssn>98641</ssn>
+        <address></address>
+        <city>Boston</city>
+        <zipcode>02311</zipcode>
+        <state>MA</state>
+        <mrn>1009</mrn>
+        <isResidentAPatient>true</isResidentAPatient>
+    </resident>
+     <resident id = "10">
+        <firstname>Love</firstname>
+        <lastname>Quinn</lastname>
+        <dateOfBirth>06/06/1950</dateOfBirth>
+        <gender>Male</gender>
+        <ssn>120971</ssn>
+        <address>89 Redux Road</address>
+        <city>Boston</city>
+        <zipcode>02215</zipcode>
+        <state>MA</state>
+        <mrn>1010</mrn>
+        <isResidentAPatient>true</isResidentAPatient>
+    </resident>
+     <resident id = "11">
+        <firstname>Natalie</firstname>
+        <lastname>Engler</lastname>
+        <dateOfBirth>01/22/1956</dateOfBirth>
+        <gender>Female</gender>
+        <ssn>09851</ssn>
+        <address>22 Baker Street</address>
+        <city>Boston</city>
+        <zipcode>02115</zipcode>
+        <state>MA</state>
+        <mrn>1011</mrn>
+        <isResidentAPatient>true</isResidentAPatient>
+    </resident>
+     <resident id = "12">
+        <firstname>Gladys</firstname>
+        <lastname>Alvarez</lastname>
+        <dateOfBirth>08/08/1963</dateOfBirth>
+        <gender>Female</gender>
+        <ssn>15631</ssn>
+        <address>106 Huntington Avenue</address>
+        <city>Boston</city>
+        <zipcode>07851</zipcode>
+        <state></state>
+        <mrn>1012</mrn>
+        <isResidentAPatient>true</isResidentAPatient>
+    </resident>
+     <resident id = "13">
+        <firstname>Warren</firstname>
+        <lastname>Sullivan</lastname>
+        <dateOfBirth>09/23/1991</dateOfBirth>
+        <gender>Male</gender>
+        <ssn>17821</ssn>
+        <address>101 Boylston Street</address>
+        <city>Boston</city>
+        <zipcode>02215</zipcode>
+        <state>MA</state>
+        <mrn>1013</mrn>
+        <isResidentAPatient>true</isResidentAPatient>
+    </resident> 
+    <resident id = "14">
+        <firstname>Sherlock</firstname>
+        <lastname>Holmes</lastname>
+        <dateOfBirth>05/06/1963</dateOfBirth>
+        <gender>Male</gender>
+        <ssn>17821</ssn>
+        <address>202 Boylston Street</address>
+        <city>Boston</city>
+        <zipcode>02215</zipcode>
+        <state>MA</state>
+        <mrn>1014</mrn>
+        <isResidentAPatient>true</isResidentAPatient>
+    </resident> 
+    <resident id = "15">
+        <firstname>John</firstname>
+        <lastname>Watson</lastname>
+        <dateOfBirth>07/20/1978</dateOfBirth>
+        <gender>Male</gender>
+        <ssn>17821</ssn>
+        <address>203 Boylston Street</address>
+        <city>Boston</city>
+        <zipcode>02215</zipcode>
+        <state>MA</state>
+        <mrn>1015</mrn>
+        <isResidentAPatient>true</isResidentAPatient>
+    </resident> 
+    <resident id = "16">
+        <firstname>Irene</firstname>
+        <lastname>Adler</lastname>
+        <dateOfBirth>07/31/1990</dateOfBirth>
+        <gender>Female</gender>
+        <ssn>17821</ssn>
+        <address>204 Boylston Street</address>
+        <city>Boston</city>
+        <zipcode>02215</zipcode>
+        <state>MA</state>
+        <mrn>1016</mrn>
+        <isResidentAPatient>true</isResidentAPatient>
+    </resident> 
+    <resident id = "17">
+        <firstname>David</firstname>
+        <lastname>Rose</lastname>
+        <dateOfBirth>05/27/1996</dateOfBirth>
+        <gender>Male</gender>
+        <ssn>17821</ssn>
+        <address>205 Boylston Street</address>
+        <city>Boston</city>
+        <zipcode>02215</zipcode>
+        <state>MA</state>
+        <mrn>1017</mrn>
+        <isResidentAPatient>true</isResidentAPatient>
+    </resident> 
+    <resident id = "18">
+        <firstname>Johnny</firstname>
+        <lastname>Rose</lastname>
+        <dateOfBirth>05/03/1962</dateOfBirth>
+        <gender>Male</gender>
+        <ssn>17821</ssn>
+        <address>206 Boylston Street</address>
+        <city>Boston</city>
+        <zipcode>02215</zipcode>
+        <state>MA</state>
+        <mrn>1018</mrn>
+        <isResidentAPatient>true</isResidentAPatient>
+    </resident> 
+    <resident id = "19">
+        <firstname>Alexis</firstname>
+        <lastname>Rose</lastname>
+        <dateOfBirth>01/09/1934</dateOfBirth>
+        <gender>Female</gender>
+        <ssn>17821</ssn>
+        <address>207 Boylston Street</address>
+        <city>Boston</city>
+        <zipcode>02215</zipcode>
+        <state>MA</state>
+        <mrn>1019</mrn>
+        <isResidentAPatient>true</isResidentAPatient>
+    </resident> 
+    <resident id = "20">
+        <firstname>Moira</firstname>
+        <lastname>Rose</lastname>
+        <dateOfBirth>08/15/1991</dateOfBirth>
+        <gender>Female</gender>
+        <ssn>17821</ssn>
+        <address>208 Boylston Street</address>
+        <city>Boston</city>
+        <zipcode>02215</zipcode>
+        <state>MA</state>
+        <mrn>1020</mrn>
+        <isResidentAPatient>true</isResidentAPatient>
+    </resident> 
+    <resident id = "21">
+        <firstname>Stevie</firstname>
+        <lastname>Budd</lastname>
+        <dateOfBirth>03/21/1984</dateOfBirth>
+        <gender>Female</gender>
+        <ssn>17821</ssn>
+        <address>209 Boylston Street</address>
+        <city>Boston</city>
+        <zipcode>02215</zipcode>
+        <state>MA</state>
+        <mrn>1021</mrn>
+        <isResidentAPatient>true</isResidentAPatient>
+    </resident> 
+    <resident id = "22">
+        <firstname>Rolan</firstname>
+        <lastname>Schitt</lastname>
+        <dateOfBirth>006/19/1982</dateOfBirth>
+        <gender>Male</gender>
+        <ssn>17821</ssn>
+        <address>210 Boylston Street</address>
+        <city>Boston</city>
+        <zipcode>02215</zipcode>
+        <state>MA</state>
+        <mrn>1022</mrn>
+        <isResidentAPatient>false</isResidentAPatient>
+    </resident> 
+    <resident id = "23">
+        <firstname>Twyla</firstname>
+        <lastname>Sands</lastname>
+        <dateOfBirth>04/11/1973</dateOfBirth>
+        <gender>Female</gender>
+        <ssn>17821</ssn>
+        <address>211 Boylston Street</address>
+        <city>Boston</city>
+        <zipcode>02215</zipcode>
+        <state>MA</state>
+        <mrn>1023</mrn>
+        <isResidentAPatient>false</isResidentAPatient>
+    </resident> 
+</residents>
