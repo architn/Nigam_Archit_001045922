@@ -257,6 +257,7 @@ public class CreateResidentPanel extends javax.swing.JPanel {
         String address = txtAddress.getText();
         String state = ddState.getSelectedItem().toString();
         String city = ddCity.getSelectedItem().toString();
+        String zipCode = txtZipCode.getText();
         
         boolean isResidentAPatient = checkboxIsResidentAPatient.isSelected();
         
@@ -264,7 +265,8 @@ public class CreateResidentPanel extends javax.swing.JPanel {
         ResidentInfo residentInfo = residentRecords.addResidentRecord();
         
         if(validationLogic.ValidateIfAllFieldsAreFilledOnCreateResident
-                            (lastName, lastName, address, city, city, ssn, mrn) )
+                            (firstName, lastName, address, zipCode, String.valueOf(dateOfBirth), ssn, mrn) 
+                && validationLogic.ValidateIfPatientIsAbove18YearsOfAge(dateOfBirth))
         {
             residentInfo.setResidentID(residentRecords.GenerateResidentID());
             residentInfo.setResidentFirstName(firstName);
@@ -275,6 +277,8 @@ public class CreateResidentPanel extends javax.swing.JPanel {
             residentInfo.setAddressOfresident(address);
             residentInfo.setState(state);
             residentInfo.setCityOfResident(city);
+            int ageOfResident = residentRecords.CalculateAgeOfPatient(dateOfBirth);
+            residentInfo.setAgeOfResident(ageOfResident);
             if(isResidentAPatient)
             {
                registeredMRNList = patientRecords.addMRNRecord(mrn);

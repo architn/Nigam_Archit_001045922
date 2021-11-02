@@ -5,6 +5,9 @@
  */
 package model;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
 import java.util.Date;
 /**
  *
@@ -15,6 +18,7 @@ public class ResidentInfo {
     private String firstName;
     private String lastName;
     private Date dateOfBirth;
+    private int ageOfResident;
     private String SSN;
     private String address;
     private String city;
@@ -112,4 +116,13 @@ public class ResidentInfo {
     public void setIsResidentAPatient(boolean isResidentAPatient) {
         this.isResidentAPatient = isResidentAPatient;
     }  
+
+    public int getAgeOfResident() {
+        return ageOfResident;
+    }
+
+    public void setAgeOfResident(int ageOfResident) {
+        this.ageOfResident = ageOfResident;
+    }
+   
 }

@@ -6,6 +6,10 @@
 package controller;
 
 import java.io.File;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
+import java.util.Date;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.xml.parsers.DocumentBuilder;
@@ -75,7 +79,7 @@ public class ValidationLogic {
         return validationSuccessful;
     }
     
-    public boolean ValidateThatAllFieldsAreFilledAndNumericDuringUpdate(String weight, 
+    public boolean ValidateThatAllFieldsAreFilledDuringUpdate(String weight, 
             String height, String cholesterolReading, String systoleReading, 
             String diastoleReading)
     {
@@ -85,41 +89,12 @@ public class ValidationLogic {
         {
             areAllFieldsFilled = true;
         }
-        boolean areAllFieldsNumeric = false;
-        
-        if(weight.length() >= 1 && height.length() >= 1 && cholesterolReading.length() >= 1
-                && systoleReading.length() >= 1 && diastoleReading.length() >= 1)
-        {
-            if(     ! weight.matches(AppConstants.RegularExpressionForNumericFields)
-                    || ! height.matches(AppConstants.RegularExpressionForNumericFields) 
-                    || ! cholesterolReading.matches(AppConstants.RegularExpressionForNumericFields)
-                    || ! systoleReading.matches(AppConstants.RegularExpressionForNumericFields)
-                    || ! diastoleReading.matches(AppConstants.RegularExpressionForNumericFields))
-            {
-                areAllFieldsNumeric = false;
-                JOptionPane.showMessageDialog(frame, AppConstants.ErrorMessageAllFieldsAreNotNumeric);
-            }
-            else 
-            {
-                areAllFieldsNumeric = true;
-            }
-        }
         else
         {
                 areAllFieldsFilled = false;
                 JOptionPane.showMessageDialog(frame, AppConstants.ErrorMessageAllFieldsNotFilled);
         }
-        
-        boolean validationSuccessful = false;
-        
-        if(areAllFieldsFilled && areAllFieldsNumeric)
-        {
-            validationSuccessful = true;
-        }
-        else{
-            validationSuccessful = false;
-        }
-        return validationSuccessful;
+        return areAllFieldsFilled;
     }
     
     
@@ -199,5 +174,37 @@ public class ValidationLogic {
             JOptionPane.showMessageDialog(frame, AppConstants.ErrorMessageAllFieldsNotFilled);
         }
         return areAllFieldsSet;
+    }
+    
+    public boolean ValidateIfPatientIsAbove18YearsOfAge(Date dateOfBirth)
+    {
+        LocalDate today = LocalDate.now(); 
+        boolean isPatientAboveOrEqualtoEighteeenYearsOfAge = false;
+        LocalDate dateOfBirthOfPatient = dateOfBirth.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        Period p = Period.between(dateOfBirthOfPatient, today);
+        int ageOfPatient = p.getYears();
+        if(ageOfPatient >= 18)
+        {
+            isPatientAboveOrEqualtoEighteeenYearsOfAge = true;
+        }
+        else{
+            isPatientAboveOrEqualtoEighteeenYearsOfAge = false;
+            JOptionPane.showMessageDialog(frame, AppConstants.ErrorPatientIsAbove18YearsOfAge);
+        }
+        return isPatientAboveOrEqualtoEighteeenYearsOfAge;
+    }
+    
+    public boolean ValidateIfPatientIsAbove18YearsOfAge(int ageOfPatient)
+    {
+        boolean isPatientAboveOrEqualtoEighteeenYearsOfAge = false;
+        if(ageOfPatient >= 18)
+        {
+            isPatientAboveOrEqualtoEighteeenYearsOfAge = true;
+        }
+        else{
+            isPatientAboveOrEqualtoEighteeenYearsOfAge = false;
+            JOptionPane.showMessageDialog(frame, AppConstants.ErrorPatientIsAbove18YearsOfAge);
+        }
+        return isPatientAboveOrEqualtoEighteeenYearsOfAge;
     }
 }

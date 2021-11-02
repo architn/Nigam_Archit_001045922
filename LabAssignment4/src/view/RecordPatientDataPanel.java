@@ -290,7 +290,8 @@ layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         if(validationLogic.ValidateIfAllFieldsOnUIAreFilledAndAreNumeric(mrn, ageInString,  weightInString, 
                 heightInString, totalCholesterolReadingInString, systoleInString, diastoleInString) 
                 && validationLogic.ValidateIfMRNIsARegisteredPatient(patientRecords, mrn)
-                && validationLogic.ValidateIfMRNDoesNotHaveAnExistingVitalSign(patientRecords, mrn))
+                && validationLogic.ValidateIfMRNDoesNotHaveAnExistingVitalSign(patientRecords, mrn)
+                && validationLogic.ValidateIfPatientIsAbove18YearsOfAge(Integer.parseInt(ageInString)))
         {
             double weight = Double.parseDouble(txtWeight.getText());
             double height = Double.parseDouble(txtHeight.getText());

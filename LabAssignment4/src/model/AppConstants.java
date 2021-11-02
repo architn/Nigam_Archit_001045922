@@ -51,6 +51,7 @@ public class AppConstants {
     public String ErrorMessageUnauthorizedUserToRecordPatientData = "Logged in user not authorized to record patient data";
     public String ErrorMessageUnauthorizedUserToModifyPatientData = "Logged in user not authorized to modify patient data";
     public String ErrorMessageNoPatientsFound = "No patient found with MRN";
+    public String ErrorMessageNoEncounterRecordsFound = "No encounter records found for patient with MRN";
     public String ErrorMessageEmptyFieldSearch = "Please enter a MRN before searching";
     public String ErrorMessageResidentIDEmptyFieldSearch = "Please enter a Resident ID before searching";
     public String ErrorMessageNoResidentsFound = "No residents found!";
@@ -58,13 +59,14 @@ public class AppConstants {
     public String DataSuccessfullySaved = "Past Encounter Records have been populated for analysis!";
     public String ErrorMessageForNoRowSelected = "No row selected! Please select a row!";
     public String UpdateSuccessful = "Patient encounter record successfully updated!";
-    public String DeleteSuccessful = "Patient encounter record successfull deleted!";
+    public String DeleteSuccessful = "Patient encounter record successfully deleted!";
     public String RegistrationOfAResidentAsAPatientSuccessful1 = "Resident with resident ID '";
     public String RegistrationOfAResidentAsAPatientSuccessful2 = "' has been successfully registered as a patient";
     public String TheMRN = "The MRN '";
     public String ErrorMessageForDuplicateVitalSigns = "' already has a vital sign logged in the system!"
             + " Click on Modify Patients tab to change vital signs for the corresponding MRN";
     public String ResidentAddedSuccessfullyMessage = "Resident Record added successfully with resident ID '";
+    public String ErrorPatientIsAbove18YearsOfAge = "Patient should be above 18 years of age!";
 
     // File paths
     public String EncountersXMLFilePath = "/src/files/EncounterRecords.xml";
@@ -100,6 +102,7 @@ public class AppConstants {
     
     // Regular Expression
     public String RegularExpressionForNumericFields = "[0-9]+";
+    public String AlternateRegexForNumberAndDecimals = "/^[+-]?([0-9]+\\.?[0-9]*|\\.[0-9]+)$/";
     
     // Look-up Values Ethnicity
     public String WhiteNonHispanic = "White, non-Hispanic";

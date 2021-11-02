@@ -675,7 +675,7 @@ public class PatientDataAnalysisPanel extends javax.swing.JPanel {
          tblEthnicity.setValueAt(AppConstants.WhiteNonHispanic, 0, 0);
          tblEthnicity.setValueAt(countOfPatientsWithAbnormalBMILevelsWhite, 0, 1);
          tblEthnicity.setValueAt(countOfPatientsWithAbnormalBPLevelsWhite, 0, 2);
-         tblEthnicity.setValueAt(countOfPatientsWithAbnormalBPLevelsWhite, 0, 3);
+         tblEthnicity.setValueAt(countOfPatientsWithAbnormalCholesterolLevelsWhite, 0, 3);
          
          tblEthnicity.setValueAt(AppConstants.BlackNonHispanic, 1, 0);
          tblEthnicity.setValueAt(countOfPatientsWithAbnormalBMILevelsAfricanAmerican, 1, 1);

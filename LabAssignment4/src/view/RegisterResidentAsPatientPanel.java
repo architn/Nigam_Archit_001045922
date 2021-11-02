@@ -258,10 +258,10 @@ public class RegisterResidentAsPatientPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         int searchResults = 0;
         String firstName = txtFirstName.getText();
-        String lastName = txtFirstName.getText();
-        String residentID = txtFirstName.getText();
-        String city = txtFirstName.getText();
-        String state = txtFirstName.getText();
+        String lastName = txtLastName.getText();
+        String residentID = txtResidentID.getText();
+        String city = txtCity.getText();
+        String state = txtState.getText();
         String dateOfBirth = txtDOB.getText();
         String mrn = txtMRN.getText();
         if( validationLogic.ValidateAllFieldsAreFilledOnRegistration(residentID, firstName, lastName, dateOfBirth, city, state, mrn))

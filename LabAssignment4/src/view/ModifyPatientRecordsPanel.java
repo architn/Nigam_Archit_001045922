@@ -235,7 +235,7 @@ public class ModifyPatientRecordsPanel extends javax.swing.JPanel {
         }
         if(tblEncounterRecords.getRowCount() == 0)
         {
-            JOptionPane.showMessageDialog(this, AppConstants.ErrorMessageNoPatientsFound + " '"+txtMRN.getText()+"'");
+            JOptionPane.showMessageDialog(this, AppConstants.ErrorMessageNoEncounterRecordsFound + " '"+txtMRN.getText()+"'");
         }
 
     }//GEN-LAST:event_btnSearchActionPerformed
@@ -265,7 +265,7 @@ public class ModifyPatientRecordsPanel extends javax.swing.JPanel {
         String diastoleReadingInString = txtDiastole.getText();
         String cholesterolReadingInString = txtCholesterol.getText(); 
         
-        if(validationLogic.ValidateThatAllFieldsAreFilledAndNumericDuringUpdate(weightInString, heightInString, systoleReadingInString, 
+        if(validationLogic.ValidateThatAllFieldsAreFilledDuringUpdate(weightInString, heightInString, systoleReadingInString, 
                 diastoleReadingInString, cholesterolReadingInString))
         {
             
