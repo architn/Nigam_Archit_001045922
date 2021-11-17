@@ -9,6 +9,7 @@ import Business.Customer.CustomerDirectory;
 import Business.DeliveryMan.DeliveryManDirectory;
 import Business.EcoSystem;
 import Business.Order.OrderDirectory;
+import Business.Organization;
 import Business.Restaurant.Restaurant;
 import Business.Restaurant.RestaurantDirectory;
 import Business.UserAccount.UserAccount;
@@ -26,13 +27,12 @@ public class AddRestaurantJPanel extends javax.swing.JPanel {
      */
     private Restaurant restaurant;
     JPanel userProcessContainer;
-    UserAccount account;
-    RestaurantDirectory restaurantDirectory;
+    private Organization organization;
     EcoSystem system; 
-    public AddRestaurantJPanel(JPanel userProcessContainer, UserAccount account, EcoSystem system) {
+    public AddRestaurantJPanel(JPanel userProcessContainer, EcoSystem system, Organization organization) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
-        this.account = account;
+        this.organization = organization;
         this.system = system;
     }
 
@@ -118,7 +118,7 @@ public class AddRestaurantJPanel extends javax.swing.JPanel {
         String restaurantAddress = txtRestaurantAddress.getText();
         String phoneNumber = txtRestaurantPhoneNumber.getText();
         
-        restaurant =restaurantDirectory.createRestaurant(restaurantName, phoneNumber, restaurantAddress);
+        restaurant =system.getRestaurantDirectory().createRestaurant(restaurantName, phoneNumber, restaurantAddress);
         JOptionPane.showMessageDialog(this, "Restaurant Added");
     }//GEN-LAST:event_btnSaveActionPerformed
 

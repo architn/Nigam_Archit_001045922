@@ -1,11 +1,7 @@
 package Business.DB4OUtil;
 
 import Business.ConfigureASystem;
-import Business.Customer.CustomerDirectory;
-import Business.DeliveryMan.DeliveryManDirectory;
 import Business.EcoSystem;
-import Business.Menu.MenuItemsDirectory;
-import Business.Restaurant.RestaurantDirectory;
 import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
@@ -50,7 +46,6 @@ public class DB4OUtil {
             config.common().objectClass(EcoSystem.class).cascadeOnUpdate(true); // Change to the object you want to save
 
             ObjectContainer db = Db4oEmbedded.openFile(config, FILENAME);
-            System.out.println("DB connection Success");
             return db;
         } catch (Exception ex) {
             System.out.print(ex.getMessage());
@@ -63,7 +58,6 @@ public class DB4OUtil {
         conn.store(system);
         conn.commit();
         conn.close();
-        System.out.println("Store Data Success");
     }
     
     public EcoSystem retrieveSystem(){

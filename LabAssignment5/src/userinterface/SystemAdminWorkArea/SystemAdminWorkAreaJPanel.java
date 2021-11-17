@@ -36,10 +36,12 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
      */
     JPanel userProcessContainer;
     EcoSystem ecosystem;
-    UserAccount ua = new UserAccount();
+    Organization customerOrganization;
+    Organization deliveryorganization;
+    Organization organization;
 //    RestaurantDirectory restaurantDirectory = new RestaurantDirectory();
 //    MenuItemsDirectory menuItemsDirectory = new MenuItemsDirectory();
-    public SystemAdminWorkAreaJPanel(JPanel userProcessContainer,UserAccount account, EcoSystem ecosystem) {
+    public SystemAdminWorkAreaJPanel(JPanel userProcessContainer, EcoSystem ecosystem) {
         initComponents();
         this.userProcessContainer=userProcessContainer;
         this.ecosystem=ecosystem;
@@ -143,13 +145,13 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnAddMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddMenuItemActionPerformed
            
-        AddMenuItemJPanel addMenuItemJPanel = new AddMenuItemJPanel(userProcessContainer, ua, ecosystem);
-        jSplitPane.setRightComponent(addMenuItemJPanel);
+//        AddMenuItemJPanel addMenuItemJPanel = new AddMenuItemJPanel(userProcessContainer, ua, ecosystem);
+//        jSplitPane.setRightComponent(addMenuItemJPanel);
     }//GEN-LAST:event_btnAddMenuItemActionPerformed
 
     private void btnAddDeliveryManActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddDeliveryManActionPerformed
-        AddDeliveryManJPanel addDeliveryManPanel = new AddDeliveryManJPanel(userProcessContainer, ua, ecosystem);
-        jSplitPane.setRightComponent(addDeliveryManPanel);
+//        AddDeliveryManJPanel addDeliveryManPanel = new AddDeliveryManJPanel(userProcessContainer, ua, ecosystem);
+//        jSplitPane.setRightComponent(addDeliveryManPanel);
     }//GEN-LAST:event_btnAddDeliveryManActionPerformed
 
     private void btnManageOrdersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageOrdersActionPerformed
@@ -159,7 +161,7 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnAddRestaurantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddRestaurantActionPerformed
         // TODO add your handling code here:
-        AddRestaurantJPanel addRestaurantPanel = new AddRestaurantJPanel(userProcessContainer, ua, ecosystem);
+        AddRestaurantJPanel addRestaurantPanel = new AddRestaurantJPanel(userProcessContainer, ecosystem, organization );
         jSplitPane.setRightComponent(addRestaurantPanel);
     }//GEN-LAST:event_btnAddRestaurantActionPerformed
 
