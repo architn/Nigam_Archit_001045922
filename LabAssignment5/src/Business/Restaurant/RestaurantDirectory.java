@@ -12,16 +12,14 @@ import java.util.ArrayList;
  * @author harold
  */
 public class RestaurantDirectory {
-    private ArrayList<Restaurant> restaurantsRecords;
-    private ArrayList<MenuItems> menuItemRecords;
+    ArrayList<Restaurant> restaurantsRecords;
     
     public RestaurantDirectory()
     {
-        this.restaurantsRecords = new ArrayList<Restaurant>();
-        this.menuItemRecords = new ArrayList<MenuItems>();
+        restaurantsRecords = new ArrayList();
     }
     
-    public ArrayList<Restaurant> getDeliveryManRecords() {
+    public ArrayList<Restaurant> getRestaurantList() {
         return restaurantsRecords;
     }
     
@@ -57,23 +55,26 @@ public class RestaurantDirectory {
         return numberOfRecords;
     }
     
-    public ArrayList<MenuItems> getMenuItemRecords() {
-        return menuItemRecords;
+    public Restaurant createRestaurant(String name, String phoneNumber, String address){
+        
+        Restaurant resto = new Restaurant();
+        resto.setRestaurantName(name);
+        resto.setRestaurantPhoneNumber(phoneNumber);
+        resto.setRestaurantAddress(address);
+        return resto;
     }
     
-    public void setMenuItemRecords(ArrayList<MenuItems> menuItemRecords) {
-        this.menuItemRecords = menuItemRecords;
-    }  
     
-    public MenuItems addMenuItemRecord(){
-        MenuItems newMenuItem = new MenuItems();
-        menuItemRecords.add(newMenuItem);
-        return newMenuItem;
-    }
-    
-    public MenuItems updateMenuItemsRecord(int indexOfSelectedRecord, MenuItems newMenuItemRecord)
+    public Restaurant FindRestaurantByName(String restaurantName)
     {
-        menuItemRecords.set(indexOfSelectedRecord, newMenuItemRecord);
-        return newMenuItemRecord;
+        for(Restaurant resto : restaurantsRecords)
+        {
+            if(resto.getRestaurantName().equalsIgnoreCase(restaurantName))
+            {
+                return resto;
+            }
+        }
+        return null;
     }
+
 }

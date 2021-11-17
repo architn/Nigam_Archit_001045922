@@ -5,6 +5,7 @@
  */
 package Business.Customer;
 
+import Business.Organization;
 import java.util.ArrayList;
 
 /**
@@ -49,5 +50,9 @@ public class CustomerDirectory {
     {
         int numberOfRecords = customerRecords.size();
         return numberOfRecords;
+    }
+
+    public Iterable<Organization> getOrganizationList() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

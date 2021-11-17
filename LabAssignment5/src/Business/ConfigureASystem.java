@@ -1,6 +1,7 @@
 package Business;
 
 import Business.Employee.Employee;
+import Business.Restaurant.Restaurant;
 import Business.Role.AdminRole;
 import Business.Role.CustomerRole;
 import Business.Role.SystemAdminRole;
@@ -26,10 +27,9 @@ public class ConfigureASystem {
         Employee employee = system.getEmployeeDirectory().createEmployee("RRH");
         
         UserAccount ua = system.getUserAccountDirectory().createUserAccount("sysadmin", "sysadmin", employee, new SystemAdminRole());
-        UserAccount ua1 = system.getUserAccountDirectory().createUserAccount("resto", "resto", employee, new AdminRole());
-        UserAccount ua2 = system.getUserAccountDirectory().createUserAccount("customer", "customer", employee, new CustomerRole());
-        
-        
+        UserAccount ua_Restaurant = system.getUserAccountDirectory().createUserAccount("resto", "resto", employee, new AdminRole());
+        UserAccount ua_Customer = system.getUserAccountDirectory().createUserAccount("customer", "customer", employee, new CustomerRole());
+        //Restaurant resto = system.getRestaurantDirectory().createRestaurant("Food Plaza", "8578905431", "Boylston Street");
         return system;
     }
     

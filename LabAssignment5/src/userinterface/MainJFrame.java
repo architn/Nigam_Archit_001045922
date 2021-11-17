@@ -133,7 +133,10 @@ public class MainJFrame extends javax.swing.JFrame {
         UserAccount ua = system.getUserAccountDirectory().authenticateUser(userName, password);
         Role roleOfAuthorizedUser = ua.getRole();
         jSplitPane1.setRightComponent(roleOfAuthorizedUser.createWorkArea(container, ua, system));
+        loginJButton.setEnabled(false);
         logoutJButton.setEnabled(true);
+        userNameJTextField.setEnabled(false);
+        passwordField.setEnabled(false);
        
     }//GEN-LAST:event_loginJButtonActionPerformed
 

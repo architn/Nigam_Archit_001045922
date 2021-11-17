@@ -4,16 +4,20 @@
  * and open the template in the editor.
  */
 package Business.Restaurant;
+import Business.Menu.MenuItemsDirectory;
 
 /**
  *
  * @author harold
  */
 public class Restaurant {
+    
     private int restaurantID;
     private String restaurantName;
     private String restaurantPhoneNumber;
     private String restaurantAddress;
+    
+    MenuItemsDirectory menuDirectory;
 
     public int getRestaurantID() {
         return restaurantID;
@@ -46,4 +50,14 @@ public class Restaurant {
     public void setRestaurantAddress(String restaurantAddress) {
         this.restaurantAddress = restaurantAddress;
     }
+
+    public MenuItemsDirectory getMenuDirectory() {
+        return menuDirectory;
+    }
+
+    public void setMenuDirectory(MenuItemsDirectory menuDirectory) {
+        this.menuDirectory = menuDirectory;
+    }
+    
+    
 }
