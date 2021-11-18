@@ -12,7 +12,7 @@ package Business.Menu;
 public class MenuItems {
     String itemName;
     double itemPrice;
-    int quantity;
+    boolean availability;
 
     public String getItemName() {
         return itemName;
@@ -30,12 +30,12 @@ public class MenuItems {
         this.itemPrice = itemPrice;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public boolean isAvailability() {
+        return availability;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setAvailability(boolean availability) {
+        this.availability = availability;
     }
     
     @Override

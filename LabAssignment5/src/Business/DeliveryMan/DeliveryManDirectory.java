@@ -6,6 +6,7 @@
 package Business.DeliveryMan;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  *
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 public class DeliveryManDirectory {
     
     private ArrayList<DeliveryMan> deliveryMan;
+     Random rand = new Random();
 
    public DeliveryManDirectory(){
         deliveryMan = new ArrayList<DeliveryMan>();
@@ -48,16 +50,6 @@ public class DeliveryManDirectory {
    }
     public void deleteDeliveryMan(DeliveryMan deliveryman){
        deliveryMan.remove(deliveryman);
-   }
-   
-   public String returnAnyRandomDeliveryPerson()
-   {
-       String name = "Paul Rudd";
-       for(DeliveryMan deliveryGuy : deliveryMan)
-       {
-           name = deliveryGuy.getDeliveryManName();
-       }
-       return name;
    }
    
 }

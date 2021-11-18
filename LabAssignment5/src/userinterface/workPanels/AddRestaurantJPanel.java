@@ -8,10 +8,12 @@ package userinterface.workPanels;
 import Business.Customer.CustomerDirectory;
 import Business.DeliveryMan.DeliveryManDirectory;
 import Business.EcoSystem;
+import Business.Employee.Employee;
 import Business.Order.OrderDirectory;
 import Business.Organization;
 import Business.Restaurant.Restaurant;
 import Business.Restaurant.RestaurantDirectory;
+import Business.Role.AdminRole;
 import Business.UserAccount.UserAccount;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -56,6 +58,10 @@ public class AddRestaurantJPanel extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         txtType = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        txtUsername = new javax.swing.JTextField();
+        txtPassword = new javax.swing.JTextField();
 
         jLabel1.setText("Restaurant Name: ");
 
@@ -74,6 +80,10 @@ public class AddRestaurantJPanel extends javax.swing.JPanel {
 
         jLabel3.setText("Add New Restaurant: ");
 
+        jLabel6.setText("Username: ");
+
+        jLabel7.setText("Password: ");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -81,24 +91,28 @@ public class AddRestaurantJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5))
-                        .addGap(43, 43, 43)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtRestaurantAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtRestaurantName, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtManager, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtType, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(215, 215, 215)
                         .addComponent(btnSave))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(169, 169, 169)
-                        .addComponent(jLabel3)))
+                        .addComponent(jLabel3))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7))
+                        .addGap(51, 51, 51)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtRestaurantAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtRestaurantName, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtManager, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtType, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(349, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -106,25 +120,33 @@ public class AddRestaurantJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addComponent(jLabel3)
-                .addGap(56, 56, 56)
+                .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtRestaurantName, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40)
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtRestaurantAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(47, 47, 47)
+                    .addComponent(jLabel2)
+                    .addComponent(txtRestaurantAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtManager, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(53, 53, 53)
+                .addGap(43, 43, 43)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
                     .addComponent(txtType, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(63, 63, 63)
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
+                    .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addGap(42, 42, 42)
                 .addComponent(btnSave)
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -134,9 +156,12 @@ public class AddRestaurantJPanel extends javax.swing.JPanel {
         String restaurantAddress = txtRestaurantAddress.getText();
         String type = txtType.getText();
         String manager = txtManager.getText();
-        
+        String username = txtUsername.getText();
+        String password = txtPassword.getText();
         
         restaurant = ecosystem.getRestaurantDirectory().createRestaurant(restaurantName, restaurantAddress, type, manager );
+        Employee emp = ecosystem.getEmployeeDirectory().createEmployee(manager);
+        ecosystem.getUserAccountDirectory().createUserAccount(username, password, emp, new AdminRole());
         JOptionPane.showMessageDialog(this, "Restaurant Added");
     }//GEN-LAST:event_btnSaveActionPerformed
 
@@ -148,9 +173,13 @@ public class AddRestaurantJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JTextField txtManager;
+    private javax.swing.JTextField txtPassword;
     private javax.swing.JTextField txtRestaurantAddress;
     private javax.swing.JTextField txtRestaurantName;
     private javax.swing.JTextField txtType;
+    private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 }

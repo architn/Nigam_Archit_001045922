@@ -22,4 +22,10 @@ public class OrderDirectory {
         this.orderhist = orderhist;
     }
     
+    public Order updateOrder(int indexOfSelectedRecord, Order selectedOrder)
+    {
+        orderhist.set(indexOfSelectedRecord, selectedOrder);
+        return selectedOrder;
+    }
+    
 }

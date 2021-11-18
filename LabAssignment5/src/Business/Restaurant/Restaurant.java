@@ -5,7 +5,9 @@
  */
 package Business.Restaurant;
 
+import Business.Menu.MenuItems;
 import Business.Menu.MenuItemsDirectory;
+import java.util.ArrayList;
 /**
  *
  * @author harold
@@ -16,7 +18,7 @@ public class Restaurant {
     String address;
     String type;
     String manager;
-    MenuItemsDirectory menuItemsDirectory;
+    ArrayList<MenuItems> menuItems;
 
     public String getName() {
         return name;
@@ -50,12 +52,12 @@ public class Restaurant {
         this.manager = manager;
     }
 
-    public MenuItemsDirectory getMenuDirectory() {
-        return menuItemsDirectory;
+    public ArrayList<MenuItems> getMenuItems() {
+        return menuItems;
     }
 
-    public void setMenuDirectory(MenuItemsDirectory menuItemsDirectory) {
-        this.menuItemsDirectory = menuItemsDirectory;
+    public void setMenuItems(ArrayList<MenuItems> menuItems) {
+        this.menuItems = menuItems;
     }
     
 }

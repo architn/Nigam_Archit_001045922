@@ -16,10 +16,11 @@ import java.util.ArrayList;
 public class RestaurantDirectory {
     
     ArrayList<Restaurant> restaurantList;
-    MenuItemsDirectory menuItems = new MenuItemsDirectory();
+    ArrayList<MenuItems> menuItems;
     
     public RestaurantDirectory(){
           restaurantList = new ArrayList<Restaurant>();
+          menuItems = new ArrayList<MenuItems>();
         }
 
     public ArrayList<Restaurant> getRestaurantList() {
@@ -37,7 +38,7 @@ public class RestaurantDirectory {
         res.setAddress(address);
         res.setType(type);
         res.setManager(manager);
-        res.setMenuDirectory(menuItems);
+        res.setMenuItems(menuItems);
         restaurantList.add(res);
         return res;
     
@@ -46,7 +47,7 @@ public class RestaurantDirectory {
         
          
          for(Restaurant res : restaurantList){
-             if(res.getName().equals(name)){
+             if(res.getName().equalsIgnoreCase(name)){
                  return res;
              }
          }

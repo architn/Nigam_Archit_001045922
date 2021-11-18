@@ -269,24 +269,28 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         DefaultMutableTreeNode restNode;
         DefaultMutableTreeNode custNode;
         DefaultMutableTreeNode delvNode;
-     
-
-        for(int i=0; i < ecosystem.getRestaurantDirectory().getRestaurantList().size() ; i++){
+        
+        try{
+            for(int i=0; i < ecosystem.getRestaurantDirectory().getRestaurantList().size() ; i++){
             Restaurant resname = ecosystem.getRestaurantDirectory().getRestaurantList().get(i);
             restNode = new DefaultMutableTreeNode(resname.getName());
             restaurant.insert(restNode,i);
-        }
-        for(int i=0; i < ecosystem.getCustomerDirectory().getOrganizationList().size() ; i++){
-            Organization cust = ecosystem.getCustomerDirectory().getOrganizationList().get(i);
-            custNode = new DefaultMutableTreeNode(cust.getName());
-            customers.insert(custNode,i);
-        }
-//        for(int i=0; i < ecosystem.getDeliveryManDirectory().getDeliveryMan().size() ; i++){
-//            DeliveryMan dm = ecosystem.getDeliveryManDirectory().getDeliveryMan().get(i);
-//            delvNode = new DefaultMutableTreeNode(dm.getDeliveryManName());
-//            delivery.insert(delvNode,i);
-//        }
+            }
+            for(int i=0; i < ecosystem.getCustomerDirectory().getOrganizationList().size() ; i++){
+                Organization cust = ecosystem.getCustomerDirectory().getOrganizationList().get(i);
+                custNode = new DefaultMutableTreeNode(cust.getName());
+                customers.insert(custNode,i);
+            }
+            for(int i=0; i < ecosystem.getDeliveryManDirectory().getDeliveryMan().size() ; i++){
+                DeliveryMan dm = ecosystem.getDeliveryManDirectory().getDeliveryMan().get(i);
+                delvNode = new DefaultMutableTreeNode(dm.getDeliveryManName());
+                delivery.insert(delvNode,i);
+            }
 
-        model.reload();
+            model.reload();
+        }
+        catch(Exception ex){
+            
+        }
     }
 }

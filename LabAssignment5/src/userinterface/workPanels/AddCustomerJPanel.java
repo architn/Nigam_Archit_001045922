@@ -54,6 +54,8 @@ public class AddCustomerJPanel extends javax.swing.JPanel {
         btnSave = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         jLabel1.setText("Customer Name: ");
 
         jLabel2.setText("Customer username: ");

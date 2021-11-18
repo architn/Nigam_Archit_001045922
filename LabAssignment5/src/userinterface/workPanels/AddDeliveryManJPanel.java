@@ -186,11 +186,17 @@ public class AddDeliveryManJPanel extends javax.swing.JPanel {
         String password = txtPassword.getText();
         String rating = txtRating.getText();
         
-        //Employee emp = system.getEmployeeDirectory().createEmployee(nameOfDeliveryMan);
-        //UserAccount account = system.getUserAccountDirectory().createUserAccount(usernameOfDeliveryMan, password, emp, new DeliverManRole());
-        system.getDeliveryManDirectory().createDeliveryMan(nameOfDeliveryMan, usernameOfDeliveryMan, 
+        try{
+            Employee emp = system.getEmployeeDirectory().createEmployee(nameOfDeliveryMan);
+            UserAccount account = system.getUserAccountDirectory().createUserAccount(usernameOfDeliveryMan, password, emp, new DeliverManRole());
+            system.getDeliveryManDirectory().createDeliveryMan(nameOfDeliveryMan, usernameOfDeliveryMan, 
                 Integer.parseInt(rating));
-        JOptionPane.showMessageDialog(this, "Delivery Man added!");       
+            JOptionPane.showMessageDialog(this, "Delivery Man added!");
+        }       
+        catch(Exception ex)
+        {
+
+        }
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameActionPerformed

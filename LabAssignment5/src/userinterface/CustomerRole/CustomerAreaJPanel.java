@@ -6,16 +6,16 @@ package userinterface.CustomerRole;
 
 
 import Business.DB4OUtil.DB4OUtil;
+import Business.DeliveryMan.DeliveryMan;
 import Business.EcoSystem;
 import Business.Menu.MenuItems;
 import Business.Order.Order;
 import Business.Organization;
 import Business.Restaurant.Restaurant;
-import Business.Restaurant.RestaurantDirectory;
 import Business.UserAccount.UserAccount;
-import java.awt.MenuItem;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Random;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -30,9 +30,10 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
     private JPanel userProcessContainer;
     Organization organization;
     private UserAccount userAccount;
-    private Restaurant restaurant;
     EcoSystem system;
     DB4OUtil db4O;
+    ArrayList<MenuItems> menuItemsInCart = new ArrayList<MenuItems>();
+    Random rand = new Random();
     public CustomerAreaJPanel(JPanel userProcessContainer, UserAccount userAccount, EcoSystem system) {
         initComponents();
         this.setSize(1680, 1050);
@@ -53,7 +54,6 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblMenuItems = new javax.swing.JTable();
-        btnAddToCart = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblCart = new javax.swing.JTable();
         btnOrder = new javax.swing.JToggleButton();
@@ -63,6 +63,7 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
         btnSearch = new javax.swing.JButton();
         lblName = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        btnAddToOrder = new javax.swing.JButton();
 
         tblMenuItems.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -76,13 +77,6 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
             }
         ));
         jScrollPane1.setViewportView(tblMenuItems);
-
-        btnAddToCart.setText("Add to Cart");
-        btnAddToCart.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddToCartActionPerformed(evt);
-            }
-        });
 
         tblCart.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -115,6 +109,13 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
 
         jLabel3.setText("Welcome! ");
 
+        btnAddToOrder.setText("Add to cart");
+        btnAddToOrder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddToOrderActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -126,13 +127,10 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
                         .addComponent(btnOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 655, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(jLabel2)
                         .addGap(26, 26, 26)
                         .addComponent(txtRestaurantName, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(60, 60, 60)
+                        .addGap(27, 27, 27)
                         .addComponent(btnSearch))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
@@ -145,15 +143,16 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
                                 .addComponent(lblCustomerName, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnAddToOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 655, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(271, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 670, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnAddToCart)
-                        .addGap(35, 35, 35)))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 670, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -171,18 +170,18 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(74, 74, 74)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnAddToCart)
-                        .addGap(57, 57, 57)
+                        .addGap(34, 34, 34)
+                        .addComponent(btnAddToOrder)
+                        .addGap(41, 41, 41)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28)
                         .addComponent(btnOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(16, 16, 16)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnSearch)
                             .addComponent(txtRestaurantName, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))))
+                            .addComponent(jLabel2)
+                            .addComponent(btnSearch))))
                 .addGap(71, 71, 71))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -190,41 +189,28 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
         String restaurantName = txtRestaurantName.getText();
-        restaurant = system.getRestaurantDirectory().findRestaurant(restaurantName);
+        Restaurant searchedRestaurant;
+        searchedRestaurant = system.getRestaurantDirectory().findRestaurant(restaurantName);
         DefaultTableModel model = (DefaultTableModel) tblMenuItems.getModel();
         model.setRowCount(0);
-        for(int index = 0; index < restaurant.getMenuDirectory().getMenu().size(); index++)
+        for(int index = 0; index < searchedRestaurant.getMenuItems().size(); index++)
         {
-            MenuItems menuItems = restaurant.getMenuDirectory().getMenu().get(index);
-            Object[] row = new Object[3];
-            row[0] = menuItems.getItemName();
-            row[1] = menuItems.getItemPrice();
-            row[2] = menuItems;
-            model.addRow(row);
+            MenuItems menuItems = searchedRestaurant.getMenuItems().get(index);
+            if(menuItems.isAvailability())
+            {
+                Object[] row = new Object[3];
+                row[0] = menuItems.getItemName();
+                row[1] = menuItems.getItemPrice();
+                row[2] = menuItems;
+                model.addRow(row);
+            }
         }
         
     }//GEN-LAST:event_btnSearchActionPerformed
 
-    private void btnAddToCartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddToCartActionPerformed
-        // TODO add your handling code here:
-        int selectedIndex = tblMenuItems.getSelectedRow();
-        if(selectedIndex < 0)
-        {
-            JOptionPane.showMessageDialog(this, "Select a row");
-        }
-        DefaultTableModel model = (DefaultTableModel) tblMenuItems.getModel();
-        MenuItems selectedMenuItem = (MenuItems) model.getValueAt(selectedIndex, 2);
-        DefaultTableModel model1 = (DefaultTableModel) tblCart.getModel();
-        model1.setRowCount(0);
-        Object[] row = new Object[2];
-        row[0] = selectedMenuItem.getItemName();
-        row[1] = selectedMenuItem.getItemPrice();
-        model1.addRow(row);
-        
-    }//GEN-LAST:event_btnAddToCartActionPerformed
-
     private void btnOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrderActionPerformed
         // TODO add your handling code here:
+        double totalOrderAmount = 0;
         MenuItems menuItem = new MenuItems();
         ArrayList<MenuItems> orderedItems = new ArrayList<MenuItems>();
         Order order = new Order();
@@ -235,22 +221,52 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
             menuItem.setItemName(model1.getValueAt(acrossRow, 0).toString());
             double price = Double.parseDouble(model1.getValueAt(acrossRow, 1).toString());
             menuItem.setItemPrice(price);
+            totalOrderAmount += price;
         }
-        orderedItems.add(menuItem);
-        int orderId = order.generateOrderID();
-        order.setOrderID(orderId);
-        order.setOrdersByCustomer(orderedItems);
-        order.setCustomerUsername(userAccount.getUsername());
-        order.setOrderTime(new Date());
-        order.setDeliveryMan("Paul Rudd");
-        order.setOrderStatus("Accepted");
-        orderhist.add(order);
-        system.getOrderDirectory().setOrderhist(orderhist);
-        JOptionPane.showMessageDialog(this, "Order successfully placed!");
+        DeliveryMan assignedDeliveryMan = new DeliveryMan();
+        int upperbound = system.getDeliveryManDirectory().getDeliveryMan().size();
+        if(upperbound != 0)
+        {
+           int returnedIndex = rand.nextInt(upperbound);
+           assignedDeliveryMan = system.getDeliveryManDirectory().getDeliveryMan().get(returnedIndex);
+           orderedItems.add(menuItem);
+            int orderId = order.generateOrderID();
+            order.setOrderID(orderId);
+            order.setOrdersByCustomer(orderedItems);
+            order.setCustomerUsername(userAccount.getUsername());
+            order.setOrderTime(new Date());
+            order.setDeliveryMan(assignedDeliveryMan);
+            order.setOrderStatus("Order Accepted");
+            order.setOrderAmount(totalOrderAmount);
+            orderhist.add(order);
+            system.getOrderDirectory().setOrderhist(orderhist);
+            JOptionPane.showMessageDialog(this, "Order successfully placed! Total amount is: "+totalOrderAmount);
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Order cannot be placed if there is no delivery person in system! "
+                    + "Please add one before proceding!");
+        }
+        
     }//GEN-LAST:event_btnOrderActionPerformed
 
+    private void btnAddToOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddToOrderActionPerformed
+        // TODO add your handling code here:
+        int rowCount = tblCart.getRowCount();
+            
+            int selectedIndex = tblMenuItems.getSelectedRow();
+            if(selectedIndex < 0)
+            {
+                JOptionPane.showMessageDialog(this, "Select a row");
+            }
+            DefaultTableModel model = (DefaultTableModel) tblMenuItems.getModel();
+            MenuItems selectedMenuItem = (MenuItems) model.getValueAt(selectedIndex, 2);
+            menuItemsInCart.add(selectedMenuItem);
+            JOptionPane.showMessageDialog(this, "Added to cart!");
+            populateCart(menuItemsInCart);
+    }//GEN-LAST:event_btnAddToOrderActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAddToCart;
+    private javax.swing.JButton btnAddToOrder;
     private javax.swing.JToggleButton btnOrder;
     private javax.swing.JButton btnSearch;
     private javax.swing.JLabel jLabel1;
@@ -264,4 +280,21 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JTable tblMenuItems;
     private javax.swing.JTextField txtRestaurantName;
     // End of variables declaration//GEN-END:variables
+
+    private void populateCart(ArrayList<MenuItems> itemsInCart) {
+        DefaultTableModel model1 = (DefaultTableModel) tblCart.getModel();
+        model1.setRowCount(0);
+        for(int index = 0; index < menuItemsInCart.size(); index++)
+        {
+            MenuItems menuItem = menuItemsInCart.get(index);
+            Object[] row = new Object[2];
+            row[0] = menuItem.getItemName();
+            row[1] = menuItem.getItemPrice();
+            model1.addRow(row);
+        }
+    }
+
+    private void populateDropdown() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

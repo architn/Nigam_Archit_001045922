@@ -19,10 +19,11 @@ import java.util.Random;
 public class Order {
     private int OrderID;
     private ArrayList<MenuItems> ordersByCustomer;
-    String deliveryMan;
+    DeliveryMan deliveryMan;
     String customerUsername;
     String orderStatus;
     Date orderTime;
+    double orderAmount;
     
     Random rand = new Random();
 
@@ -42,11 +43,11 @@ public class Order {
         this.ordersByCustomer = ordersByCustomer;
     }
 
-    public String getDeliveryMan() {
+    public DeliveryMan getDeliveryMan() {
         return deliveryMan;
     }
 
-    public void setDeliveryMan(String deliveryMan) {
+    public void setDeliveryMan(DeliveryMan deliveryMan) {
         this.deliveryMan = deliveryMan;
     }
 
@@ -73,6 +74,15 @@ public class Order {
     public void setCustomerUsername(String customerUsername) {
         this.customerUsername = customerUsername;
     }
+
+    public double getOrderAmount() {
+        return orderAmount;
+    }
+
+    public void setOrderAmount(double orderAmount) {
+        this.orderAmount = orderAmount;
+    }
+    
     
     public int generateOrderID()
     {

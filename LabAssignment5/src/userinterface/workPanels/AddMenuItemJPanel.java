@@ -30,7 +30,7 @@ public class AddMenuItemJPanel extends javax.swing.JPanel {
     EcoSystem system;
     private UserAccount userAccount;
     DB4OUtil db4O;
-    ArrayList<MenuItems> menuItemList;
+    ArrayList<MenuItems> menuItemList = new ArrayList<MenuItems>();
     Organization organization;
     
     public AddMenuItemJPanel(JPanel userProcessContainer, EcoSystem system, Organization organization) {
@@ -63,13 +63,13 @@ public class AddMenuItemJPanel extends javax.swing.JPanel {
         jButton2 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         txtRestaurantName = new javax.swing.JTextField();
-        txtQuantity = new javax.swing.JTextField();
+        checkboxAvailable = new javax.swing.JCheckBox();
 
         jLabel1.setText("Dish Name: ");
 
         jLabel2.setText("Cost: ");
 
-        jLabel3.setText("Quantity:");
+        jLabel3.setText("Available");
 
         jLabel4.setText("Add New Item to Menu: ");
 
@@ -94,6 +94,11 @@ public class AddMenuItemJPanel extends javax.swing.JPanel {
         jScrollPane1.setViewportView(tblMenu);
 
         jButton1.setText("Update");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Delete");
 
@@ -123,7 +128,7 @@ public class AddMenuItemJPanel extends javax.swing.JPanel {
                                     .addComponent(btnSaveDish, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(txtCost, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
                                     .addComponent(txtRestaurantName)
-                                    .addComponent(txtQuantity))))
+                                    .addComponent(checkboxAvailable))))
                         .addGap(0, 408, Short.MAX_VALUE))
                     .addComponent(jScrollPane1))
                 .addContainerGap())
@@ -151,11 +156,11 @@ public class AddMenuItemJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
+                .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(txtQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
+                    .addComponent(checkboxAvailable))
+                .addGap(29, 29, 29)
                 .addComponent(btnSaveDish)
                 .addGap(43, 43, 43)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -172,41 +177,33 @@ public class AddMenuItemJPanel extends javax.swing.JPanel {
         String restaurantName = txtRestaurantName.getText();
         String dishName = txtDishName.getText();
         String dishCost = txtCost.getText();
-        String quantity = txtQuantity.getText();
+        boolean isAvailable = checkboxAvailable.isSelected();
         
         MenuItems menuItem = new MenuItems();
         
         menuItem.setItemName(dishName);
         menuItem.setItemPrice(Double.parseDouble(dishCost));
-        menuItem.setQuantity(Integer.parseInt(quantity));
+        menuItem.setAvailability(isAvailable);
 
   
         Restaurant searchedRestaurant = system.getRestaurantDirectory().findRestaurant(restaurantName);
         System.out.println("resto "+searchedRestaurant.getName());
-        if(searchedRestaurant == null)
-        {
-            MenuItemsDirectory menuItemsDirectory = new MenuItemsDirectory();
-            ArrayList<MenuItems> menuDirectory  = new ArrayList<MenuItems>();
-            menuDirectory.add(menuItem);
-            menuItemsDirectory.setMenu(menuItemList);
-            searchedRestaurant.setMenuDirectory(menuItemsDirectory);
-            JOptionPane.showMessageDialog(this, "Menu Dish added!");
-        }
-        else{
-            MenuItemsDirectory menuDirectory = searchedRestaurant.getMenuDirectory();
-            menuItemList = searchedRestaurant.getMenuDirectory().getMenu();
-            menuItemList.add(menuItem);
-            menuDirectory.setMenu(menuItemList);
-            searchedRestaurant.setMenuDirectory(menuDirectory);
-            JOptionPane.showMessageDialog(this, "Menu Dish added!");
-        }
-        //populateTable();
+        menuItemList.add(menuItem);
+        searchedRestaurant.setMenuItems(menuItemList);
+        JOptionPane.showMessageDialog(this, "Menu Dish added!");
+        
+        populateTable();
 
     }//GEN-LAST:event_btnSaveDishActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSaveDish;
+    private javax.swing.JCheckBox checkboxAvailable;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -218,7 +215,6 @@ public class AddMenuItemJPanel extends javax.swing.JPanel {
     private javax.swing.JTable tblMenu;
     private javax.swing.JTextField txtCost;
     private javax.swing.JTextField txtDishName;
-    private javax.swing.JTextField txtQuantity;
     private javax.swing.JTextField txtRestaurantName;
     // End of variables declaration//GEN-END:variables
 
