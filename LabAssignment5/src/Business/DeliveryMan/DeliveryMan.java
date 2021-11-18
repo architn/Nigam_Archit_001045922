@@ -5,22 +5,20 @@
  */
 package Business.DeliveryMan;
 
+import Business.Organization;
+import Business.Role.DeliverManRole;
+import Business.Role.Role;
+import java.util.ArrayList;
+
 /**
  *
  * @author harold
  */
-public class DeliveryMan {
-    private int deliveryManID;
-    private String deliveryManName;
-    private String deliveryPhoneNumber;
-
-    public int getDeliveryManID() {
-        return deliveryManID;
-    }
-
-    public void setDeliveryManID(int deliveryManID) {
-        this.deliveryManID = deliveryManID;
-    }
+public class DeliveryMan  {
+    
+   String deliveryManName;
+   String deliveryusername;
+   int rating;
 
     public String getDeliveryManName() {
         return deliveryManName;
@@ -30,13 +28,26 @@ public class DeliveryMan {
         this.deliveryManName = deliveryManName;
     }
 
-    public String getDeliveryPhoneNumber() {
-        return deliveryPhoneNumber;
+    public String getDeliveryusername() {
+        return deliveryusername;
     }
 
-    public void setDeliveryPhoneNumber(String deliveryPhoneNumber) {
-        this.deliveryPhoneNumber = deliveryPhoneNumber;
+    public void setDeliveryusername(String deliveryusername) {
+        this.deliveryusername = deliveryusername;
     }
 
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
+    
+    @Override
+    public String toString() {
+        return deliveryManName;
+    }
+   
 
 }

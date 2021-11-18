@@ -18,6 +18,15 @@ public class UserAccount {
     private String password;
     private Employee employee;
     private Role role;
+    private String emailid;
+
+    public String getEmailid() {
+        return emailid;
+    }
+
+    public void setEmailid(String emailid) {
+        this.emailid = emailid;
+    }
     private WorkQueue workQueue;
 
     public UserAccount() {

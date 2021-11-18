@@ -7,52 +7,46 @@ package Business.Customer;
 
 import Business.Organization;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author harold
  */
 public class CustomerDirectory {
-    private ArrayList<Customer> customerRecords;
     
-    public ArrayList<Customer> getCustomerRecords() {
-        return customerRecords;
-    }
     
-    public void setCustomerRecords(ArrayList<Customer> customerRecords) {
-        this.customerRecords = customerRecords;
-    }  
-    
-    public Customer addCustomerRecord()
-    {
-        Customer newCustomerRecord = new Customer();
-        customerRecords.add(newCustomerRecord);
-        return newCustomerRecord;
-    }
-    
-    public Customer updateCustomerRecord(int indexOfSelectedRecord, Customer selectedCustomerRecord)
-    {
-        customerRecords.set(indexOfSelectedRecord, selectedCustomerRecord);
-        return selectedCustomerRecord;
-    }
-    
-    public Customer returnCustomerRecords(int index)
-    {
-        return customerRecords.get(index);
-    }
-    
-    public void deleteCustomerRecord(Customer selectedCustomerRecord)
-    {
-        customerRecords.remove(selectedCustomerRecord);
-    }
-    
-    public int ReturnNumberOfRecords()
-    {
-        int numberOfRecords = customerRecords.size();
-        return numberOfRecords;
+      private ArrayList<Organization> organizationList;
+
+    public CustomerDirectory() {
+        organizationList = new ArrayList();
     }
 
-    public Iterable<Organization> getOrganizationList() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ArrayList<Organization> getOrganizationList() {
+        return organizationList;
+    }
+    
+
+    public Organization createOrganization(Organization.Type type){
+        Organization organization = null;
+      if (type.getValue().equals(Organization.Type.Customer.getValue())){
+            organization = new Customer();
+            organizationList.add(organization);
+    }
+
+        return organization;
+    }
+    public void deleteCustomer(Customer customer){
+        organizationList.remove(customer); 
+    }
+    
+        public List<Organization> searchOrganization(String organizationName){
+            List<Organization> list = new ArrayList();
+        for (Organization organization: organizationList) {
+            if (organization.getName().equals(organizationName)) {
+                list.add(organization);
+            }
+        }
+        return list;
     }
 }

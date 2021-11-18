@@ -4,60 +4,58 @@
  * and open the template in the editor.
  */
 package Business.Restaurant;
-import Business.Menu.MenuItemsDirectory;
 
+import Business.Menu.MenuItemsDirectory;
 /**
  *
  * @author harold
  */
 public class Restaurant {
-    
-    private int restaurantID;
-    private String restaurantName;
-    private String restaurantPhoneNumber;
-    private String restaurantAddress;
-    
-    MenuItemsDirectory menuDirectory;
+ 
+    String name;
+    String address;
+    String type;
+    String manager;
+    MenuItemsDirectory menuItemsDirectory;
 
-    public int getRestaurantID() {
-        return restaurantID;
+    public String getName() {
+        return name;
     }
 
-    public void setRestaurantID(int restaurantID) {
-        this.restaurantID = restaurantID;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getRestaurantName() {
-        return restaurantName;
+    public String getAddress() {
+        return address;
     }
 
-    public void setRestaurantName(String restaurantName) {
-        this.restaurantName = restaurantName;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public String getRestaurantPhoneNumber() {
-        return restaurantPhoneNumber;
+    public String getType() {
+        return type;
     }
 
-    public void setRestaurantPhoneNumber(String restaurantPhoneNumber) {
-        this.restaurantPhoneNumber = restaurantPhoneNumber;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public String getRestaurantAddress() {
-        return restaurantAddress;
+    public String getManager() {
+        return manager;
     }
 
-    public void setRestaurantAddress(String restaurantAddress) {
-        this.restaurantAddress = restaurantAddress;
+    public void setManager(String manager) {
+        this.manager = manager;
     }
 
     public MenuItemsDirectory getMenuDirectory() {
-        return menuDirectory;
+        return menuItemsDirectory;
     }
 
-    public void setMenuDirectory(MenuItemsDirectory menuDirectory) {
-        this.menuDirectory = menuDirectory;
+    public void setMenuDirectory(MenuItemsDirectory menuItemsDirectory) {
+        this.menuItemsDirectory = menuItemsDirectory;
     }
-    
     
 }

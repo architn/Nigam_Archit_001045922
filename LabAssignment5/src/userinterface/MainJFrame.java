@@ -127,12 +127,38 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void loginJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginJButtonActionPerformed
         // Get user name
-        String userName = userNameJTextField.getText();
-        String password = passwordField.getText();
+         String username = userNameJTextField.getText();
         
-        UserAccount ua = system.getUserAccountDirectory().authenticateUser(userName, password);
-        Role roleOfAuthorizedUser = ua.getRole();
-        jSplitPane1.setRightComponent(roleOfAuthorizedUser.createWorkArea(container, ua, system));
+        char[] passwordCharArray = passwordField.getPassword();
+        String password = String.valueOf(passwordCharArray);
+        UserAccount useraccount=system.getUserAccountDirectory().authenticateUser(username, password);
+        
+        Organization inOrganization=null;
+        //Enterprise enterprise=null;
+        
+         if(useraccount==null){
+           for(Organization organization:system.getCustomerDirectory().getOrganizationList())
+                       {
+                           useraccount=organization.getUserAccountDirectory().authenticateUser(username, password);
+                           if(useraccount!=null)
+                           {
+                               inOrganization=organization;
+                               break;
+                           }
+                       }
+        }
+        if(useraccount==null){
+            JOptionPane.showMessageDialog(null, "Invalid credentials");
+            return;
+        }
+        
+        else{
+            CardLayout layout=(CardLayout)container.getLayout();
+            container.add("workArea",useraccount.getRole().createWorkArea(container, useraccount, system));
+            layout.next(container);
+        }
+       
+        
         loginJButton.setEnabled(false);
         logoutJButton.setEnabled(true);
         userNameJTextField.setEnabled(false);

@@ -13,44 +13,51 @@ import java.util.ArrayList;
  */
 public class DeliveryManDirectory {
     
-    private ArrayList<DeliveryMan> deliveryManRecords;
-    
-    public ArrayList<DeliveryMan> getDeliveryManRecords() {
-        return deliveryManRecords;
-    }
-    
+    private ArrayList<DeliveryMan> deliveryMan;
 
-    public void setDeliveryManRecords(ArrayList<DeliveryMan> deliveryManRecords) {
-        this.deliveryManRecords = deliveryManRecords;
-    }  
-    
-    public DeliveryMan addDeliveryManRecord()
-    {
-        DeliveryMan newDeliveryManRecord = new DeliveryMan();
-        deliveryManRecords.add(newDeliveryManRecord);
-        return newDeliveryManRecord;
+   public DeliveryManDirectory(){
+        deliveryMan = new ArrayList<DeliveryMan>();
+    }
+
+    public ArrayList<DeliveryMan> getDeliveryMan() {
+        return deliveryMan;
+    }
+
+    public void setDeliveryMan(ArrayList<DeliveryMan> deliveryMan) {
+        this.deliveryMan = deliveryMan;
     }
     
-    public DeliveryMan updateDeliveryManRecord(int indexOfSelectedRecord, DeliveryMan newDeliveryManRecord)
-    {
-        deliveryManRecords.set(indexOfSelectedRecord, newDeliveryManRecord);
-        return newDeliveryManRecord;
-    }
-    
-    public DeliveryMan returnDeliveryManRecords(int index)
-    {
-        return deliveryManRecords.get(index);
-    }
-    
-    
-    public void deleteDeliveryManRecord(DeliveryMan selectedDeliveryManRecord)
-    {
-        deliveryManRecords.remove(selectedDeliveryManRecord);
-    }
-    
-    public int ReturnNumberOfRecords()
-    {
-        int numberOfRecords = deliveryManRecords.size();
-        return numberOfRecords;
-    }
+       public DeliveryMan createDeliveryMan(String name, String username, int rating){
+       
+       DeliveryMan dm = new DeliveryMan();
+       dm.setDeliveryManName(name);
+       dm.setDeliveryusername(username);
+       dm.setRating(rating);
+       deliveryMan.add(dm);
+       return dm;      
+   }
+   
+   public DeliveryMan findDeliveryMan(String name){
+       for(DeliveryMan dm :deliveryMan ){
+           
+           if(dm.getDeliveryManName().equals(name)){
+               return dm;
+           }
+       }
+       return null;
+   }
+    public void deleteDeliveryMan(DeliveryMan deliveryman){
+       deliveryMan.remove(deliveryman);
+   }
+   
+   public String returnAnyRandomDeliveryPerson()
+   {
+       String name = "Paul Rudd";
+       for(DeliveryMan deliveryGuy : deliveryMan)
+       {
+           name = deliveryGuy.getDeliveryManName();
+       }
+       return name;
+   }
+   
 }

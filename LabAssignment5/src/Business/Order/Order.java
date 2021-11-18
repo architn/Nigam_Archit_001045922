@@ -9,6 +9,8 @@ import Business.Customer.Customer;
 import Business.DeliveryMan.DeliveryMan;
 import Business.Menu.MenuItems;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Random;
 
 /**
  *
@@ -17,8 +19,12 @@ import java.util.ArrayList;
 public class Order {
     private int OrderID;
     private ArrayList<MenuItems> ordersByCustomer;
-    DeliveryMan deliveryMan;
-    Customer customer;
+    String deliveryMan;
+    String customerUsername;
+    String orderStatus;
+    Date orderTime;
+    
+    Random rand = new Random();
 
     public int getOrderID() {
         return OrderID;
@@ -36,21 +42,43 @@ public class Order {
         this.ordersByCustomer = ordersByCustomer;
     }
 
-    public DeliveryMan getDeliveryMan() {
+    public String getDeliveryMan() {
         return deliveryMan;
     }
 
-    public void setDeliveryMan(DeliveryMan deliveryMan) {
+    public void setDeliveryMan(String deliveryMan) {
         this.deliveryMan = deliveryMan;
     }
 
-    public Customer getCustomer() {
-        return customer;
+    public String getOrderStatus() {
+        return orderStatus;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setOrderStatus(String orderStatus) {
+        this.orderStatus = orderStatus;
+    }
+
+    public Date getOrderTime() {
+        return orderTime;
+    }
+
+    public void setOrderTime(Date orderTime) {
+        this.orderTime = orderTime;
+    }
+
+    public String getCustomerUsername() {
+        return customerUsername;
+    }
+
+    public void setCustomerUsername(String customerUsername) {
+        this.customerUsername = customerUsername;
     }
     
+    public int generateOrderID()
+    {
+        int upperbound = 1000;
+        int generatedID = rand.nextInt(upperbound);
+        return generatedID;
+    }
     
 }

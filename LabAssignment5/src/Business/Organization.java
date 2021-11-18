@@ -4,6 +4,8 @@
  */
 package Business;
 
+import Business.Customer.CustomerDirectory;
+import Business.DeliveryMan.DeliveryManDirectory;
 import Business.Employee.EmployeeDirectory;
 import Business.Role.Role;
 import Business.UserAccount.UserAccountDirectory;
@@ -20,6 +22,8 @@ public abstract class Organization {
     private WorkQueue workQueue;
     private EmployeeDirectory employeeDirectory;
     private UserAccountDirectory userAccountDirectory;
+    private DeliveryManDirectory deliverymanDirectory;
+    private CustomerDirectory customerDirectory;
     private int organizationID;
     private static int counter=0;
     

@@ -9,6 +9,7 @@ import Business.DB4OUtil.DB4OUtil;
 import Business.Menu.MenuItems;
 import Business.EcoSystem;
 import Business.Menu.MenuItemsDirectory;
+import Business.Organization;
 import Business.UserAccount.UserAccount;
 import Business.Restaurant.Restaurant;
 import javax.swing.JPanel;
@@ -30,11 +31,12 @@ public class AddMenuItemJPanel extends javax.swing.JPanel {
     private UserAccount userAccount;
     DB4OUtil db4O;
     ArrayList<MenuItems> menuItemList;
+    Organization organization;
     
-    public AddMenuItemJPanel(JPanel userProcessContainer, UserAccount account, EcoSystem system) {
+    public AddMenuItemJPanel(JPanel userProcessContainer, EcoSystem system, Organization organization) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
-        this.userAccount = account;
+        this.organization = organization;
         this.system = system;
         
     }
@@ -54,7 +56,6 @@ public class AddMenuItemJPanel extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         txtCost = new javax.swing.JTextField();
         txtDishName = new javax.swing.JTextField();
-        checkBoxAvailaibility = new javax.swing.JCheckBox();
         btnSaveDish = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblMenu = new javax.swing.JTable();
@@ -62,12 +63,13 @@ public class AddMenuItemJPanel extends javax.swing.JPanel {
         jButton2 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         txtRestaurantName = new javax.swing.JTextField();
+        txtQuantity = new javax.swing.JTextField();
 
         jLabel1.setText("Dish Name: ");
 
         jLabel2.setText("Cost: ");
 
-        jLabel3.setText("Availability: ");
+        jLabel3.setText("Quantity:");
 
         jLabel4.setText("Add New Item to Menu: ");
 
@@ -118,10 +120,10 @@ public class AddMenuItemJPanel extends javax.swing.JPanel {
                                 .addGap(31, 31, 31)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txtDishName)
-                                    .addComponent(checkBoxAvailaibility, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(btnSaveDish, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(txtCost, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
-                                    .addComponent(txtRestaurantName))))
+                                    .addComponent(txtRestaurantName)
+                                    .addComponent(txtQuantity))))
                         .addGap(0, 408, Short.MAX_VALUE))
                     .addComponent(jScrollPane1))
                 .addContainerGap())
@@ -142,19 +144,18 @@ public class AddMenuItemJPanel extends javax.swing.JPanel {
                     .addComponent(jLabel5)
                     .addComponent(txtRestaurantName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(22, 22, 22)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(txtDishName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(36, 36, 36)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(txtCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(41, 41, 41)
-                        .addComponent(jLabel3))
-                    .addComponent(checkBoxAvailaibility))
-                .addGap(32, 32, 32)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtDishName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(36, 36, 36)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(36, 36, 36)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
                 .addComponent(btnSaveDish)
                 .addGap(43, 43, 43)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -171,32 +172,33 @@ public class AddMenuItemJPanel extends javax.swing.JPanel {
         String restaurantName = txtRestaurantName.getText();
         String dishName = txtDishName.getText();
         String dishCost = txtCost.getText();
-        boolean isDishAvailable = checkBoxAvailaibility.isSelected();
+        String quantity = txtQuantity.getText();
         
         MenuItems menuItem = new MenuItems();
         
-        menuItem.setMenuItemName(dishName);
-        menuItem.setMenuItemCost(Double.parseDouble(dishCost));
-        menuItem.setMenuItemAvailability(isDishAvailable);
+        menuItem.setItemName(dishName);
+        menuItem.setItemPrice(Double.parseDouble(dishCost));
+        menuItem.setQuantity(Integer.parseInt(quantity));
 
   
-        Restaurant searchedRestaurant = system.getRestaurantDirectory().FindRestaurantByName(restaurantName);
-        System.out.println("resto "+searchedRestaurant.getRestaurantName());
+        Restaurant searchedRestaurant = system.getRestaurantDirectory().findRestaurant(restaurantName);
+        System.out.println("resto "+searchedRestaurant.getName());
         if(searchedRestaurant == null)
         {
             MenuItemsDirectory menuItemsDirectory = new MenuItemsDirectory();
             ArrayList<MenuItems> menuDirectory  = new ArrayList<MenuItems>();
             menuDirectory.add(menuItem);
-            menuItemsDirectory.setMenuItemRecords(menuItemList);
+            menuItemsDirectory.setMenu(menuItemList);
             searchedRestaurant.setMenuDirectory(menuItemsDirectory);
             JOptionPane.showMessageDialog(this, "Menu Dish added!");
         }
         else{
             MenuItemsDirectory menuDirectory = searchedRestaurant.getMenuDirectory();
-            menuItemList = searchedRestaurant.getMenuDirectory().getMenuItemRecords();
+            menuItemList = searchedRestaurant.getMenuDirectory().getMenu();
             menuItemList.add(menuItem);
-            menuDirectory.setMenuItemRecords(menuItemList);
+            menuDirectory.setMenu(menuItemList);
             searchedRestaurant.setMenuDirectory(menuDirectory);
+            JOptionPane.showMessageDialog(this, "Menu Dish added!");
         }
         //populateTable();
 
@@ -205,7 +207,6 @@ public class AddMenuItemJPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSaveDish;
-    private javax.swing.JCheckBox checkBoxAvailaibility;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -217,6 +218,7 @@ public class AddMenuItemJPanel extends javax.swing.JPanel {
     private javax.swing.JTable tblMenu;
     private javax.swing.JTextField txtCost;
     private javax.swing.JTextField txtDishName;
+    private javax.swing.JTextField txtQuantity;
     private javax.swing.JTextField txtRestaurantName;
     // End of variables declaration//GEN-END:variables
 

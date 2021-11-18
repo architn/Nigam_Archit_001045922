@@ -5,45 +5,24 @@
  */
 package Business.Customer;
 
+import Business.Organization;
+import Business.Role.CustomerRole;
+import Business.Role.Role;
+import java.util.ArrayList;
+
 /**
  *
  * @author harold
  */
-public class Customer {
-    private int customerID;
-    private String customerName;
-    private String customerPhoneNumber;
-    private String customerAddress;
-
-    public int getCustomerID() {
-        return customerID;
+public class Customer extends Organization{
+    public Customer(){
+        super(Organization.Type.Customer.getValue());
     }
 
-    public void setCustomerID(int customerID) {
-        this.customerID = customerID;
-    }
-
-    public String getCustomerName() {
-        return customerName;
-    }
-
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
-    }
-
-    public String getCustomerPhoneNumber() {
-        return customerPhoneNumber;
-    }
-
-    public void setCustomerPhoneNumber(String customerPhoneNumber) {
-        this.customerPhoneNumber = customerPhoneNumber;
-    }
-
-    public String getCustomerAddress() {
-        return customerAddress;
-    }
-
-    public void setCustomerAddress(String customerAddress) {
-        this.customerAddress = customerAddress;
-    }  
+    @Override
+    public ArrayList<Role> getSupportedRole() {
+        ArrayList<Role> roles = new ArrayList();
+        roles.add(new CustomerRole());
+        return roles;
+}
 }

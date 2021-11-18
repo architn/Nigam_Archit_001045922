@@ -5,8 +5,13 @@
  */
 package userinterface.workPanels;
 
+import Business.DeliveryMan.DeliveryMan;
 import Business.EcoSystem;
+import Business.Employee.Employee;
+import Business.Organization;
+import Business.Role.DeliverManRole;
 import Business.UserAccount.UserAccount;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -18,14 +23,17 @@ public class AddDeliveryManJPanel extends javax.swing.JPanel {
     /**
      * Creates new form AddDeliveryManJPanel
      */
+    private DeliveryMan deliveryMan;
     private JPanel userProcessContainer;
     EcoSystem system;
+    Organization organization;
     private UserAccount userAccount;
-    public AddDeliveryManJPanel(JPanel userProcessContainer, UserAccount account, EcoSystem system) {
+    public AddDeliveryManJPanel(JPanel userProcessContainer, EcoSystem system, Organization organization) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
-        this.userAccount = account;
+        this.organization = organization;
         this.system = system;
+        populateTable();
     }
 
     /**
@@ -40,26 +48,37 @@ public class AddDeliveryManJPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        txtPhoneNo = new javax.swing.JTextField();
-        txtCity = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        txtDeliveryManName = new javax.swing.JTextField();
+        txtUsername = new javax.swing.JTextField();
+        txtPassword = new javax.swing.JTextField();
+        btnSave = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        checkBoxAvailability = new javax.swing.JCheckBox();
         jLabel6 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        txtRating = new javax.swing.JTextField();
 
         jLabel1.setText("Delivery man name: ");
 
-        jLabel2.setText("Phone Number: ");
+        jLabel2.setText("Username: ");
 
-        jLabel3.setText("City: ");
+        jLabel3.setText("Password: ");
 
-        jButton1.setText("Save Details");
+        txtUsername.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUsernameActionPerformed(evt);
+            }
+        });
+
+        btnSave.setText("Save Details");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -76,7 +95,7 @@ public class AddDeliveryManJPanel extends javax.swing.JPanel {
 
         jLabel4.setText("Available Delivery Boys:");
 
-        jLabel5.setText("Availability: ");
+        jLabel5.setText("Rating:");
 
         jLabel6.setText("Add Delivery Man: ");
 
@@ -108,15 +127,15 @@ public class AddDeliveryManJPanel extends javax.swing.JPanel {
                                     .addComponent(jLabel5))))
                         .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtPhoneNo, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCity, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1)
-                            .addComponent(checkBoxAvailability, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 503, Short.MAX_VALUE))
+                            .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtDeliveryManName, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSave)
+                            .addComponent(txtRating, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 810, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -133,21 +152,21 @@ public class AddDeliveryManJPanel extends javax.swing.JPanel {
                 .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtDeliveryManName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtPhoneNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCity, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addGap(24, 24, 24)
+                .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(checkBoxAvailability))
-                .addGap(29, 29, 29)
-                .addComponent(jButton1)
+                    .addComponent(txtRating, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
+                .addComponent(btnSave)
                 .addGap(19, 19, 19)
                 .addComponent(jLabel4)
                 .addGap(36, 36, 36)
@@ -160,10 +179,27 @@ public class AddDeliveryManJPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        // TODO add your handling code here:
+        String nameOfDeliveryMan = txtDeliveryManName.getText();
+        String usernameOfDeliveryMan = txtUsername.getText();
+        String password = txtPassword.getText();
+        String rating = txtRating.getText();
+        
+        //Employee emp = system.getEmployeeDirectory().createEmployee(nameOfDeliveryMan);
+        //UserAccount account = system.getUserAccountDirectory().createUserAccount(usernameOfDeliveryMan, password, emp, new DeliverManRole());
+        system.getDeliveryManDirectory().createDeliveryMan(nameOfDeliveryMan, usernameOfDeliveryMan, 
+                Integer.parseInt(rating));
+        JOptionPane.showMessageDialog(this, "Delivery Man added!");       
+    }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUsernameActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JCheckBox checkBoxAvailability;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnSave;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
@@ -174,8 +210,13 @@ public class AddDeliveryManJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField txtCity;
-    private javax.swing.JTextField txtPhoneNo;
+    private javax.swing.JTextField txtDeliveryManName;
+    private javax.swing.JTextField txtPassword;
+    private javax.swing.JTextField txtRating;
+    private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
+
+    private void populateTable() {
+        
+    }
 }

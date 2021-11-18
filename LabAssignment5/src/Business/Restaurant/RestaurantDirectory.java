@@ -5,6 +5,8 @@
  */
 package Business.Restaurant;
 
+import Business.Menu.MenuItems;
+import Business.Menu.MenuItemsDirectory;
 import java.util.ArrayList;
 
 /**
@@ -12,69 +14,44 @@ import java.util.ArrayList;
  * @author harold
  */
 public class RestaurantDirectory {
-    ArrayList<Restaurant> restaurantsRecords;
     
-    public RestaurantDirectory()
-    {
-        restaurantsRecords = new ArrayList();
-    }
+    ArrayList<Restaurant> restaurantList;
+    MenuItemsDirectory menuItems = new MenuItemsDirectory();
     
-    public ArrayList<Restaurant> getRestaurantList() {
-        return restaurantsRecords;
-    }
-    
-    public void setRestaurantRecords(ArrayList<Restaurant> restaurantsRecords) {
-        this.restaurantsRecords = restaurantsRecords;
-    }  
-    
-    public Restaurant addRestaurantRecord(){
-        Restaurant newRestaurantRecord = new Restaurant();
-        restaurantsRecords.add(newRestaurantRecord);
-        return newRestaurantRecord;
-    }
-    
-    public Restaurant updateRestaurantRecord(int indexOfSelectedRecord, Restaurant newRestaurantRecord)
-    {
-        restaurantsRecords.set(indexOfSelectedRecord, newRestaurantRecord);
-        return newRestaurantRecord;
-    }
-    
-    public Restaurant returnRestaurantRecords(int index)
-    {
-        return restaurantsRecords.get(index);
-    }
-    
-    public void deleteRestaurantRecord(Restaurant selectedRestaurantRecord)
-    {
-        restaurantsRecords.remove(selectedRestaurantRecord);
-    }
-    
-    public int ReturnNumberOfRecords()
-    {
-        int numberOfRecords = restaurantsRecords.size();
-        return numberOfRecords;
-    }
-    
-    public Restaurant createRestaurant(String name, String phoneNumber, String address){
-        
-        Restaurant resto = new Restaurant();
-        resto.setRestaurantName(name);
-        resto.setRestaurantPhoneNumber(phoneNumber);
-        resto.setRestaurantAddress(address);
-        return resto;
-    }
-    
-    
-    public Restaurant FindRestaurantByName(String restaurantName)
-    {
-        for(Restaurant resto : restaurantsRecords)
-        {
-            if(resto.getRestaurantName().equalsIgnoreCase(restaurantName))
-            {
-                return resto;
-            }
+    public RestaurantDirectory(){
+          restaurantList = new ArrayList<Restaurant>();
         }
-        return null;
+
+    public ArrayList<Restaurant> getRestaurantList() {
+        return restaurantList;
     }
 
+    public void setRestaurantList(ArrayList<Restaurant> restaurantList) {
+        this.restaurantList = restaurantList;
+    }
+    
+    public Restaurant createRestaurant(String name, String address, String type, String manager){
+        
+        Restaurant res = new Restaurant();
+        res.setName(name);
+        res.setAddress(address);
+        res.setType(type);
+        res.setManager(manager);
+        res.setMenuDirectory(menuItems);
+        restaurantList.add(res);
+        return res;
+    
+    }
+     public Restaurant findRestaurant(String name){
+        
+         
+         for(Restaurant res : restaurantList){
+             if(res.getName().equals(name)){
+                 return res;
+             }
+         }
+         return null;
+     }
+    
+    
 }

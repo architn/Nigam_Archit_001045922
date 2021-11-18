@@ -8,7 +8,6 @@ package Business;
 
 import Business.Customer.CustomerDirectory;
 import Business.DeliveryMan.DeliveryManDirectory;
-import Business.Menu.MenuItemsDirectory;
 import Business.Order.OrderDirectory;
 import Business.Restaurant.RestaurantDirectory;
 import Business.Role.Role;
@@ -27,8 +26,7 @@ public class EcoSystem extends Organization{
     private DeliveryManDirectory deliveryManDirectory;
     private OrderDirectory orderDirectory;
 
-    public EcoSystem(RestaurantDirectory restaurantDirectory, CustomerDirectory customerDirectory, DeliveryManDirectory deliveryManDirectory
-    , OrderDirectory orderDirectory) {
+    public EcoSystem(RestaurantDirectory restaurantDirectory, CustomerDirectory customerDirectory, DeliveryManDirectory deliveryManDirectory, OrderDirectory orderDirectory) {
 
         this.restaurantDirectory = restaurantDirectory;
         this.customerDirectory = customerDirectory;
@@ -42,6 +40,38 @@ public class EcoSystem extends Organization{
         }
         return business;
     }
+
+    public OrderDirectory getOrderDirectory() {
+        return orderDirectory;
+    }
+
+    public void setOrderDirectory(OrderDirectory orderDirectory) {
+        this.orderDirectory = orderDirectory;
+    }
+
+     private EcoSystem()
+     {
+         super(null);
+         deliveryManDirectory = new DeliveryManDirectory();
+         customerDirectory = new CustomerDirectory();
+         restaurantDirectory = new RestaurantDirectory();
+         orderDirectory = new OrderDirectory();
+     }
+    public CustomerDirectory getCustomerDirectory() {
+        return customerDirectory;
+    }
+
+    public DeliveryManDirectory getDeliveryManDirectory() {
+        return deliveryManDirectory;
+    }
+
+    public RestaurantDirectory getRestaurantDirectory() {
+        return restaurantDirectory;
+    }
+
+    public void setRestaurantDirectory(RestaurantDirectory restaurantDirectory) {
+        this.restaurantDirectory = restaurantDirectory;
+    }
     
     @Override
     public ArrayList<Role> getSupportedRole() {
@@ -49,30 +79,8 @@ public class EcoSystem extends Organization{
         roleList.add(new SystemAdminRole());
         return roleList;
     }
-    private EcoSystem(){
-        super(null);
-       // networkList=new ArrayList<Network>();
-    }
-    public CustomerDirectory getCustomerDirectory() {
-        return customerDirectory;
-    }
     
 
-    public DeliveryManDirectory getDeliveryManDirectory() {
-        return deliveryManDirectory;
-    }
-
-    public OrderDirectory getOrderDirectory(){
-        return orderDirectory;
-    }
-    
-    public RestaurantDirectory getRestaurantDirectory() {
-        return restaurantDirectory;
-    }
-
-    public void setRestaurantDirectory(RestaurantDirectory restaurantDirectory) {
-        this.restaurantDirectory = restaurantDirectory;
-     }
     
     public boolean checkIfUserIsUnique(String userName){
        //

@@ -7,6 +7,7 @@ package userinterface.workPanels;
 
 import Business.Menu.MenuItems;
 import Business.EcoSystem;
+import Business.Order.Order;
 import Business.Restaurant.Restaurant;
 import Business.Restaurant.RestaurantDirectory;
 import java.util.ArrayList;
@@ -22,12 +23,15 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
     /**
      * Creates new form ManageOrdersJPanel
      */
-    EcoSystem system;
+    JPanel userProcessContainer;
+    EcoSystem ecosystem;
     ArrayList<Restaurant> restaurantList;
-    public ManageOrdersJPanel(JPanel userProcessContainer,EcoSystem system) {
+    public ManageOrdersJPanel(JPanel userProcessContainer,EcoSystem ecosystem) {
         initComponents();
         populateTable();
-        this.system = system;
+        this.userProcessContainer = userProcessContainer;
+        this.ecosystem = ecosystem;
+        populateTable();
     }
 
     /**
@@ -137,14 +141,22 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
     private void populateTable() {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
-        
-        for(Restaurant reso : system.getRestaurantDirectory().getRestaurantList())
-        {
-                Object[] row = new Object[3];
-                row[0] =  reso.getRestaurantName();
-                row[1] =  reso.getRestaurantPhoneNumber();
-                row[2] = reso.getRestaurantAddress();
+        try{
+            for(int index = 0; index < ecosystem.getOrderDirectory().getOrderhist().size(); index++)
+            {
+                Order presentOrder = ecosystem.getOrderDirectory().getOrderhist().get(index);
+                Object[] row = new Object[5];
+                row[0] =  presentOrder.getOrderID();
+                row[1] =  presentOrder.getOrderStatus();
+                row[2] = presentOrder.getOrderTime();
+                row[3] = presentOrder.getCustomerUsername();
+                row[4] = presentOrder.getDeliveryMan();
                 model.addRow(row);
+            }
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
         }
     }
 }

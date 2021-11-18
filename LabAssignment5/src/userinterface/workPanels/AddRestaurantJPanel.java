@@ -28,12 +28,13 @@ public class AddRestaurantJPanel extends javax.swing.JPanel {
     private Restaurant restaurant;
     JPanel userProcessContainer;
     private Organization organization;
-    EcoSystem system; 
-    public AddRestaurantJPanel(JPanel userProcessContainer, EcoSystem system, Organization organization) {
+    private EcoSystem ecosystem; 
+    RestaurantDirectory restaurantDirectory;
+    public AddRestaurantJPanel(JPanel userProcessContainer, EcoSystem ecosystem, Organization organization) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.organization = organization;
-        this.system = system;
+        this.ecosystem = ecosystem;
     }
 
     /**
@@ -49,15 +50,16 @@ public class AddRestaurantJPanel extends javax.swing.JPanel {
         txtRestaurantName = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         txtRestaurantAddress = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        txtRestaurantPhoneNumber = new javax.swing.JTextField();
         btnSave = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        txtManager = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        txtType = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
 
         jLabel1.setText("Restaurant Name: ");
 
         jLabel2.setText("Restaurant Address: ");
-
-        jLabel3.setText("Restaurant Phone Number: ");
 
         btnSave.setText("Save");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
@@ -65,6 +67,12 @@ public class AddRestaurantJPanel extends javax.swing.JPanel {
                 btnSaveActionPerformed(evt);
             }
         });
+
+        jLabel4.setText("Manager Name: ");
+
+        jLabel5.setText("Type: ");
+
+        jLabel3.setText("Add New Restaurant: ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -76,25 +84,29 @@ public class AddRestaurantJPanel extends javax.swing.JPanel {
                         .addGap(42, 42, 42)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
-                            .addComponent(jLabel1))
-                        .addGap(38, 38, 38)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5))
+                        .addGap(43, 43, 43)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtRestaurantAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtRestaurantName, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtRestaurantName, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtManager, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtType, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtRestaurantPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(215, 215, 215)
+                        .addComponent(btnSave))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(211, 211, 211)
-                        .addComponent(btnSave)))
-                .addContainerGap(354, Short.MAX_VALUE))
+                        .addGap(169, 169, 169)
+                        .addComponent(jLabel3)))
+                .addContainerGap(349, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(98, 98, 98)
+                .addGap(26, 26, 26)
+                .addComponent(jLabel3)
+                .addGap(56, 56, 56)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtRestaurantName, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -102,13 +114,17 @@ public class AddRestaurantJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtRestaurantAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addGap(49, 49, 49)
+                .addGap(47, 47, 47)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtRestaurantPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(78, 78, 78)
+                    .addComponent(jLabel4)
+                    .addComponent(txtManager, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(53, 53, 53)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
+                    .addComponent(txtType, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(63, 63, 63)
                 .addComponent(btnSave)
-                .addContainerGap(127, Short.MAX_VALUE))
+                .addContainerGap(64, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -116,9 +132,11 @@ public class AddRestaurantJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         String restaurantName = txtRestaurantName.getText();
         String restaurantAddress = txtRestaurantAddress.getText();
-        String phoneNumber = txtRestaurantPhoneNumber.getText();
+        String type = txtType.getText();
+        String manager = txtManager.getText();
         
-        restaurant =system.getRestaurantDirectory().createRestaurant(restaurantName, phoneNumber, restaurantAddress);
+        
+        restaurant = ecosystem.getRestaurantDirectory().createRestaurant(restaurantName, restaurantAddress, type, manager );
         JOptionPane.showMessageDialog(this, "Restaurant Added");
     }//GEN-LAST:event_btnSaveActionPerformed
 
@@ -128,8 +146,11 @@ public class AddRestaurantJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JTextField txtManager;
     private javax.swing.JTextField txtRestaurantAddress;
     private javax.swing.JTextField txtRestaurantName;
-    private javax.swing.JTextField txtRestaurantPhoneNumber;
+    private javax.swing.JTextField txtType;
     // End of variables declaration//GEN-END:variables
 }

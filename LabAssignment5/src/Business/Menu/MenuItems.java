@@ -10,40 +10,36 @@ package Business.Menu;
  * @author architnigam
  */
 public class MenuItems {
-    private int MenuItemID;
-    private String MenuItemName;
-    private double MenuItemCost;
-    private boolean MenuItemAvailability;
+    String itemName;
+    double itemPrice;
+    int quantity;
 
-    public int getMenuItemID() {
-        return MenuItemID;
+    public String getItemName() {
+        return itemName;
     }
 
-    public void setMenuItemID(int MenuItemID) {
-        this.MenuItemID = MenuItemID;
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
     }
 
-    public String getMenuItemName() {
-        return MenuItemName;
+    public double getItemPrice() {
+        return itemPrice;
     }
 
-    public void setMenuItemName(String MenuItemName) {
-        this.MenuItemName = MenuItemName;
+    public void setItemPrice(double itemPrice) {
+        this.itemPrice = itemPrice;
     }
 
-    public double getMenuItemCost() {
-        return MenuItemCost;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public void setMenuItemCost(double MenuItemCost) {
-        this.MenuItemCost = MenuItemCost;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
-
-    public boolean isMenuItemAvailability() {
-        return MenuItemAvailability;
-    }
-
-    public void setMenuItemAvailability(boolean MenuItemAvailability) {
-        this.MenuItemAvailability = MenuItemAvailability;
+    
+    @Override
+    public String toString(){
+        return itemName;
     }
 }

@@ -12,17 +12,19 @@ import java.util.ArrayList;
  * @author architnigam
  */
 public class MenuItemsDirectory {
-    ArrayList<MenuItems> menuItemRecords;
+        ArrayList<MenuItems> menu;
     
-    public MenuItemsDirectory(){
-        menuItemRecords = new ArrayList<MenuItems>();
+    
+     public MenuItemsDirectory(){
+        this.menu = new ArrayList<MenuItems>();
+        
     }
-    
-    public ArrayList<MenuItems> getMenuItemRecords() {
-        return menuItemRecords;
+
+    public ArrayList<MenuItems> getMenu() {
+        return menu;
     }
-    
-    public void setMenuItemRecords(ArrayList<MenuItems> menuItemRecords) {
-        this.menuItemRecords = menuItemRecords;
-    }  
+
+    public void setMenu(ArrayList<MenuItems> menu) {
+        this.menu = menu;
+    }
 }
