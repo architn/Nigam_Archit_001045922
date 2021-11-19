@@ -8,6 +8,7 @@ package Business.Order;
 import Business.Customer.Customer;
 import Business.DeliveryMan.DeliveryMan;
 import Business.Menu.MenuItems;
+import Business.Restaurant.Restaurant;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
@@ -24,6 +25,7 @@ public class Order {
     String orderStatus;
     Date orderTime;
     double orderAmount;
+    Restaurant restaurant;
     
     Random rand = new Random();
 
@@ -90,5 +92,12 @@ public class Order {
         int generatedID = rand.nextInt(upperbound);
         return generatedID;
     }
-    
+
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
+    }
 }

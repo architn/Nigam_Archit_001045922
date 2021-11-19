@@ -9,6 +9,8 @@ import Business.EcoSystem;
 import Business.Organization;
 import Business.Restaurant.Restaurant;
 import Business.Restaurant.RestaurantDirectory;
+import java.awt.Font;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -26,12 +28,28 @@ public class ManageRestaurantsJPanel extends javax.swing.JPanel {
     private Organization organization;
     private EcoSystem ecosystem; 
     RestaurantDirectory restaurantDirectory;
-    public ManageRestaurantsJPanel(JPanel userProcessContainer, EcoSystem ecosystem, Organization organization) {
+    String restaurantName;
+    
+//    public ManageRestaurantsJPanel(JPanel userProcessContainer, EcoSystem ecosystem, Organization organization) {
+//        initComponents();
+//        this.userProcessContainer = userProcessContainer;
+//        this.organization = organization;
+//        this.ecosystem = ecosystem;
+//        populateTable();
+//    }
+    
+     public ManageRestaurantsJPanel(JPanel userProcessContainer, EcoSystem ecosystem, Organization organization, String restaurantName) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.organization = organization;
         this.ecosystem = ecosystem;
+        this.restaurantName = restaurantName;
         populateTable();
+        Font font = new Font("Helvetica", Font.BOLD,12);
+        jLabel1.setFont(font);
+        jLabel2.setFont(font);
+        jLabel3.setFont(font);
+        jLabel4.setFont(font);
     }
 
     /**
@@ -45,8 +63,8 @@ public class ManageRestaurantsJPanel extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tblRestaurants = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnUpdate = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -56,6 +74,9 @@ public class ManageRestaurantsJPanel extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+
+        setBackground(new java.awt.Color(255, 255, 255));
 
         tblRestaurants.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -70,9 +91,19 @@ public class ManageRestaurantsJPanel extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tblRestaurants);
 
-        jButton1.setText("Update");
+        btnUpdate.setText("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Delete");
+        btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Restaurant Name: ");
 
@@ -84,47 +115,53 @@ public class ManageRestaurantsJPanel extends javax.swing.JPanel {
 
         jButton3.setText("Save");
 
+        jButton4.setText("Back");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1)
+                        .addComponent(btnUpdate)
                         .addGap(76, 76, 76)
-                        .addComponent(jButton2))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 731, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(98, 98, 98)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel1)
-                                .addComponent(jLabel2)
-                                .addComponent(jLabel3)
-                                .addComponent(jLabel4))
-                            .addGap(36, 36, 36)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jButton3)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextField1)
-                                    .addComponent(jTextField2)
-                                    .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
-                                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                        .addComponent(btnDelete))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))
+                        .addGap(36, 36, 36)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton3)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jTextField1)
+                                .addComponent(jTextField2)
+                                .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
+                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(362, 362, 362)))
+                .addContainerGap(80, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 731, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton4))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(36, 36, 36)
+                .addGap(18, 18, 18)
+                .addComponent(jButton4)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(btnUpdate)
+                    .addComponent(btnDelete))
                 .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
@@ -141,7 +178,7 @@ public class ManageRestaurantsJPanel extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
                             .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                         .addComponent(jButton3))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -150,11 +187,25 @@ public class ManageRestaurantsJPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+        int selectedIndex = tblRestaurants.getSelectedRow();
+ 
+        ecosystem.getRestaurantDirectory().deleteRestaurantRecord(selectedIndex);
+        JOptionPane.showMessageDialog(this, "Delete successful!");
+        populateTable();
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnUpdate;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -168,17 +219,37 @@ public class ManageRestaurantsJPanel extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void populateTable() {
-        DefaultTableModel model = (DefaultTableModel) tblRestaurants.getModel();
-        model.setRowCount(0);
-        for(int index = 0; index< ecosystem.getRestaurantDirectory().getRestaurantList().size(); index++)
-        {
-            restaurant = ecosystem.getRestaurantDirectory().getRestaurantList().get(index);
-            Object[] row = new Object[4];
-            row[0] =  restaurant.getName();
-            row[1] =  restaurant.getAddress();
-            row[2] = restaurant.getType();
-            row[3] = restaurant.getManager();
-            model.addRow(row);
+        try{
+            DefaultTableModel model = (DefaultTableModel) tblRestaurants.getModel();
+            model.setRowCount(0);
+            for(int index = 0; index< ecosystem.getRestaurantDirectory().getRestaurantList().size(); index++)
+            {
+                restaurant = ecosystem.getRestaurantDirectory().getRestaurantList().get(index);
+                if(!restaurantName.equals(""))
+                {
+                    if(restaurant.getName().equals(restaurantName))
+                    {
+                        Object[] row = new Object[4];
+                        row[0] =  restaurant.getName();
+                        row[1] =  restaurant.getAddress();
+                        row[2] = restaurant.getType();
+                        row[3] = restaurant.getManager();
+                        model.addRow(row);
+                    }
+                }
+                else{
+                        Object[] row = new Object[4];
+                        row[0] =  restaurant.getName();
+                        row[1] =  restaurant.getAddress();
+                        row[2] = restaurant.getType();
+                        row[3] = restaurant.getManager();
+                        model.addRow(row);
+                    }
+            
+            }
+        }
+        catch(Exception e){
+            
         }
         
     }

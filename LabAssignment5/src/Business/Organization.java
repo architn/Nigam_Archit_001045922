@@ -19,6 +19,9 @@ import java.util.ArrayList;
 public abstract class Organization {
 
     private String name;
+    private String address;
+    private String username;
+    private String phoneNumber;
     private WorkQueue workQueue;
     private EmployeeDirectory employeeDirectory;
     private UserAccountDirectory userAccountDirectory;
@@ -70,6 +73,33 @@ public abstract class Organization {
     public String getName() {
         return name;
     }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+      
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+    
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+    
+    
 
     public WorkQueue getWorkQueue() {
         return workQueue;

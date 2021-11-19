@@ -22,28 +22,30 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
+              <Component id="btnBack" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="btnSave" min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="txtName" max="32767" attributes="0"/>
+                      <Component id="btnSave" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtName" pref="133" max="32767" attributes="0"/>
                       <Component id="txtUsername" max="32767" attributes="0"/>
                       <Component id="txtPassword" max="32767" attributes="0"/>
-                      <Component id="txtEmail" pref="133" max="32767" attributes="0"/>
+                      <Component id="txtAddress" max="32767" attributes="0"/>
                   </Group>
+                  <Component id="txtPhoneNumber" min="-2" pref="122" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="399" max="32767" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <Component id="btnBack" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -75,11 +77,16 @@
               <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtEmail" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtAddress" alignment="3" min="-2" pref="44" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
+              <EmptySpace pref="40" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtPhoneNumber" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
               <Component id="btnSave" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="94" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -108,10 +115,10 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Customer Email ID: "/>
+        <Property name="text" type="java.lang.String" value="Customer Address: "/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtEmail">
+    <Component class="javax.swing.JTextField" name="txtAddress">
     </Component>
     <Component class="javax.swing.JButton" name="btnSave">
       <Properties>
@@ -128,6 +135,13 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBackActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel5">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Customer Phone No: "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtPhoneNumber">
     </Component>
   </SubComponents>
 </Form>

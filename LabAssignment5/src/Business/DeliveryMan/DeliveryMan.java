@@ -19,6 +19,7 @@ public class DeliveryMan  {
    String deliveryManName;
    String deliveryusername;
    int rating;
+   String status;
 
     public String getDeliveryManName() {
         return deliveryManName;
@@ -48,6 +49,14 @@ public class DeliveryMan  {
     public String toString() {
         return deliveryManName;
     }
-   
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+    
 
 }

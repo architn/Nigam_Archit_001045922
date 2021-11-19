@@ -31,13 +31,14 @@ public class RestaurantDirectory {
         this.restaurantList = restaurantList;
     }
     
-    public Restaurant createRestaurant(String name, String address, String type, String manager){
+    public Restaurant createRestaurant(String name, String address, String type, String manager, String username){
         
         Restaurant res = new Restaurant();
         res.setName(name);
         res.setAddress(address);
         res.setType(type);
         res.setManager(manager);
+        res.setUsername(username);
         res.setMenuItems(menuItems);
         restaurantList.add(res);
         return res;
@@ -54,5 +55,15 @@ public class RestaurantDirectory {
          return null;
      }
     
+     public Restaurant updateRestaurantRecord(int indexOfSelectedRecord, Restaurant selectedRestaurant)
+     {
+         restaurantList.set(indexOfSelectedRecord, selectedRestaurant);
+         return selectedRestaurant;
+     }
+     
+     public void deleteRestaurantRecord(int indexOfSelectedRecord)
+     {
+         restaurantList.remove(indexOfSelectedRecord);
+     }
     
 }

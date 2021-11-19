@@ -35,6 +35,7 @@ public class DeliveryManDirectory {
        dm.setDeliveryManName(name);
        dm.setDeliveryusername(username);
        dm.setRating(rating);
+       dm.setStatus("Available");
        deliveryMan.add(dm);
        return dm;      
    }
@@ -51,5 +52,6 @@ public class DeliveryManDirectory {
     public void deleteDeliveryMan(DeliveryMan deliveryman){
        deliveryMan.remove(deliveryman);
    }
+    
    
 }

@@ -11,8 +11,12 @@ import Business.Employee.Employee;
 import Business.Organization;
 import Business.Role.DeliverManRole;
 import Business.UserAccount.UserAccount;
+import Business.ValidationLogic;
+import java.awt.CardLayout;
+import java.awt.Font;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -28,11 +32,20 @@ public class AddDeliveryManJPanel extends javax.swing.JPanel {
     EcoSystem system;
     Organization organization;
     private UserAccount userAccount;
+    ValidationLogic validationLogic = new ValidationLogic();
     public AddDeliveryManJPanel(JPanel userProcessContainer, EcoSystem system, Organization organization) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.organization = organization;
         this.system = system;
+        populateTable();
+         Font font = new Font("Helvetica", Font.BOLD,12);
+        jLabel1.setFont(font);
+        jLabel2.setFont(font);
+        jLabel3.setFont(font);
+        jLabel4.setFont(font);
+        jLabel5.setFont(font);
+        jLabel6.setFont(font);
         populateTable();
     }
 
@@ -53,13 +66,16 @@ public class AddDeliveryManJPanel extends javax.swing.JPanel {
         txtPassword = new javax.swing.JTextField();
         btnSave = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblDeliveryMen = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnUpdate = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
         txtRating = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+
+        setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setText("Delivery man name: ");
 
@@ -80,7 +96,7 @@ public class AddDeliveryManJPanel extends javax.swing.JPanel {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblDeliveryMen.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -88,10 +104,10 @@ public class AddDeliveryManJPanel extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "Name", "Phone Number", "City", "Availability"
+                "Name", "Rating", "Availability", "Delivery"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblDeliveryMen);
 
         jLabel4.setText("Available Delivery Boys:");
 
@@ -99,57 +115,78 @@ public class AddDeliveryManJPanel extends javax.swing.JPanel {
 
         jLabel6.setText("Add Delivery Man: ");
 
-        jButton2.setText("Update");
+        btnUpdate.setText("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Delete");
+        btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Back");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(164, 164, 164)
+                .addContainerGap()
+                .addComponent(jButton1)
+                .addGap(61, 61, 61)
                 .addComponent(jLabel6)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(17, 17, 17)
-                                .addComponent(jLabel4))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(35, 35, 35)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel5))))
-                        .addGap(27, 27, 27)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtDeliveryManName, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnSave)
-                            .addComponent(txtRating, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 810, Short.MAX_VALUE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 810, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(68, 68, 68)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel5))
+                        .addGap(30, 30, 30)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnSave)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
+                                .addComponent(txtDeliveryManName, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
+                                .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
+                                .addComponent(txtRating, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addComponent(btnUpdate)
                 .addGap(18, 18, 18)
-                .addComponent(jButton3)
+                .addComponent(btnDelete)
                 .addGap(65, 65, 65))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jLabel6)
-                .addGap(37, 37, 37)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jButton1))
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtDeliveryManName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -165,16 +202,16 @@ public class AddDeliveryManJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtRating, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
+                .addGap(44, 44, 44)
                 .addComponent(btnSave)
-                .addGap(19, 19, 19)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addComponent(jLabel4)
-                .addGap(36, 36, 36)
+                .addGap(33, 33, 33)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(btnUpdate)
+                    .addComponent(btnDelete))
                 .addGap(31, 31, 31))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -186,16 +223,24 @@ public class AddDeliveryManJPanel extends javax.swing.JPanel {
         String password = txtPassword.getText();
         String rating = txtRating.getText();
         
-        try{
+        if(validationLogic.validateIfAllFieldsAreFilled_4(txtDeliveryManName, txtUsername, txtPassword, txtRating)
+                && validationLogic.validateIfFieldIsNumeric(txtRating))
+        {
+            try{
             Employee emp = system.getEmployeeDirectory().createEmployee(nameOfDeliveryMan);
             UserAccount account = system.getUserAccountDirectory().createUserAccount(usernameOfDeliveryMan, password, emp, new DeliverManRole());
             system.getDeliveryManDirectory().createDeliveryMan(nameOfDeliveryMan, usernameOfDeliveryMan, 
                 Integer.parseInt(rating));
             JOptionPane.showMessageDialog(this, "Delivery Man added!");
-        }       
-        catch(Exception ex)
-        {
+            populateTable();
+            }       
+            catch(Exception ex)
+            {
 
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "All fields must be filled and Rating should have a numeric integer value!");
         }
     }//GEN-LAST:event_btnSaveActionPerformed
 
@@ -203,11 +248,27 @@ public class AddDeliveryManJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUsernameActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        userProcessContainer.remove(this);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnSave;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btnUpdate;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -215,7 +276,7 @@ public class AddDeliveryManJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tblDeliveryMen;
     private javax.swing.JTextField txtDeliveryManName;
     private javax.swing.JTextField txtPassword;
     private javax.swing.JTextField txtRating;
@@ -223,6 +284,25 @@ public class AddDeliveryManJPanel extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void populateTable() {
-        
+        try
+        {
+            DefaultTableModel model1 = (DefaultTableModel) tblDeliveryMen.getModel();
+            model1.setRowCount(0);
+            DeliveryMan deliveryManObject = new DeliveryMan();
+            for(int index = 0; index < system.getDeliveryManDirectory().getDeliveryMan().size(); index++)
+            {
+                deliveryManObject = system.getDeliveryManDirectory().getDeliveryMan().get(index);
+                Object[] row = new Object[4];
+                row[0] = deliveryManObject.getDeliveryManName();
+                row[1] = deliveryManObject.getRating();
+                row[2] = deliveryManObject.getStatus();
+                row[3] = deliveryManObject;
+                model1.addRow(row);
+            }
+        }
+        catch(Exception ex)
+        {
+            
+        }
     }
 }

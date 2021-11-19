@@ -5,16 +5,14 @@
  */
 package userinterface.workPanels;
 
-import Business.Customer.CustomerDirectory;
-import Business.DeliveryMan.DeliveryManDirectory;
 import Business.EcoSystem;
 import Business.Employee.Employee;
-import Business.Order.OrderDirectory;
 import Business.Organization;
 import Business.Restaurant.Restaurant;
 import Business.Restaurant.RestaurantDirectory;
 import Business.Role.AdminRole;
-import Business.UserAccount.UserAccount;
+import Business.ValidationLogic;
+import java.awt.Font;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -32,11 +30,20 @@ public class AddRestaurantJPanel extends javax.swing.JPanel {
     private Organization organization;
     private EcoSystem ecosystem; 
     RestaurantDirectory restaurantDirectory;
+    ValidationLogic validationLogic = new ValidationLogic();
     public AddRestaurantJPanel(JPanel userProcessContainer, EcoSystem ecosystem, Organization organization) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.organization = organization;
         this.ecosystem = ecosystem;
+        Font font = new Font("Helvetica", Font.BOLD,12);
+        jLabel1.setFont(font);
+        jLabel2.setFont(font);
+        jLabel3.setFont(font);
+        jLabel4.setFont(font);
+        jLabel5.setFont(font);
+        jLabel6.setFont(font);
+        jLabel7.setFont(font);
     }
 
     /**
@@ -62,6 +69,9 @@ public class AddRestaurantJPanel extends javax.swing.JPanel {
         jLabel7 = new javax.swing.JLabel();
         txtUsername = new javax.swing.JTextField();
         txtPassword = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+
+        setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setText("Restaurant Name: ");
 
@@ -84,6 +94,8 @@ public class AddRestaurantJPanel extends javax.swing.JPanel {
 
         jLabel7.setText("Password: ");
 
+        jButton1.setText("Back");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -94,7 +106,9 @@ public class AddRestaurantJPanel extends javax.swing.JPanel {
                         .addGap(215, 215, 215)
                         .addComponent(btnSave))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(169, 169, 169)
+                        .addContainerGap()
+                        .addComponent(jButton1)
+                        .addGap(66, 66, 66)
                         .addComponent(jLabel3))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(34, 34, 34)
@@ -118,9 +132,11 @@ public class AddRestaurantJPanel extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(jLabel3)
-                .addGap(17, 17, 17)
+                .addGap(21, 21, 21)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jButton1))
+                .addGap(9, 9, 9)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtRestaurantName, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -159,15 +175,23 @@ public class AddRestaurantJPanel extends javax.swing.JPanel {
         String username = txtUsername.getText();
         String password = txtPassword.getText();
         
-        restaurant = ecosystem.getRestaurantDirectory().createRestaurant(restaurantName, restaurantAddress, type, manager );
-        Employee emp = ecosystem.getEmployeeDirectory().createEmployee(manager);
-        ecosystem.getUserAccountDirectory().createUserAccount(username, password, emp, new AdminRole());
-        JOptionPane.showMessageDialog(this, "Restaurant Added");
+        if(validationLogic.validateIfAllFieldsAreFilled_6(txtRestaurantName, txtRestaurantAddress, txtType, txtManager, 
+                txtUsername, txtPassword))
+        {
+            restaurant = ecosystem.getRestaurantDirectory().createRestaurant(restaurantName, restaurantAddress, type, manager, username );
+            Employee emp = ecosystem.getEmployeeDirectory().createEmployee(manager);
+            ecosystem.getUserAccountDirectory().createUserAccount(username, password, emp, new AdminRole());
+            JOptionPane.showMessageDialog(this, "Restaurant Added");
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "All fields must be filled!");
+        }
     }//GEN-LAST:event_btnSaveActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSave;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

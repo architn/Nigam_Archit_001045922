@@ -10,6 +10,7 @@ import Business.DeliveryMan.DeliveryMan;
 import Business.EcoSystem;
 import Business.Menu.MenuItems;
 import Business.Order.Order;
+import Business.Order.OrderDirectory;
 import Business.Organization;
 import Business.Restaurant.Restaurant;
 import Business.UserAccount.UserAccount;
@@ -33,6 +34,8 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
     EcoSystem system;
     DB4OUtil db4O;
     ArrayList<MenuItems> menuItemsInCart = new ArrayList<MenuItems>();
+    Restaurant searchedRestaurant;
+    
     Random rand = new Random();
     public CustomerAreaJPanel(JPanel userProcessContainer, UserAccount userAccount, EcoSystem system) {
         initComponents();
@@ -189,21 +192,32 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
         String restaurantName = txtRestaurantName.getText();
-        Restaurant searchedRestaurant;
-        searchedRestaurant = system.getRestaurantDirectory().findRestaurant(restaurantName);
-        DefaultTableModel model = (DefaultTableModel) tblMenuItems.getModel();
-        model.setRowCount(0);
-        for(int index = 0; index < searchedRestaurant.getMenuItems().size(); index++)
-        {
-            MenuItems menuItems = searchedRestaurant.getMenuItems().get(index);
-            if(menuItems.isAvailability())
+        try{
+            searchedRestaurant = system.getRestaurantDirectory().findRestaurant(restaurantName);
+            if(searchedRestaurant == null)
             {
-                Object[] row = new Object[3];
-                row[0] = menuItems.getItemName();
-                row[1] = menuItems.getItemPrice();
-                row[2] = menuItems;
-                model.addRow(row);
+                JOptionPane.showMessageDialog(this, "No such restaurant found!");
+                txtRestaurantName.setText("");
             }
+            else{
+                DefaultTableModel model = (DefaultTableModel) tblMenuItems.getModel();
+            model.setRowCount(0);
+            for(int index = 0; index < searchedRestaurant.getMenuItems().size(); index++)
+            {
+                MenuItems menuItems = searchedRestaurant.getMenuItems().get(index);
+                if(menuItems.isAvailability())
+                {
+                    Object[] row = new Object[3];
+                    row[0] = menuItems.getItemName();
+                    row[1] = menuItems.getItemPrice();
+                    row[2] = menuItems;
+                    model.addRow(row);
+                }
+            }
+            }
+        }
+        catch(Exception ex){
+            
         }
         
     }//GEN-LAST:event_btnSearchActionPerformed
@@ -211,9 +225,9 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
     private void btnOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrderActionPerformed
         // TODO add your handling code here:
         double totalOrderAmount = 0;
+        OrderDirectory orderdiretory  = new OrderDirectory();
         MenuItems menuItem = new MenuItems();
         ArrayList<MenuItems> orderedItems = new ArrayList<MenuItems>();
-        Order order = new Order();
         ArrayList<Order> orderhist = new ArrayList<Order>();
         DefaultTableModel model1 = (DefaultTableModel) tblCart.getModel();
         for(int acrossRow = 0; acrossRow < model1.getRowCount(); acrossRow++)
@@ -227,20 +241,31 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
         int upperbound = system.getDeliveryManDirectory().getDeliveryMan().size();
         if(upperbound != 0)
         {
-           int returnedIndex = rand.nextInt(upperbound);
-           assignedDeliveryMan = system.getDeliveryManDirectory().getDeliveryMan().get(returnedIndex);
-           orderedItems.add(menuItem);
-            int orderId = order.generateOrderID();
-            order.setOrderID(orderId);
-            order.setOrdersByCustomer(orderedItems);
-            order.setCustomerUsername(userAccount.getUsername());
-            order.setOrderTime(new Date());
-            order.setDeliveryMan(assignedDeliveryMan);
-            order.setOrderStatus("Order Accepted");
-            order.setOrderAmount(totalOrderAmount);
-            orderhist.add(order);
-            system.getOrderDirectory().setOrderhist(orderhist);
-            JOptionPane.showMessageDialog(this, "Order successfully placed! Total amount is: "+totalOrderAmount);
+            int returnedIndex = rand.nextInt(upperbound);
+            assignedDeliveryMan = system.getDeliveryManDirectory().getDeliveryMan().get(returnedIndex);
+            orderedItems.add(menuItem);
+            Order order = new Order();
+            
+            // Method 1:
+//            int orderId = order.generateOrderID();
+//            order.setOrderID(orderId);
+//            order.setOrdersByCustomer(orderedItems);
+//            order.setCustomerUsername(userAccount.getUsername());
+//            order.setOrderTime(new Date());
+//            order.setDeliveryMan(assignedDeliveryMan);
+//            order.setOrderStatus("Order Accepted");
+//            order.setOrderAmount(totalOrderAmount);
+//            order.setRestaurant(searchedRestaurant);
+//            orderhist.add(order);
+//            orderdiretory.setOrderhist(orderhist);
+//            system.setOrderDirectory(orderdiretory);
+            
+            // Method 2: Correct
+            order = system.getOrderDirectory().createOrder(orderedItems, userAccount.getUsername(), 
+                    assignedDeliveryMan, totalOrderAmount, searchedRestaurant);
+            
+            JOptionPane.showMessageDialog(this, "Order successfully placed! Total amount is: $"+totalOrderAmount
+            +" and will be delivered by: "+assignedDeliveryMan.getDeliveryManName());
         }
         else{
             JOptionPane.showMessageDialog(this, "Order cannot be placed if there is no delivery person in system! "
@@ -292,9 +317,5 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
             row[1] = menuItem.getItemPrice();
             model1.addRow(row);
         }
-    }
-
-    private void populateDropdown() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

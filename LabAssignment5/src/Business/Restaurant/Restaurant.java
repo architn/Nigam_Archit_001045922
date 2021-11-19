@@ -18,6 +18,7 @@ public class Restaurant {
     String address;
     String type;
     String manager;
+    String username;
     ArrayList<MenuItems> menuItems;
 
     public String getName() {
@@ -60,4 +61,21 @@ public class Restaurant {
         this.menuItems = menuItems;
     }
     
+    public MenuItems addMenuItemToARestaurant(String menuItemName, double cost, boolean availability)
+    {
+        MenuItems menuItem = new MenuItems();
+        menuItem.setItemName(menuItemName);
+        menuItem.setItemPrice(cost);
+        menuItem.setAvailability(availability);
+        menuItems.add(menuItem);
+        return menuItem;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }  
 }

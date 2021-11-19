@@ -11,6 +11,7 @@ import Business.Organization;
 import Business.Role.CustomerRole;
 import java.awt.CardLayout;
 import java.awt.Component;
+import java.awt.Font;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import userinterface.SystemAdminWorkArea.SystemAdminWorkAreaJPanel;
@@ -32,6 +33,11 @@ public class AddCustomerJPanel extends javax.swing.JPanel {
         this.userProcessContainer = userProcessContainer;
         this.system=system;
         this.custorganization=custorganization;
+        Font font = new Font("Helvetica", Font.BOLD,12);
+        jLabel1.setFont(font);
+        jLabel2.setFont(font);
+        jLabel3.setFont(font);
+        jLabel4.setFont(font);
     }
 
     /**
@@ -50,9 +56,11 @@ public class AddCustomerJPanel extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         txtPassword = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        txtEmail = new javax.swing.JTextField();
+        txtAddress = new javax.swing.JTextField();
         btnSave = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        txtPhoneNumber = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -62,7 +70,7 @@ public class AddCustomerJPanel extends javax.swing.JPanel {
 
         jLabel3.setText("Customer password: ");
 
-        jLabel4.setText("Customer Email ID: ");
+        jLabel4.setText("Customer Address: ");
 
         btnSave.setText("Save");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
@@ -78,29 +86,33 @@ public class AddCustomerJPanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel5.setText("Customer Phone No: ");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(btnBack)
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(67, 67, 67)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3)
-                    .addComponent(jLabel4))
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5))
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnSave)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(txtName)
+                        .addComponent(btnSave)
+                        .addComponent(txtName, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
                         .addComponent(txtUsername)
                         .addComponent(txtPassword)
-                        .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)))
+                        .addComponent(txtAddress))
+                    .addComponent(txtPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(399, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(btnBack)
-                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -125,10 +137,14 @@ public class AddCustomerJPanel extends javax.swing.JPanel {
                 .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(68, 68, 68)
+                    .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(txtPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(35, 35, 35)
                 .addComponent(btnSave)
-                .addContainerGap(94, Short.MAX_VALUE))
+                .addGap(43, 43, 43))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -137,9 +153,11 @@ public class AddCustomerJPanel extends javax.swing.JPanel {
         String customername = txtName.getText();
         String customerusername = txtUsername.getText();
         String customerpassword = txtPassword.getText();
-        String customeremailid = txtEmail.getText();
+        String address = txtAddress.getText();
+        String phoneNumber = txtPhoneNumber.getText();
         
-        if(customername.isEmpty() || customerusername.isEmpty() || customerpassword.isEmpty() || customeremailid.isEmpty()){
+        if(customername.isEmpty() || customerusername.isEmpty() || customerpassword.isEmpty() || address.isEmpty()
+                || phoneNumber.isEmpty()){
            JOptionPane.showMessageDialog(null,"All the fields are required", "Success", JOptionPane.ERROR_MESSAGE);
            return;
         }
@@ -148,6 +166,9 @@ public class AddCustomerJPanel extends javax.swing.JPanel {
         system.getUserAccountDirectory().createUserAccount(customerusername, customerpassword, emp, new CustomerRole());
         Business.Customer.Customer customer = (Business.Customer.Customer) system.getCustomerDirectory().createOrganization(Organization.Type.Customer);
         customer.setName(customername);
+        customer.setAddress(address);
+        customer.setPhoneNumber(phoneNumber);
+        customer.setUsername(customerusername);
         Business.Role.CustomerRole customerrole = new CustomerRole();
         customer.getUserAccountDirectory().createUserAccount(customername, customerpassword, emp, customerrole);
         JOptionPane.showMessageDialog(null, "Customer Saved Successfully");
@@ -156,15 +177,9 @@ public class AddCustomerJPanel extends javax.swing.JPanel {
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
-        CardLayout layout = (CardLayout)userProcessContainer.getLayout();
         userProcessContainer.remove(this);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
-        Component[] comps = this.userProcessContainer.getComponents();
-        for(Component comp : comps){
-            if(comp instanceof SystemAdminWorkAreaJPanel){
-                SystemAdminWorkAreaJPanel systemAdminPanel = (SystemAdminWorkAreaJPanel) comp;
-            }
-        }
     }//GEN-LAST:event_btnBackActionPerformed
 
 
@@ -175,9 +190,11 @@ public class AddCustomerJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JTextField txtEmail;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JTextField txtAddress;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtPassword;
+    private javax.swing.JTextField txtPhoneNumber;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,6 +5,7 @@
  */
 package Business.Menu;
 
+import Business.Restaurant.Restaurant;
 import java.util.ArrayList;
 
 /**
@@ -27,4 +28,15 @@ public class MenuItemsDirectory {
     public void setMenu(ArrayList<MenuItems> menu) {
         this.menu = menu;
     }
+    
+    public MenuItems updateMenuItem(int indexOfSelectedRecord, MenuItems selectedMenuItem)
+     {
+         menu.set(indexOfSelectedRecord, selectedMenuItem);
+         return selectedMenuItem;
+     }
+     
+     public void deleteMenuItem(int indexOfSelectedRecord)
+     {
+         menu.remove(indexOfSelectedRecord);
+     }
 }

@@ -8,10 +8,11 @@ package userinterface.workPanels;
 import Business.DB4OUtil.DB4OUtil;
 import Business.Menu.MenuItems;
 import Business.EcoSystem;
-import Business.Menu.MenuItemsDirectory;
 import Business.Organization;
 import Business.UserAccount.UserAccount;
 import Business.Restaurant.Restaurant;
+import Business.ValidationLogic;
+import java.awt.Font;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
@@ -32,15 +33,36 @@ public class AddMenuItemJPanel extends javax.swing.JPanel {
     DB4OUtil db4O;
     ArrayList<MenuItems> menuItemList = new ArrayList<MenuItems>();
     Organization organization;
-    
+    String nameOfRestaurant;
+    ValidationLogic validationLogic = new ValidationLogic();
     public AddMenuItemJPanel(JPanel userProcessContainer, EcoSystem system, Organization organization) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.organization = organization;
         this.system = system;
+        Font font = new Font("Helvetica", Font.BOLD,12);
+        jLabel1.setFont(font);
+        jLabel2.setFont(font);
+        jLabel3.setFont(font);
+        jLabel4.setFont(font);
+        jLabel5.setFont(font);
         
     }
-
+    public AddMenuItemJPanel(JPanel userProcessContainer, EcoSystem system, Organization organization, String nameOfRestaurant) {
+        initComponents();
+        this.userProcessContainer = userProcessContainer;
+        this.organization = organization;
+        this.system = system;
+        this.nameOfRestaurant = nameOfRestaurant;
+        txtRestaurantName.setText(nameOfRestaurant);
+        txtRestaurantName.setEditable(false);
+        Font font = new Font("Helvetica", Font.BOLD,12);
+        jLabel1.setFont(font);
+        jLabel2.setFont(font);
+        jLabel3.setFont(font);
+        jLabel4.setFont(font);
+        jLabel5.setFont(font);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -59,11 +81,17 @@ public class AddMenuItemJPanel extends javax.swing.JPanel {
         btnSaveDish = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblMenu = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnUpdate = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         txtRestaurantName = new javax.swing.JTextField();
         checkboxAvailable = new javax.swing.JCheckBox();
+        jButton3 = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        txtSearchRestaurant = new javax.swing.JTextField();
+        btnSearch = new javax.swing.JButton();
+
+        setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setText("Dish Name: ");
 
@@ -93,58 +121,81 @@ public class AddMenuItemJPanel extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tblMenu);
 
-        jButton1.setText("Update");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnUpdate.setText("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnUpdateActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Delete");
+        btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("Restaurant: ");
+
+        jButton3.setText("Back");
+
+        jLabel6.setText("Restaurant: ");
+
+        btnSearch.setText("Search");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(184, 184, 184)
-                                .addComponent(jLabel4))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(32, 32, 32)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel5))
-                                .addGap(31, 31, 31)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtDishName)
-                                    .addComponent(btnSaveDish, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtCost, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
-                                    .addComponent(txtRestaurantName)
-                                    .addComponent(checkboxAvailable))))
-                        .addGap(0, 408, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(38, 38, 38)
-                .addComponent(jButton2)
-                .addGap(33, 33, 33))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnUpdate)
+                        .addGap(40, 40, 40)
+                        .addComponent(btnDelete))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(jButton3)
+                            .addGap(95, 95, 95)
+                            .addComponent(jLabel4))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(32, 32, 32)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel1)
+                                .addComponent(jLabel2)
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel5)
+                                .addComponent(jLabel6))
+                            .addGap(31, 31, 31)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtDishName)
+                                .addComponent(btnSaveDish, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtCost, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
+                                .addComponent(txtRestaurantName)
+                                .addComponent(checkboxAvailable)
+                                .addComponent(txtSearchRestaurant))
+                            .addGap(31, 31, 31)
+                            .addComponent(btnSearch))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(16, 16, 16)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 523, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(210, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jLabel4)
-                .addGap(30, 30, 30)
+                .addGap(14, 14, 14)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jButton3))
+                .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtRestaurantName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -162,13 +213,22 @@ public class AddMenuItemJPanel extends javax.swing.JPanel {
                     .addComponent(checkboxAvailable))
                 .addGap(29, 29, 29)
                 .addComponent(btnSaveDish)
-                .addGap(43, 43, 43)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(txtSearchRestaurant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSearch))
+                        .addGap(40, 40, 40)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(123, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnUpdate)
+                            .addComponent(btnDelete))
+                        .addGap(60, 60, 60))))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -179,61 +239,74 @@ public class AddMenuItemJPanel extends javax.swing.JPanel {
         String dishCost = txtCost.getText();
         boolean isAvailable = checkboxAvailable.isSelected();
         
-        MenuItems menuItem = new MenuItems();
-        
-        menuItem.setItemName(dishName);
-        menuItem.setItemPrice(Double.parseDouble(dishCost));
-        menuItem.setAvailability(isAvailable);
-
-  
-        Restaurant searchedRestaurant = system.getRestaurantDirectory().findRestaurant(restaurantName);
-        System.out.println("resto "+searchedRestaurant.getName());
-        menuItemList.add(menuItem);
-        searchedRestaurant.setMenuItems(menuItemList);
-        JOptionPane.showMessageDialog(this, "Menu Dish added!");
-        
-        populateTable();
-
+        if(validationLogic.validateIfAllFieldsAreFilled_3(txtRestaurantName, txtDishName, txtCost))
+        {
+            Restaurant searchedRestaurant = system.getRestaurantDirectory().findRestaurant(restaurantName);
+            searchedRestaurant.addMenuItemToARestaurant(dishName, Double.parseDouble(dishCost), isAvailable);
+            JOptionPane.showMessageDialog(this, "Menu Dish added!");
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "All fields must be filled!");
+        }
     }//GEN-LAST:event_btnSaveDishActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        // TODO add your handling code here:
+        populateTable();
+    }//GEN-LAST:event_btnSearchActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnSaveDish;
+    private javax.swing.JButton btnSearch;
+    private javax.swing.JButton btnUpdate;
     private javax.swing.JCheckBox checkboxAvailable;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblMenu;
     private javax.swing.JTextField txtCost;
     private javax.swing.JTextField txtDishName;
     private javax.swing.JTextField txtRestaurantName;
+    private javax.swing.JTextField txtSearchRestaurant;
     // End of variables declaration//GEN-END:variables
 
     private void populateTable() {
         DefaultTableModel model = (DefaultTableModel) tblMenu.getModel();
         model.setRowCount(0);
-//        for(MenuItems menuItem: system.getMenuItemsDirectory().getMenuItemRecords())
-//        {
-//                Object[] row = new Object[3];
-//                row[0] =  menuItem.getMenuItemName();
-//                row[1] =  String.valueOf(menuItem.getMenuItemCost());
-//                if(menuItem.isMenuItemAvailability())
-//                {
-//                    row[2] = "Yes";
-//                }
-//                else{
-//                    row[2] = "No";
-//                }
-//                model.addRow(row);
-//        }
+        String searchedRestaurant = txtSearchRestaurant.getText();
+        Restaurant restaurantFound = system.getRestaurantDirectory().findRestaurant(searchedRestaurant);
+        ArrayList<MenuItems> menuItems = restaurantFound.getMenuItems();
+        for(MenuItems menuItem : menuItems)
+        {
+            Object[] row = new Object[4];
+            row[0] = menuItem.getItemName();
+            row[1] = menuItem.getItemPrice();
+            boolean isAvailable = menuItem.isAvailability();
+            if(isAvailable)
+            {
+                row[2] = "Yes";
+            }
+            else{
+                row[2] = "No";
+            }
+            row[3] = menuItem;
+            model.addRow(row);
+        }
     }
 }
