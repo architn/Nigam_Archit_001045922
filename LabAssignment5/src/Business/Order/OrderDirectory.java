@@ -40,10 +40,9 @@ public class OrderDirectory {
             od.setCustomerUsername(username);
             od.setOrderTime(new Date());
             od.setDeliveryMan(assignedDeliveryMan);
-            od.setOrderStatus("Order Accepted");
             od.setOrderAmount(totalOrderAmount);
             od.setRestaurant(assignedRestaurant);
-            //System.out.println(od);
+            od.setIsOrderDelivered(false);
             orderhist.add(od);
             return od;
     }

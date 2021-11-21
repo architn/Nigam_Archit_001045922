@@ -61,14 +61,21 @@ public class Restaurant {
         this.menuItems = menuItems;
     }
     
-    public MenuItems addMenuItemToARestaurant(String menuItemName, double cost, boolean availability)
+    public MenuItems addMenuItemToARestaurant(String menuItemName, double cost, boolean availability, String restaurant)
     {
         MenuItems menuItem = new MenuItems();
         menuItem.setItemName(menuItemName);
         menuItem.setItemPrice(cost);
         menuItem.setAvailability(availability);
+        menuItem.setRestaurant(restaurant);
         menuItems.add(menuItem);
         return menuItem;
+    }
+    
+    public MenuItems updateMenuItems(int indexOfSelectedRecord, MenuItems selectedMenuItem)
+    {
+        menuItems.set(indexOfSelectedRecord, selectedMenuItem);
+        return selectedMenuItem;
     }
 
     public String getUsername() {

@@ -5,6 +5,7 @@
  */
 package Business.DeliveryMan;
 
+import Business.Order.Order;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -29,13 +30,14 @@ public class DeliveryManDirectory {
         this.deliveryMan = deliveryMan;
     }
     
-       public DeliveryMan createDeliveryMan(String name, String username, int rating){
+       public DeliveryMan createDeliveryMan(String name, String username, int rating, String phoneNumber){
        
        DeliveryMan dm = new DeliveryMan();
        dm.setDeliveryManName(name);
        dm.setDeliveryusername(username);
        dm.setRating(rating);
        dm.setStatus("Available");
+       dm.setDeliveryPhoneNumber(phoneNumber);
        deliveryMan.add(dm);
        return dm;      
    }
@@ -53,5 +55,9 @@ public class DeliveryManDirectory {
        deliveryMan.remove(deliveryman);
    }
     
-   
+   public DeliveryMan updateDeliveryMan(int indexOfSelectedRecord, DeliveryMan selectedDeliveryMan)
+    {
+        deliveryMan.set(indexOfSelectedRecord, selectedDeliveryMan);
+        return selectedDeliveryMan;
+    }
 }

@@ -9,6 +9,7 @@ import Business.DeliveryMan.DeliveryMan;
 import Business.EcoSystem;
 import Business.Organization;
 import Business.Restaurant.Restaurant;
+import Business.Role.SystemAdminRole;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -17,6 +18,8 @@ import userinterface.workPanels.AddCustomerJPanel;
 import userinterface.workPanels.AddRestaurantJPanel;
 import userinterface.workPanels.AddDeliveryManJPanel;
 import userinterface.workPanels.AddMenuItemJPanel;
+import userinterface.workPanels.ManageMenuItems;
+import userinterface.workPanels.ManageDeliveryMan;
 import userinterface.workPanels.ManageOrdersJPanel;
 import userinterface.workPanels.ManageRestaurantsJPanel;
 
@@ -34,14 +37,23 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
     Organization customerOrganization;
     Organization deliveryorganization;
     Organization organization;
-
+    
     public SystemAdminWorkAreaJPanel(JPanel userProcessContainer, EcoSystem ecosystem) {
         initComponents();
         this.userProcessContainer=userProcessContainer;
         this.ecosystem=ecosystem;
         populateTree();
+        if(ecosystem.getRestaurantDirectory().getRestaurantList().isEmpty())
+        {
+           btnAddMenuItem.setEnabled(false);
+           btnManageRestaurant.setEnabled(false);
+           btnManageOrders.setEnabled(false);
+        }
+        if(ecosystem.getDeliveryManDirectory().getDeliveryMan().isEmpty())
+        {
+            btnManageDeliveryMan.setEnabled(false);
+        }
     }
-    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -63,6 +75,7 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         btnManageOrders = new javax.swing.JButton();
         btnManageRestaurant = new javax.swing.JButton();
         btnAddCustomer = new javax.swing.JButton();
+        btnManageDeliveryMan = new javax.swing.JButton();
 
         setLayout(new java.awt.BorderLayout());
 
@@ -128,6 +141,13 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnManageDeliveryMan.setText("Manage Delivery Man");
+        btnManageDeliveryMan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnManageDeliveryManActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -135,29 +155,34 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(43, 43, 43)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnManageOrders)
                     .addComponent(btnAddCustomer)
                     .addComponent(btnAddRestaurant)
                     .addComponent(btnAddMenuItem, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAddDeliveryMan, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnManageRestaurant))
-                .addContainerGap(367, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(btnAddDeliveryMan, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnManageOrders)
+                            .addComponent(btnManageRestaurant)
+                            .addComponent(btnManageDeliveryMan))))
+                .addContainerGap(355, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(btnAddRestaurant)
-                .addGap(29, 29, 29)
+                .addGap(18, 18, 18)
                 .addComponent(btnAddCustomer)
-                .addGap(31, 31, 31)
+                .addGap(18, 18, 18)
                 .addComponent(btnAddMenuItem)
-                .addGap(34, 34, 34)
+                .addGap(18, 18, 18)
                 .addComponent(btnAddDeliveryMan)
-                .addGap(33, 33, 33)
+                .addGap(18, 18, 18)
                 .addComponent(btnManageRestaurant)
-                .addGap(29, 29, 29)
+                .addGap(18, 18, 18)
                 .addComponent(btnManageOrders)
-                .addContainerGap(179, Short.MAX_VALUE))
+                .addGap(30, 30, 30)
+                .addComponent(btnManageDeliveryMan)
+                .addContainerGap(186, Short.MAX_VALUE))
         );
 
         jSplitPane.setRightComponent(jPanel2);
@@ -169,6 +194,7 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
            
         AddMenuItemJPanel addMenuItemJPanel = new AddMenuItemJPanel(userProcessContainer, ecosystem, organization);
         jSplitPane.setRightComponent(addMenuItemJPanel);
+        userProcessContainer.add("Add Menu Item", addMenuItemJPanel);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
     }//GEN-LAST:event_btnAddMenuItemActionPerformed
@@ -176,6 +202,7 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
     private void btnAddDeliveryManActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddDeliveryManActionPerformed
         AddDeliveryManJPanel addDeliveryManPanel = new AddDeliveryManJPanel(userProcessContainer, ecosystem, organization);
         jSplitPane.setRightComponent(addDeliveryManPanel);
+        userProcessContainer.add("Add Delivery Man", addDeliveryManPanel);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
     }//GEN-LAST:event_btnAddDeliveryManActionPerformed
@@ -183,6 +210,7 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
     private void btnManageOrdersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageOrdersActionPerformed
         ManageOrdersJPanel manageOrdersJPanel = new ManageOrdersJPanel(userProcessContainer, ecosystem);
         jSplitPane.setRightComponent(manageOrdersJPanel);
+        userProcessContainer.add("Manage Orders", manageOrdersJPanel);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
     }//GEN-LAST:event_btnManageOrdersActionPerformed
@@ -191,6 +219,7 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         AddRestaurantJPanel addRestaurantPanel = new AddRestaurantJPanel(userProcessContainer, ecosystem, organization);
         jSplitPane.setRightComponent(addRestaurantPanel);
+         userProcessContainer.add("Add Restaurants Panel", addRestaurantPanel);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
     }//GEN-LAST:event_btnAddRestaurantActionPerformed
@@ -199,6 +228,7 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         ManageRestaurantsJPanel manageRestaurantsPanel = new ManageRestaurantsJPanel(userProcessContainer, ecosystem, organization, "");
         jSplitPane.setRightComponent(manageRestaurantsPanel);
+        userProcessContainer.add("Manage Restaurants Panel", manageRestaurantsPanel);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
     }//GEN-LAST:event_btnManageRestaurantActionPerformed
@@ -207,9 +237,18 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         AddCustomerJPanel addCustomerPanel = new AddCustomerJPanel(userProcessContainer, ecosystem, organization);
         jSplitPane.setRightComponent(addCustomerPanel);
+        userProcessContainer.add("Add Customer", addCustomerPanel);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
     }//GEN-LAST:event_btnAddCustomerActionPerformed
+
+    private void btnManageDeliveryManActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageDeliveryManActionPerformed
+        // TODO add your handling code here:
+        ManageDeliveryMan manageMenuItemsJPanel = new ManageDeliveryMan(userProcessContainer, ecosystem, organization);
+        jSplitPane.setRightComponent(manageMenuItemsJPanel);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_btnManageDeliveryManActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -217,6 +256,7 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnAddDeliveryMan;
     private javax.swing.JButton btnAddMenuItem;
     private javax.swing.JButton btnAddRestaurant;
+    private javax.swing.JButton btnManageDeliveryMan;
     private javax.swing.JButton btnManageOrders;
     private javax.swing.JButton btnManageRestaurant;
     private javax.swing.JPanel jPanel1;

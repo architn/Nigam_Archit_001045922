@@ -32,13 +32,13 @@ public class AddDeliveryManJPanel extends javax.swing.JPanel {
     EcoSystem system;
     Organization organization;
     private UserAccount userAccount;
-    ValidationLogic validationLogic = new ValidationLogic();
+    
     public AddDeliveryManJPanel(JPanel userProcessContainer, EcoSystem system, Organization organization) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.organization = organization;
         this.system = system;
-        populateTable();
+
          Font font = new Font("Helvetica", Font.BOLD,12);
         jLabel1.setFont(font);
         jLabel2.setFont(font);
@@ -46,7 +46,6 @@ public class AddDeliveryManJPanel extends javax.swing.JPanel {
         jLabel4.setFont(font);
         jLabel5.setFont(font);
         jLabel6.setFont(font);
-        populateTable();
     }
 
     /**
@@ -65,15 +64,12 @@ public class AddDeliveryManJPanel extends javax.swing.JPanel {
         txtUsername = new javax.swing.JTextField();
         txtPassword = new javax.swing.JTextField();
         btnSave = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblDeliveryMen = new javax.swing.JTable();
-        jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        btnUpdate = new javax.swing.JButton();
-        btnDelete = new javax.swing.JButton();
         txtRating = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        txtPhoneNumber = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -96,38 +92,9 @@ public class AddDeliveryManJPanel extends javax.swing.JPanel {
             }
         });
 
-        tblDeliveryMen.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Name", "Rating", "Availability", "Delivery"
-            }
-        ));
-        jScrollPane1.setViewportView(tblDeliveryMen);
-
-        jLabel4.setText("Available Delivery Boys:");
-
         jLabel5.setText("Rating:");
 
         jLabel6.setText("Add Delivery Man: ");
-
-        btnUpdate.setText("Update");
-        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUpdateActionPerformed(evt);
-            }
-        });
-
-        btnDelete.setText("Delete");
-        btnDelete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeleteActionPerformed(evt);
-            }
-        });
 
         jButton1.setText("Back");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -136,32 +103,27 @@ public class AddDeliveryManJPanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel4.setText("Phone Number:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton1)
-                .addGap(61, 61, 61)
-                .addComponent(jLabel6)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 810, Short.MAX_VALUE)))
+                        .addComponent(jButton1)
+                        .addGap(61, 61, 61)
+                        .addComponent(jLabel6))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(68, 68, 68)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel1)
                             .addComponent(jLabel3)
-                            .addComponent(jLabel5))
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel4))
                         .addGap(30, 30, 30)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnSave)
@@ -169,15 +131,9 @@ public class AddDeliveryManJPanel extends javax.swing.JPanel {
                                 .addComponent(txtUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
                                 .addComponent(txtDeliveryManName, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
                                 .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
-                                .addComponent(txtRating, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnUpdate)
-                .addGap(18, 18, 18)
-                .addComponent(btnDelete)
-                .addGap(65, 65, 65))
+                                .addComponent(txtRating, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE))
+                            .addComponent(txtPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(476, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -202,37 +158,40 @@ public class AddDeliveryManJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtRating, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(44, 44, 44)
-                .addComponent(btnSave)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
-                .addComponent(jLabel4)
-                .addGap(33, 33, 33)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnUpdate)
-                    .addComponent(btnDelete))
-                .addGap(31, 31, 31))
+                    .addComponent(jLabel4)
+                    .addComponent(txtPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addComponent(btnSave)
+                .addContainerGap(336, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
+        ValidationLogic validationLogic = new ValidationLogic(system);
         String nameOfDeliveryMan = txtDeliveryManName.getText();
         String usernameOfDeliveryMan = txtUsername.getText();
         String password = txtPassword.getText();
         String rating = txtRating.getText();
+        String phoneNumber = txtPhoneNumber.getText();
         
-        if(validationLogic.validateIfAllFieldsAreFilled_4(txtDeliveryManName, txtUsername, txtPassword, txtRating)
-                && validationLogic.validateIfFieldIsNumeric(txtRating))
+        if(validationLogic.validateIfAllFieldsAreFilled_5(txtDeliveryManName, txtUsername, txtPassword, txtRating, txtPhoneNumber)
+                && validationLogic.validateIfFieldIsNumeric(txtRating)
+                && validationLogic.validateIfContactNumberIsCorrect(txtPhoneNumber))
         {
             try{
             Employee emp = system.getEmployeeDirectory().createEmployee(nameOfDeliveryMan);
             UserAccount account = system.getUserAccountDirectory().createUserAccount(usernameOfDeliveryMan, password, emp, new DeliverManRole());
             system.getDeliveryManDirectory().createDeliveryMan(nameOfDeliveryMan, usernameOfDeliveryMan, 
-                Integer.parseInt(rating));
+                Integer.parseInt(rating), phoneNumber);
             JOptionPane.showMessageDialog(this, "Delivery Man added!");
-            populateTable();
+            txtDeliveryManName.setText("");
+            txtUsername.setText("");
+            txtPassword.setText("");
+            txtRating.setText("");
+            txtPhoneNumber.setText("");
             }       
             catch(Exception ex)
             {
@@ -255,19 +214,9 @@ public class AddDeliveryManJPanel extends javax.swing.JPanel {
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnUpdateActionPerformed
-
-    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnDeleteActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnSave;
-    private javax.swing.JButton btnUpdate;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -275,34 +224,11 @@ public class AddDeliveryManJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblDeliveryMen;
     private javax.swing.JTextField txtDeliveryManName;
     private javax.swing.JTextField txtPassword;
+    private javax.swing.JTextField txtPhoneNumber;
     private javax.swing.JTextField txtRating;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 
-    private void populateTable() {
-        try
-        {
-            DefaultTableModel model1 = (DefaultTableModel) tblDeliveryMen.getModel();
-            model1.setRowCount(0);
-            DeliveryMan deliveryManObject = new DeliveryMan();
-            for(int index = 0; index < system.getDeliveryManDirectory().getDeliveryMan().size(); index++)
-            {
-                deliveryManObject = system.getDeliveryManDirectory().getDeliveryMan().get(index);
-                Object[] row = new Object[4];
-                row[0] = deliveryManObject.getDeliveryManName();
-                row[1] = deliveryManObject.getRating();
-                row[2] = deliveryManObject.getStatus();
-                row[3] = deliveryManObject;
-                model1.addRow(row);
-            }
-        }
-        catch(Exception ex)
-        {
-            
-        }
-    }
 }

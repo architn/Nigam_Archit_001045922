@@ -17,6 +17,7 @@ import java.util.ArrayList;
 public class DeliveryMan  {
     
    String deliveryManName;
+   String deliveryPhoneNumber;
    String deliveryusername;
    int rating;
    String status;
@@ -35,6 +36,14 @@ public class DeliveryMan  {
 
     public void setDeliveryusername(String deliveryusername) {
         this.deliveryusername = deliveryusername;
+    }
+
+    public String getDeliveryPhoneNumber() {
+        return deliveryPhoneNumber;
+    }
+
+    public void setDeliveryPhoneNumber(String deliveryPhoneNumber) {
+        this.deliveryPhoneNumber = deliveryPhoneNumber;
     }
 
     public int getRating() {

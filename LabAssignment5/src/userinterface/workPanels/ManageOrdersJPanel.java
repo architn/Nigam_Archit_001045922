@@ -8,6 +8,7 @@ package userinterface.workPanels;
 import Business.EcoSystem;
 import Business.Order.Order;
 import Business.Restaurant.Restaurant;
+import Business.ValidationLogic;
 import java.awt.Font;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -45,6 +46,7 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
         Font font = new Font("Helvetica", Font.BOLD,12);
         jLabel1.setFont(font);
         jLabel2.setFont(font);
+        txtAssignedTo.setEditable(false);
     }
 
     /**
@@ -63,9 +65,9 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         txtAssignedTo = new javax.swing.JTextField();
         btnSave = new javax.swing.JButton();
-        txtOrderStatus = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
+        checkboxOrderDelivery = new javax.swing.JCheckBox();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -77,9 +79,17 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Order ID", "Order Status", "Ordered At", "Ordered By", "Assigned To", "Order Amount", "Orderl"
+                "Order ID", "Order Delivered", "Ordered At", "Ordered By", "Assigned To", "Order Amount", "Order"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tblOrders);
 
         btnUpdate.setText("Update");
@@ -89,7 +99,7 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel1.setText("Order Status: ");
+        jLabel1.setText("Order Delivered: ");
 
         jLabel2.setText("Assigned To: ");
 
@@ -113,55 +123,54 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnUpdate)
+                .addGap(31, 31, 31)
+                .addComponent(btnDelete)
+                .addGap(414, 414, 414))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnUpdate)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnDelete)
-                        .addGap(18, 18, 18))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(88, 88, 88)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel1)
-                                .addComponent(jLabel2))
-                            .addGap(41, 41, 41)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(btnSave)
-                                .addComponent(txtAssignedTo, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtOrderStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(jButton1))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(25, 25, 25)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 652, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(118, Short.MAX_VALUE))
+                        .addGap(88, 88, 88)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
+                        .addGap(41, 41, 41)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnSave)
+                            .addComponent(txtAssignedTo, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(checkboxOrderDelivery, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButton1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 753, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(281, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(jButton1)
-                .addGap(30, 30, 30)
+                .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txtOrderStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(54, 54, 54)
+                    .addComponent(checkboxOrderDelivery))
+                .addGap(56, 56, 56)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtAssignedTo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(55, 55, 55)
                 .addComponent(btnSave)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48)
+                .addGap(46, 46, 46)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnUpdate)
                     .addComponent(btnDelete))
-                .addGap(97, 97, 97))
+                .addContainerGap(334, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -174,7 +183,13 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
         }
         DefaultTableModel model = (DefaultTableModel) tblOrders.getModel();
         Order selectedOrder = (Order) model.getValueAt(selectedIndex, 6);
-        txtOrderStatus.setText(selectedOrder.getOrderStatus());
+        if(selectedOrder.isIsOrderDelivered())
+        {
+            JOptionPane.showMessageDialog(this, "Cannot change status of delivered order!");
+        }
+        else{
+            checkboxOrderDelivery.setSelected(selectedOrder.isIsOrderDelivered());
+        }
         txtAssignedTo.setText(selectedOrder.getDeliveryMan().getDeliveryManName());
         
     }//GEN-LAST:event_btnUpdateActionPerformed
@@ -183,19 +198,30 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         int selectedIndex = tblOrders.getSelectedRow();
         
-        String newOrderStatus = txtOrderStatus.getText();
+        boolean orderStatus = checkboxOrderDelivery.isSelected();
         String newOrderDeliveryPerson= txtAssignedTo.getText();
-        
+        ValidationLogic validationLogic = new ValidationLogic(ecosystem);
         DefaultTableModel model = (DefaultTableModel) tblOrders.getModel();
         Order selectedOrder = (Order) model.getValueAt(selectedIndex, 6);
         
-        Order editedOrder = ecosystem.getOrderDirectory().updateOrder(selectedIndex, selectedOrder);
-        editedOrder.getDeliveryMan().setDeliveryManName(newOrderDeliveryPerson);
-        editedOrder.setOrderStatus(newOrderStatus);
+        if(validationLogic.ValidateIfDeliveryPersonExists(newOrderDeliveryPerson))
+        {
+            Order editedOrder = ecosystem.getOrderDirectory().updateOrder(selectedIndex, selectedOrder);
+            editedOrder.getDeliveryMan().setDeliveryManName(newOrderDeliveryPerson);
+            editedOrder.setIsOrderDelivered(orderStatus);
         
-        editedOrder.setDeliveryMan(editedOrder.getDeliveryMan());
-        JOptionPane.showMessageDialog(this, "Order Details updated successfully");
-        populateTable();
+            editedOrder.setDeliveryMan(editedOrder.getDeliveryMan());
+            JOptionPane.showMessageDialog(this, "Order Details updated successfully");
+            populateTable();
+            txtAssignedTo.setText("");
+            checkboxOrderDelivery.setSelected(false);
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Delivery Person with name '"+newOrderDeliveryPerson+"'"
+                    + " does not exist in system");
+        }
+        
+       
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
@@ -212,13 +238,13 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnSave;
     private javax.swing.JButton btnUpdate;
+    private javax.swing.JCheckBox checkboxOrderDelivery;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblOrders;
     private javax.swing.JTextField txtAssignedTo;
-    private javax.swing.JTextField txtOrderStatus;
     // End of variables declaration//GEN-END:variables
 
     private void populateTable() {
@@ -231,7 +257,13 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
                 Order presentOrder = ecosystem.getOrderDirectory().getOrderhist().get(index);
                 Object[] row = new Object[7];
                 row[0] =  presentOrder.getOrderID();
-                row[1] =  presentOrder.getOrderStatus();
+                if(presentOrder.isIsOrderDelivered())
+                {
+                    row[1] = "Yes";
+                }
+                else{
+                    row[1] = "No";
+                }
                 row[2] = presentOrder.getOrderTime();
                 row[3] = presentOrder.getCustomerUsername();
                 row[4] = presentOrder.getDeliveryMan();

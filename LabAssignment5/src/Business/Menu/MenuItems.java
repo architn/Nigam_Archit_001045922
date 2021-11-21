@@ -13,6 +13,7 @@ public class MenuItems {
     String itemName;
     double itemPrice;
     boolean availability;
+    String restaurant;
 
     public String getItemName() {
         return itemName;
@@ -37,6 +38,15 @@ public class MenuItems {
     public void setAvailability(boolean availability) {
         this.availability = availability;
     }
+
+    public String getRestaurant() {
+        return restaurant;
+    }
+
+    public void setRestaurant(String restaurant) {
+        this.restaurant = restaurant;
+    }
+    
     
     @Override
     public String toString(){

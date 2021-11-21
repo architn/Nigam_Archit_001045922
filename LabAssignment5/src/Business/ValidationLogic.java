@@ -5,6 +5,10 @@
  */
 package Business;
 
+import Business.DeliveryMan.DeliveryMan;
+import Business.Restaurant.Restaurant;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
@@ -12,6 +16,25 @@ import javax.swing.JTextField;
  * @author architnigam
  */
 public class ValidationLogic {
+    JFrame frame;
+    EcoSystem system;
+    public ValidationLogic(EcoSystem system)
+    {
+        this.system = system;
+    }
+    
+    public boolean validateIfAllFieldsAreFilled_2(JTextField field1, JTextField field2)
+    {
+        boolean areAllFieldsFilled = true;
+        String field1Value = field1.getText();
+        String field2Value = field2.getText();
+        
+        if(field1Value.equals("") || field2Value.equals(""))
+        {
+            areAllFieldsFilled = false;
+        }
+        return areAllFieldsFilled;
+    }
     
     public boolean validateIfAllFieldsAreFilled_3(JTextField field1, JTextField field2, JTextField field3)
     {
@@ -92,4 +115,44 @@ public class ValidationLogic {
         }
         return isFilledNumeric;
     }
+    
+    // Function to validate that contact mobile number has 10 digits
+     public boolean validateIfContactNumberIsCorrect(JTextField txtContactNumber){
+        boolean isContactNumberValid = false;
+        String contactNumberValue = txtContactNumber.getText();
+        if(contactNumberValue.length() == 10 && validateIfFieldIsNumeric(txtContactNumber))
+        {
+            isContactNumberValid = true;
+        }
+        else{
+            JOptionPane.showMessageDialog(frame, "Contact number should be 10 digits long!");
+        }
+        return isContactNumberValid;
+    }
+     
+     public boolean validateIfRestaurantExists(String restaurantName)
+     {
+         for(int index = 0; index < system.getRestaurantDirectory().getRestaurantList().size(); index++)
+         {
+             Restaurant restaurant = system.getRestaurantDirectory().getRestaurantList().get(index);
+             if(restaurant.getName().equals(restaurantName))
+             {
+                 return true;
+             }
+         }
+         return false;
+     }
+     
+     public boolean ValidateIfDeliveryPersonExists(String deliveryPersonName)
+     {
+         for(int index = 0; index < system.getDeliveryManDirectory().getDeliveryMan().size(); index++)
+         {
+             DeliveryMan deliveryPerson = system.getDeliveryManDirectory().getDeliveryMan().get(index);
+             if(deliveryPerson.getDeliveryManName().equals(deliveryPersonName))
+             {
+                 return true;
+             }
+         }
+         return false;
+     }
 }

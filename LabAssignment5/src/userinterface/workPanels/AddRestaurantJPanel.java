@@ -30,7 +30,6 @@ public class AddRestaurantJPanel extends javax.swing.JPanel {
     private Organization organization;
     private EcoSystem ecosystem; 
     RestaurantDirectory restaurantDirectory;
-    ValidationLogic validationLogic = new ValidationLogic();
     public AddRestaurantJPanel(JPanel userProcessContainer, EcoSystem ecosystem, Organization organization) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
@@ -168,6 +167,7 @@ public class AddRestaurantJPanel extends javax.swing.JPanel {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
+        ValidationLogic validationLogic = new ValidationLogic(ecosystem);
         String restaurantName = txtRestaurantName.getText();
         String restaurantAddress = txtRestaurantAddress.getText();
         String type = txtType.getText();
@@ -182,6 +182,13 @@ public class AddRestaurantJPanel extends javax.swing.JPanel {
             Employee emp = ecosystem.getEmployeeDirectory().createEmployee(manager);
             ecosystem.getUserAccountDirectory().createUserAccount(username, password, emp, new AdminRole());
             JOptionPane.showMessageDialog(this, "Restaurant Added");
+            txtRestaurantName.setText("");
+            txtPassword.setText("");
+            txtUsername.setText("");
+            txtPassword.setText("");
+            txtType.setText("");
+            txtManager.setText("");
+            txtRestaurantAddress.setText("");
         }
         else{
             JOptionPane.showMessageDialog(this, "All fields must be filled!");

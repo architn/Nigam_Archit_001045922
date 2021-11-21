@@ -69,7 +69,13 @@ public class DeliveryManWorkAreaJPanel extends javax.swing.JPanel {
                     row[2] = customer.getAddress();
                     row[3] = customer.getPhoneNumber();
                     row[4] = ordersHistory.getOrderTime();
-                    row[5] = ordersHistory.getOrderStatus();
+                    if(ordersHistory.isIsOrderDelivered())
+                    {
+                        row[5] = "Yes";
+                    }
+                    else{
+                        row[5] = "No";
+                    }
                     row[6] = ordersHistory;
                     model1.addRow(row);
                 }
@@ -94,13 +100,14 @@ public class DeliveryManWorkAreaJPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblOrdersAssigned = new javax.swing.JTable();
-        txtOrderStatus = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         btnSave = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
+        checkBoxOrderStatus = new javax.swing.JCheckBox();
 
         jButton1.setText("jButton1");
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Orders assigned to me: ");
@@ -116,13 +123,20 @@ public class DeliveryManWorkAreaJPanel extends javax.swing.JPanel {
             new String [] {
                 "Order ID", "Customer Name", "Address", "Phone Number", "Order Time", "Status", "Order"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(tblOrdersAssigned);
 
         add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 750, 140));
-        add(txtOrderStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 300, 100, 30));
 
-        jLabel2.setText("Order Status: ");
+        jLabel2.setText("Order Delivered: ");
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 310, -1, -1));
 
         btnSave.setText("Save");
@@ -131,7 +145,7 @@ public class DeliveryManWorkAreaJPanel extends javax.swing.JPanel {
                 btnSaveActionPerformed(evt);
             }
         });
-        add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 360, -1, -1));
+        add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 390, -1, -1));
 
         btnUpdate.setText("Update Order Status");
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
@@ -140,6 +154,7 @@ public class DeliveryManWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
         add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 260, -1, -1));
+        add(checkBoxOrderStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 310, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
@@ -151,20 +166,26 @@ public class DeliveryManWorkAreaJPanel extends javax.swing.JPanel {
         }
         DefaultTableModel model = (DefaultTableModel) tblOrdersAssigned.getModel();
         Order selectedOrder = (Order) model.getValueAt(selectedIndex, 6);
-        txtOrderStatus.setText(selectedOrder.getOrderStatus());
+        if(selectedOrder.isIsOrderDelivered())
+        {
+            JOptionPane.showMessageDialog(this, "Cannot change status of delivered order!");
+        }
+        else{
+            checkBoxOrderStatus.setSelected(selectedOrder.isIsOrderDelivered());
+        }
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
         int selectedIndex = tblOrdersAssigned.getSelectedRow();
         
-        String newOrderStatus = txtOrderStatus.getText();
         
         DefaultTableModel model = (DefaultTableModel) tblOrdersAssigned.getModel();
         Order selectedOrder = (Order) model.getValueAt(selectedIndex, 6);
         
         Order editedOrder = business.getOrderDirectory().updateOrder(selectedIndex, selectedOrder);
-        editedOrder.setOrderStatus(newOrderStatus);
+        editedOrder.setIsOrderDelivered(checkBoxOrderStatus.isSelected());
+        selectedOrder.getDeliveryMan().setStatus("Available");
         populateTable();
         JOptionPane.showMessageDialog(this, "Order Details updated successfully");
     }//GEN-LAST:event_btnSaveActionPerformed
@@ -172,12 +193,12 @@ public class DeliveryManWorkAreaJPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSave;
     private javax.swing.JButton btnUpdate;
+    private javax.swing.JCheckBox checkBoxOrderStatus;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tblOrdersAssigned;
-    private javax.swing.JTextField txtOrderStatus;
     // End of variables declaration//GEN-END:variables
 
     private Organization findCustomer(String username) {

@@ -9,6 +9,7 @@ import Business.EcoSystem;
 import Business.Employee.Employee;
 import Business.Organization;
 import Business.Role.CustomerRole;
+import Business.ValidationLogic;
 import java.awt.CardLayout;
 import java.awt.Component;
 import java.awt.Font;
@@ -28,16 +29,19 @@ public class AddCustomerJPanel extends javax.swing.JPanel {
     private JPanel userProcessContainer;
     private EcoSystem system;
     private Organization custorganization;
+    
     public AddCustomerJPanel(JPanel userProcessContainer,EcoSystem system,Organization custorganization) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.system=system;
         this.custorganization=custorganization;
+        
         Font font = new Font("Helvetica", Font.BOLD,12);
         jLabel1.setFont(font);
         jLabel2.setFont(font);
         jLabel3.setFont(font);
         jLabel4.setFont(font);
+        jLabel5.setFont(font);
     }
 
     /**
@@ -96,60 +100,62 @@ public class AddCustomerJPanel extends javax.swing.JPanel {
                 .addComponent(btnBack)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(67, 67, 67)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5))
+                .addGap(58, 58, 58)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel1)
+                        .addComponent(jLabel2)
+                        .addComponent(jLabel3)
+                        .addComponent(jLabel4))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addGap(10, 10, 10)))
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(btnSave)
                         .addComponent(txtName, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
-                        .addComponent(txtUsername)
                         .addComponent(txtPassword)
-                        .addComponent(txtAddress))
-                    .addComponent(txtPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(399, Short.MAX_VALUE))
+                        .addComponent(txtAddress)
+                        .addComponent(txtPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(446, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(47, 47, 47)
+                .addContainerGap()
                 .addComponent(btnBack)
-                .addGap(27, 27, 27)
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addComponent(jLabel2))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(42, 42, 42)
+                .addGap(34, 34, 34)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
+                .addGap(45, 45, 45)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(73, 73, 73)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(txtPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(txtPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
+                .addGap(54, 54, 54)
                 .addComponent(btnSave)
-                .addGap(43, 43, 43))
+                .addContainerGap(285, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
+        ValidationLogic validationLogic = new ValidationLogic(system);
         String customername = txtName.getText();
         String customerusername = txtUsername.getText();
         String customerpassword = txtPassword.getText();
@@ -162,17 +168,25 @@ public class AddCustomerJPanel extends javax.swing.JPanel {
            return;
         }
         
-        Employee emp = system.getEmployeeDirectory().createEmployee(customername);
-        system.getUserAccountDirectory().createUserAccount(customerusername, customerpassword, emp, new CustomerRole());
-        Business.Customer.Customer customer = (Business.Customer.Customer) system.getCustomerDirectory().createOrganization(Organization.Type.Customer);
-        customer.setName(customername);
-        customer.setAddress(address);
-        customer.setPhoneNumber(phoneNumber);
-        customer.setUsername(customerusername);
-        Business.Role.CustomerRole customerrole = new CustomerRole();
-        customer.getUserAccountDirectory().createUserAccount(customername, customerpassword, emp, customerrole);
-        JOptionPane.showMessageDialog(null, "Customer Saved Successfully");
-        
+        if(validationLogic.validateIfContactNumberIsCorrect(txtPhoneNumber))
+        {
+            Employee emp = system.getEmployeeDirectory().createEmployee(customername);
+            system.getUserAccountDirectory().createUserAccount(customerusername, customerpassword, emp, new CustomerRole());
+            Business.Customer.Customer customer = (Business.Customer.Customer) system.getCustomerDirectory().createOrganization(Organization.Type.Customer);
+            customer.setName(customername);
+            customer.setAddress(address);
+            customer.setPhoneNumber(phoneNumber);
+            customer.setUsername(customerusername);
+            Business.Role.CustomerRole customerrole = new CustomerRole();
+            customer.getUserAccountDirectory().createUserAccount(customername, customerpassword, emp, customerrole);
+            JOptionPane.showMessageDialog(null, "Customer Saved Successfully");
+            txtName.setText("");
+            txtPassword.setText("");
+            txtUsername.setText("");
+            txtPassword.setText("");
+            txtAddress.setText("");
+            txtPhoneNumber.setText("");
+        }
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed

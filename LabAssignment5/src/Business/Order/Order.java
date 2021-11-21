@@ -22,9 +22,9 @@ public class Order {
     private ArrayList<MenuItems> ordersByCustomer;
     DeliveryMan deliveryMan;
     String customerUsername;
-    String orderStatus;
     Date orderTime;
     double orderAmount;
+    boolean isOrderDelivered;
     Restaurant restaurant;
     
     Random rand = new Random();
@@ -51,14 +51,6 @@ public class Order {
 
     public void setDeliveryMan(DeliveryMan deliveryMan) {
         this.deliveryMan = deliveryMan;
-    }
-
-    public String getOrderStatus() {
-        return orderStatus;
-    }
-
-    public void setOrderStatus(String orderStatus) {
-        this.orderStatus = orderStatus;
     }
 
     public Date getOrderTime() {
@@ -93,6 +85,14 @@ public class Order {
         return generatedID;
     }
 
+    public boolean isIsOrderDelivered() {
+        return isOrderDelivered;
+    }
+
+    public void setIsOrderDelivered(boolean isOrderDelivered) {
+        this.isOrderDelivered = isOrderDelivered;
+    }
+    
     public Restaurant getRestaurant() {
         return restaurant;
     }
