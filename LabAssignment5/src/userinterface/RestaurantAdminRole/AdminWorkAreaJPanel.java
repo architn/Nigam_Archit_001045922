@@ -88,7 +88,7 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
         enterpriseLabel.setText("Restaurant :");
         add(enterpriseLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 120, 30));
         add(valueLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 100, 130, -1));
-        add(lblRestaurantName, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 90, 110, 30));
+        add(lblRestaurantName, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 90, 200, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnManageRestaurantsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageRestaurantsActionPerformed

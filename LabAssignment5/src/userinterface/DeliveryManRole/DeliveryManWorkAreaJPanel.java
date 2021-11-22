@@ -7,6 +7,7 @@ package userinterface.DeliveryManRole;
 import Business.DeliveryMan.DeliveryMan;
 import Business.EcoSystem;
 import Business.Order.Order;
+import Business.Order.OrderDirectory;
 import Business.Organization;
 
 import Business.UserAccount.UserAccount;
@@ -123,7 +124,7 @@ public class DeliveryManWorkAreaJPanel extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Order ID", "Customer Name", "Address", "Phone Number", "Order Time", "Status", "Order"
+                "Order ID", "Customer Name", "Address", "Phone Number", "Order Time", "Order Delivered", "Order"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -160,7 +161,7 @@ public class DeliveryManWorkAreaJPanel extends javax.swing.JPanel {
 
         jLabel3.setText("Order ID: ");
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 310, -1, -1));
-        add(txtOrderID, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 310, 100, 20));
+        add(txtOrderID, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 310, 110, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
@@ -186,14 +187,17 @@ public class DeliveryManWorkAreaJPanel extends javax.swing.JPanel {
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
         int selectedIndex = tblOrdersAssigned.getSelectedRow();
-        
+        String orderID = txtOrderID.getText();
         
         DefaultTableModel model = (DefaultTableModel) tblOrdersAssigned.getModel();
         Order selectedOrder = (Order) model.getValueAt(selectedIndex, 6);
-        
-        Order editedOrder = business.getOrderDirectory().updateOrder(selectedIndex, selectedOrder);
-        editedOrder.setIsOrderDelivered(checkBoxOrderStatus.isSelected());
-        editedOrder.getDeliveryMan().setStatus("Available");
+//        OrderDirectory orderDirectory = new OrderDirectory();
+//        Order orderToBeEdited = orderDirectory.findOrderByID(Integer.parseInt(orderID), business.getOrderDirectory().getOrderhist());
+//        orderToBeEdited.setIsOrderDelivered(checkBoxOrderStatus.isSelected());
+//        orderToBeEdited.getDeliveryMan().setStatus("Available")
+          Order editedOrder = business.getOrderDirectory().updateOrder(selectedOrder);
+          editedOrder.setIsOrderDelivered(checkBoxOrderStatus.isSelected());
+          editedOrder.getDeliveryMan().setStatus("Available");
         populateTable();
         JOptionPane.showMessageDialog(this, "Order Details updated successfully");
     }//GEN-LAST:event_btnSaveActionPerformed

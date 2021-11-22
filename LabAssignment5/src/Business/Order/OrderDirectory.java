@@ -47,14 +47,26 @@ public class OrderDirectory {
             return od;
     }
     
-    public Order updateOrder(int indexOfSelectedRecord, Order selectedOrder)
+    public Order updateOrder(Order selectedOrder)
     {
-        orderhist.set(indexOfSelectedRecord, selectedOrder);
+        orderhist.set(orderhist.indexOf(selectedOrder), selectedOrder);
         return selectedOrder;
     }
     
     public void deleteOrder(int indexOfSelectedRecord)
     {
         orderhist.remove(indexOfSelectedRecord);
+    }
+    
+    public Order findOrderByID(int orderID, ArrayList<Order> orderHistory)
+    {
+        for(Order order: orderHistory)
+        {
+            if(order.getOrderID() == orderID)
+            {
+                return order;
+            }
+        }
+        return null;
     }
 }

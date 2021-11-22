@@ -198,7 +198,7 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
         
         if(validationLogic.ValidateIfDeliveryPersonExists(newOrderDeliveryPerson))
         {
-            Order editedOrder = ecosystem.getOrderDirectory().updateOrder(selectedIndex, selectedOrder);
+            Order editedOrder = ecosystem.getOrderDirectory().updateOrder(selectedOrder);
             editedOrder.getDeliveryMan().setDeliveryManName(newOrderDeliveryPerson);
             editedOrder.setIsOrderDelivered(orderStatus);
         
