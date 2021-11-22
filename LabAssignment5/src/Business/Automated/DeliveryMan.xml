@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+<deliveryMen>
+    <deliveryman>
+        <name>Cristiano Ronaldo</name>
+        <rating>5</rating>
+        <phoneNumber>8578971558</phoneNumber>
+        <username>cr7</username>
+        <password>cr7</password>
+    </deliveryman>
+    <deliveryman>
+        <name>Lionel Messi</name>
+        <rating>5</rating>
+        <phoneNumber>8578961558</phoneNumber>
+        <username>messi</username>
+        <password>messi</password>
+    </deliveryman>
+    <deliveryman>
+        <name>Karim Benzema</name>
+        <rating>4</rating>
+        <phoneNumber>8778971558</phoneNumber>
+        <username>karim</username>
+        <password>karim</password>
+    </deliveryman>
+    <deliveryman>
+        <name>Paul Pogba</name>
+        <rating>3</rating>
+        <phoneNumber>8578871558</phoneNumber>
+        <username>paul</username>
+        <password>paul</password>
+    </deliveryman>
+</deliveryMen>

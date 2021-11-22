@@ -5,12 +5,15 @@
  */
 package userinterface.SystemAdminWorkArea;
 
+import Business.Automated.AutomatedPush;
 import Business.DeliveryMan.DeliveryMan;
 import Business.EcoSystem;
 import Business.Organization;
 import Business.Restaurant.Restaurant;
 import Business.Role.SystemAdminRole;
+import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
@@ -37,6 +40,7 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
     Organization customerOrganization;
     Organization deliveryorganization;
     Organization organization;
+    UserAccount userAccount;
     
     public SystemAdminWorkAreaJPanel(JPanel userProcessContainer, EcoSystem ecosystem) {
         initComponents();
@@ -76,6 +80,7 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         btnManageRestaurant = new javax.swing.JButton();
         btnAddCustomer = new javax.swing.JButton();
         btnManageDeliveryMan = new javax.swing.JButton();
+        btnAutoPopulate = new javax.swing.JButton();
 
         setLayout(new java.awt.BorderLayout());
 
@@ -148,6 +153,13 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnAutoPopulate.setText("Auto-Populate Data");
+        btnAutoPopulate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAutoPopulateActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -155,6 +167,7 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(43, 43, 43)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnAutoPopulate)
                     .addComponent(btnAddCustomer)
                     .addComponent(btnAddRestaurant)
                     .addComponent(btnAddMenuItem, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -180,7 +193,9 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
                 .addComponent(btnManageOrders)
                 .addGap(18, 18, 18)
                 .addComponent(btnManageDeliveryMan)
-                .addContainerGap(198, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnAutoPopulate)
+                .addContainerGap(151, Short.MAX_VALUE))
         );
 
         jSplitPane.setRightComponent(jPanel2);
@@ -248,12 +263,24 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         layout.next(userProcessContainer);
     }//GEN-LAST:event_btnManageDeliveryManActionPerformed
 
+    private void btnAutoPopulateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAutoPopulateActionPerformed
+        // TODO add your handling code here:
+        AutomatedPush automatedPush = new AutomatedPush(userProcessContainer, userAccount, ecosystem);
+        if(automatedPush.pushCustomerData() && automatedPush.pushRestaurantData()
+                && automatedPush.pushDeliveryManData() && automatedPush.pushMenuItemData())
+        {
+            JOptionPane.showMessageDialog(this, "Automated Push of Restaurant, Customer and Delivery Man and"
+                    + " menu item data was successful");
+        }
+    }//GEN-LAST:event_btnAutoPopulateActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddCustomer;
     private javax.swing.JButton btnAddDeliveryMan;
     private javax.swing.JButton btnAddMenuItem;
     private javax.swing.JButton btnAddRestaurant;
+    private javax.swing.JButton btnAutoPopulate;
     private javax.swing.JButton btnManageDeliveryMan;
     private javax.swing.JButton btnManageOrders;
     private javax.swing.JButton btnManageRestaurant;

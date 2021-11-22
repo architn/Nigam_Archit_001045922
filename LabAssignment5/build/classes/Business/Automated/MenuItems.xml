@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+<menuItems>
+    <menu restaurant = "Yard House">
+        <name>Chicken Burger</name>
+        <price>20</price>
+        <availability>true</availability>
+    </menu>
+    <menu restaurant = "Yard House">
+        <name>Pasta</name>
+        <price>10</price>
+        <availability>true</availability>
+    </menu>
+    <menu restaurant = "Yard House">
+        <name>Fries</name>
+        <price>12</price>
+        <availability>true</availability>
+    </menu>
+    <menu restaurant = "Blaze Pizza">
+        <name>Hawaii Pizza</name>
+        <price>25</price>
+        <availability>true</availability>
+    </menu>
+    <menu restaurant = "Blaze Pizza">
+        <name>Chicken Pizza</name>
+        <price>23</price>
+        <availability>true</availability>
+    </menu>
+    <menu restaurant = "Cheesecake Factory">
+        <name>Lousiana Chicken Pasta</name>
+        <price>29</price>
+        <availability>true</availability>
+    </menu>
+    <menu restaurant = "Cheesecake Factory">
+        <name>Jambalaya Chicken Pasta</name>
+        <price>26</price>
+        <availability>true</availability>
+    </menu>
+    <menu restaurant = "Cheesecake Factory">
+        <name>Coke</name>
+        <price>4</price>
+        <availability>true</availability>
+    </menu>
+    <menu restaurant = "Dumpling Place">
+        <name>Chicken Momos</name>
+        <price>20</price>
+        <availability>true</availability>
+    </menu>
+    <menu restaurant = "Dumpling Place">
+        <name>Veg Momos</name>
+        <price>12</price>
+        <availability>true</availability>
+    </menu>
+</menuItems>

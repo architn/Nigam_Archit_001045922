@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+<customers>
+    <customer>
+        <name>Weeknd</name>
+        <address>New York City, NY</address>
+        <phoneNumber>8578671558</phoneNumber>
+        <username>weeknd</username>
+        <password>weeknd</password>
+        </customer>
+    <customer>
+        <name>Sam Smith</name>
+        <address>New York City, NT</address>
+        <phoneNumber>8578671558</phoneNumber>
+        <username>sam</username>
+        <password>sam</password>
+    </customer>
+    <customer>
+        <name>Dua Lipa</name>
+        <address>New York City, NY</address>
+        <phoneNumber>8578671558</phoneNumber>
+        <username>dua</username>
+        <password>dua</password>
+    </customer>
+    <customer>
+        <name>Michael Jackson</name>
+        <address>New York City, NT</address>
+        <phoneNumber>8578671558</phoneNumber>
+        <username>mj</username>
+        <password>mj</password>
+    </customer>
+</customers>
