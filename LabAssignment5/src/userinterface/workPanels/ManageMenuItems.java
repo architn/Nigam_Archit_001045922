@@ -36,6 +36,7 @@ public class ManageMenuItems extends javax.swing.JPanel {
         this.organization = organization;
         Font font = new Font("Helvetica", Font.BOLD,12);
         jLabel6.setFont(font);
+        populateComboBox();
     }
 
     /**
@@ -48,13 +49,11 @@ public class ManageMenuItems extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel6 = new javax.swing.JLabel();
-        txtSearchRestaurant = new javax.swing.JTextField();
         btnSearch = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblMenu = new javax.swing.JTable();
         btnUpdate = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
-        btnBack = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -62,6 +61,7 @@ public class ManageMenuItems extends javax.swing.JPanel {
         txtCost = new javax.swing.JTextField();
         checkBoxAvailability = new javax.swing.JCheckBox();
         btnSave = new javax.swing.JButton();
+        ddRestaurants = new javax.swing.JComboBox();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -109,8 +109,6 @@ public class ManageMenuItems extends javax.swing.JPanel {
             }
         });
 
-        btnBack.setText("Back");
-
         jLabel1.setText("Item Name: ");
 
         jLabel2.setText("Cost:");
@@ -124,6 +122,8 @@ public class ManageMenuItems extends javax.swing.JPanel {
             }
         });
 
+        ddRestaurants.setModel(new javax.swing.DefaultComboBoxModel(new String[] {  }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -131,18 +131,16 @@ public class ManageMenuItems extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(jLabel6)
-                .addGap(29, 29, 29)
-                .addComponent(txtSearchRestaurant, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
-                .addGap(28, 28, 28)
+                .addGap(18, 18, 18)
+                .addComponent(ddRestaurants, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                 .addComponent(btnSearch)
                 .addGap(445, 445, 445))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 605, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnBack)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 605, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(342, 342, 342)
                         .addComponent(btnUpdate)
@@ -166,13 +164,11 @@ public class ManageMenuItems extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addComponent(btnBack)
-                .addGap(18, 18, 18)
+                .addGap(59, 59, 59)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(txtSearchRestaurant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSearch))
+                    .addComponent(btnSearch)
+                    .addComponent(ddRestaurants, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(44, 44, 44)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(13, 13, 13)
@@ -199,13 +195,7 @@ public class ManageMenuItems extends javax.swing.JPanel {
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
-        if(!txtSearchRestaurant.getText().equals(""))
-        {
-            populateTable();
-        }
-        else{
-            JOptionPane.showMessageDialog(this, "Enter name of restaurant before searching!");
-        }
+        populateTable();  
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
@@ -265,12 +255,12 @@ public class ManageMenuItems extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBack;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnSave;
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JCheckBox checkBoxAvailability;
+    private javax.swing.JComboBox<String> ddRestaurants;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -279,13 +269,12 @@ public class ManageMenuItems extends javax.swing.JPanel {
     private javax.swing.JTable tblMenu;
     private javax.swing.JTextField txtCost;
     private javax.swing.JTextField txtItemName;
-    private javax.swing.JTextField txtSearchRestaurant;
     // End of variables declaration//GEN-END:variables
 
     private void populateTable() {
         DefaultTableModel model = (DefaultTableModel) tblMenu.getModel();
         model.setRowCount(0);
-        String searchedRestaurant = txtSearchRestaurant.getText();
+        String searchedRestaurant = ddRestaurants.getSelectedItem().toString();
         Restaurant restaurantFound = system.getRestaurantDirectory().findRestaurant(searchedRestaurant);
         ArrayList<MenuItems> menuItems = restaurantFound.getMenuItems();
         for(MenuItems menuItem : menuItems)
@@ -303,6 +292,12 @@ public class ManageMenuItems extends javax.swing.JPanel {
             }
             row[3] = menuItem;
             model.addRow(row);
+        }
+    }
+
+    private void populateComboBox() {
+         for(Restaurant res: system.getRestaurantDirectory().getRestaurantList()){
+            ddRestaurants.addItem(res.getName());
         }
     }
 }

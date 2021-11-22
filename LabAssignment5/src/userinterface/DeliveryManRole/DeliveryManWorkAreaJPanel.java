@@ -104,6 +104,8 @@ public class DeliveryManWorkAreaJPanel extends javax.swing.JPanel {
         btnSave = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
         checkBoxOrderStatus = new javax.swing.JCheckBox();
+        jLabel3 = new javax.swing.JLabel();
+        txtOrderID = new javax.swing.JTextField();
 
         jButton1.setText("jButton1");
 
@@ -137,7 +139,7 @@ public class DeliveryManWorkAreaJPanel extends javax.swing.JPanel {
         add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 750, 140));
 
         jLabel2.setText("Order Delivered: ");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 310, -1, -1));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 350, -1, -1));
 
         btnSave.setText("Save");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
@@ -154,7 +156,11 @@ public class DeliveryManWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
         add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 260, -1, -1));
-        add(checkBoxOrderStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 310, -1, -1));
+        add(checkBoxOrderStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 350, -1, -1));
+
+        jLabel3.setText("Order ID: ");
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 310, -1, -1));
+        add(txtOrderID, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 310, 100, 20));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
@@ -166,6 +172,8 @@ public class DeliveryManWorkAreaJPanel extends javax.swing.JPanel {
         }
         DefaultTableModel model = (DefaultTableModel) tblOrdersAssigned.getModel();
         Order selectedOrder = (Order) model.getValueAt(selectedIndex, 6);
+        txtOrderID.setText(String.valueOf(selectedOrder.getOrderID()));
+        txtOrderID.setEditable(false);
         if(selectedOrder.isIsOrderDelivered())
         {
             JOptionPane.showMessageDialog(this, "Cannot change status of delivered order!");
@@ -185,7 +193,7 @@ public class DeliveryManWorkAreaJPanel extends javax.swing.JPanel {
         
         Order editedOrder = business.getOrderDirectory().updateOrder(selectedIndex, selectedOrder);
         editedOrder.setIsOrderDelivered(checkBoxOrderStatus.isSelected());
-        selectedOrder.getDeliveryMan().setStatus("Available");
+        editedOrder.getDeliveryMan().setStatus("Available");
         populateTable();
         JOptionPane.showMessageDialog(this, "Order Details updated successfully");
     }//GEN-LAST:event_btnSaveActionPerformed
@@ -197,8 +205,10 @@ public class DeliveryManWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tblOrdersAssigned;
+    private javax.swing.JTextField txtOrderID;
     // End of variables declaration//GEN-END:variables
 
     private Organization findCustomer(String username) {

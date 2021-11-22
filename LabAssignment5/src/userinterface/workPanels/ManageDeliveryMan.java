@@ -37,7 +37,6 @@ public class ManageDeliveryMan extends javax.swing.JPanel {
         jLabel3.setFont(font);
         jLabel4.setFont(font);
         jLabel5.setFont(font);
-        txtAvailability.setEditable(false);
         populateTable();
     }
 
@@ -55,16 +54,15 @@ public class ManageDeliveryMan extends javax.swing.JPanel {
         tblDeliveryMen = new javax.swing.JTable();
         btnUpdate = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         txtName = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         txtPhoneNo = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txtRating = new javax.swing.JTextField();
-        txtAvailability = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         btnSave = new javax.swing.JButton();
+        ddAvailability = new javax.swing.JComboBox();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -105,8 +103,6 @@ public class ManageDeliveryMan extends javax.swing.JPanel {
             }
         });
 
-        jButton1.setText("Back");
-
         jLabel2.setText("Name: ");
 
         jLabel3.setText("Phone No: ");
@@ -122,6 +118,8 @@ public class ManageDeliveryMan extends javax.swing.JPanel {
             }
         });
 
+        ddAvailability.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Busy", "Available"}));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -132,9 +130,6 @@ public class ManageDeliveryMan extends javax.swing.JPanel {
                 .addGap(32, 32, 32)
                 .addComponent(btnDelete)
                 .addGap(144, 144, 144))
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jButton1)
-                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -159,17 +154,16 @@ public class ManageDeliveryMan extends javax.swing.JPanel {
                                     .addComponent(txtRating)
                                     .addComponent(txtPhoneNo)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(btnSave)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addComponent(txtAvailability))))))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(btnSave)
+                                            .addComponent(ddAvailability, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(0, 0, Short.MAX_VALUE)))))))
                 .addContainerGap(134, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(13, 13, 13)
-                .addComponent(jButton1)
-                .addGap(18, 18, 18)
+                .addGap(60, 60, 60)
                 .addComponent(jLabel1)
                 .addGap(30, 30, 30)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -189,13 +183,13 @@ public class ManageDeliveryMan extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtRating, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(49, 49, 49)
+                .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(txtAvailability, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(53, 53, 53)
+                    .addComponent(ddAvailability, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(51, 51, 51)
                 .addComponent(btnSave)
-                .addContainerGap(65, Short.MAX_VALUE))
+                .addContainerGap(66, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -211,7 +205,8 @@ public class ManageDeliveryMan extends javax.swing.JPanel {
         txtName.setText(selectedDeliveryGuy.getDeliveryManName());;
         txtRating.setText(String.valueOf(selectedDeliveryGuy.getRating()));
         txtPhoneNo.setText(selectedDeliveryGuy.getDeliveryPhoneNumber());
-        txtAvailability.setText(selectedDeliveryGuy.getStatus());
+        ddAvailability.setSelectedItem(selectedDeliveryGuy.getStatus());
+        //txtAvailability.setText(selectedDeliveryGuy.getStatus());
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
@@ -224,6 +219,7 @@ public class ManageDeliveryMan extends javax.swing.JPanel {
         String nameOfDeliveryMan = txtName.getText();
         String rating = txtRating.getText();
         String phoneNumber = txtPhoneNo.getText();
+        String deliveryGuyStatus = ddAvailability.getSelectedItem().toString();
         
         if(validationLogic.validateIfAllFieldsAreFilled_3(txtName, txtRating, txtPhoneNo)
                 && validationLogic.validateIfFieldIsNumeric(txtRating))
@@ -231,27 +227,26 @@ public class ManageDeliveryMan extends javax.swing.JPanel {
         {
             if(validationLogic.validateIfContactNumberIsCorrect(txtPhoneNo))
             {
-             try
-             {
-                int selectedIndex = tblDeliveryMen.getSelectedRow();
-                DefaultTableModel model = (DefaultTableModel) tblDeliveryMen.getModel();
-                DeliveryMan selectedDeliveryGuy = (DeliveryMan) model.getValueAt(selectedIndex, 4);
-                DeliveryMan deliveryMan = system.getDeliveryManDirectory().updateDeliveryMan(selectedIndex, selectedDeliveryGuy);
-                deliveryMan.setDeliveryManName(nameOfDeliveryMan);
-                deliveryMan.setDeliveryPhoneNumber(phoneNumber);
-                deliveryMan.setRating(Integer.parseInt(rating));
+                
+                 try{
+                    int selectedIndex = tblDeliveryMen.getSelectedRow();
+                    DefaultTableModel model = (DefaultTableModel) tblDeliveryMen.getModel();
+                    DeliveryMan selectedDeliveryGuy = (DeliveryMan) model.getValueAt(selectedIndex, 4);
+                    DeliveryMan deliveryMan = system.getDeliveryManDirectory().updateDeliveryMan(selectedIndex, selectedDeliveryGuy);
+                    deliveryMan.setDeliveryManName(nameOfDeliveryMan);
+                    deliveryMan.setDeliveryPhoneNumber(phoneNumber);
+                    deliveryMan.setRating(Integer.parseInt(rating));
+                    deliveryMan.setStatus(deliveryGuyStatus);
+                    JOptionPane.showMessageDialog(this, "Delivery Man details updated!");
+                    populateTable();  
+                    txtName.setText("");;
+                    txtRating.setText("");
+                    txtPhoneNo.setText("");
+                    }       
+                catch(Exception ex){
 
-                JOptionPane.showMessageDialog(this, "Delivery Man details updated!");
-                populateTable();  
-                txtName.setText("");;
-                txtRating.setText("");
-                txtPhoneNo.setText("");
-                txtAvailability.setText("");
-                }       
-                catch(Exception ex)
-                {
-
-                }
+                 }
+            
             }
         }
         else{
@@ -265,7 +260,7 @@ public class ManageDeliveryMan extends javax.swing.JPanel {
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnSave;
     private javax.swing.JButton btnUpdate;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<String> ddAvailability;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -273,7 +268,6 @@ public class ManageDeliveryMan extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblDeliveryMen;
-    private javax.swing.JTextField txtAvailability;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtPhoneNo;
     private javax.swing.JTextField txtRating;

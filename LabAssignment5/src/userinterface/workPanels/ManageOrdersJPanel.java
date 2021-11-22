@@ -65,7 +65,6 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         txtAssignedTo = new javax.swing.JTextField();
         btnSave = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
         checkboxOrderDelivery = new javax.swing.JCheckBox();
 
@@ -110,8 +109,6 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
             }
         });
 
-        jButton1.setText("Back");
-
         btnDelete.setText("Delete");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -142,9 +139,6 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
                             .addComponent(txtAssignedTo, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(checkboxOrderDelivery, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jButton1))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(45, 45, 45)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 753, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(281, Short.MAX_VALUE))
@@ -152,9 +146,7 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(jButton1)
-                .addGap(31, 31, 31)
+                .addGap(82, 82, 82)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(checkboxOrderDelivery))
@@ -239,7 +231,6 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnSave;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JCheckBox checkboxOrderDelivery;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;

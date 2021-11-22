@@ -10,13 +10,11 @@ import Business.DeliveryMan.DeliveryMan;
 import Business.EcoSystem;
 import Business.Menu.MenuItems;
 import Business.Order.Order;
-import Business.Order.OrderDirectory;
 import Business.Organization;
 import Business.Restaurant.Restaurant;
 import Business.UserAccount.UserAccount;
 import java.awt.Font;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Random;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -50,6 +48,7 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
         jLabel2.setFont(font);
         jLabel3.setFont(font);
         jLabel4.setFont(font);
+        populateComboBox();
         
         if(system.getRestaurantDirectory().getRestaurantList().isEmpty())
         {
@@ -74,13 +73,13 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
         btnOrder = new javax.swing.JToggleButton();
         lblCustomerName = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txtRestaurantName = new javax.swing.JTextField();
         btnSearch = new javax.swing.JButton();
         lblName = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         btnAddToCart = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         txtTotalPrice = new javax.swing.JTextField();
+        ddRestaurants = new javax.swing.JComboBox();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -153,6 +152,13 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
 
         jLabel4.setText("Total Price:  $");
 
+        ddRestaurants.setModel(new javax.swing.DefaultComboBoxModel(new String[] {}));
+        ddRestaurants.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ddRestaurantsActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -170,8 +176,8 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addGap(18, 18, 18)
-                                .addComponent(txtRestaurantName, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                                .addComponent(ddRestaurants, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(19, 19, 19)
                                 .addComponent(btnSearch))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
@@ -209,8 +215,8 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtRestaurantName, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnSearch)))
+                        .addComponent(btnSearch)
+                        .addComponent(ddRestaurants, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -233,13 +239,12 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
-        String restaurantName = txtRestaurantName.getText();
+        String restaurantName = ddRestaurants.getSelectedItem().toString();
         try{
             searchedRestaurant = system.getRestaurantDirectory().findRestaurant(restaurantName);
             if(searchedRestaurant == null)
             {
                 JOptionPane.showMessageDialog(this, "No such restaurant found!");
-                txtRestaurantName.setText("");
             }
             else{
                 DefaultTableModel model = (DefaultTableModel) tblMenuItems.getModel();
@@ -266,46 +271,53 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
 
     private void btnOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrderActionPerformed
         // TODO add your handling code here:
-        double totalOrderAmount = 0;
-        MenuItems menuItem = new MenuItems();
-        ArrayList<MenuItems> orderedItems = new ArrayList<MenuItems>();
-        DefaultTableModel model1 = (DefaultTableModel) tblCart.getModel();
-        for(int acrossRow = 0; acrossRow < model1.getRowCount(); acrossRow++)
+    try{
+        String totalAmountInString = txtTotalPrice.getText();
+        if(!totalAmountInString.isEmpty())
         {
-            menuItem.setItemName(model1.getValueAt(acrossRow, 0).toString());
-            double price = Double.parseDouble(model1.getValueAt(acrossRow, 1).toString());
-            menuItem.setItemPrice(price);
-            totalOrderAmount += price;
-        }
-        DeliveryMan assignedDeliveryMan = new DeliveryMan();
-        int upperbound = system.getDeliveryManDirectory().getDeliveryMan().size();
-        if(upperbound != 0)
-        {
-            int returnedIndex = rand.nextInt(upperbound);
-            assignedDeliveryMan = system.getDeliveryManDirectory().getDeliveryMan().get(returnedIndex);
-            orderedItems.add(menuItem);
-            Order orderedItem = new Order();
-            
-            // Method 2: Correct
-            if(!assignedDeliveryMan.getStatus().equals("Busy") && totalOrderAmount != 0)
+            double totalOrderAmount = 0;
+            MenuItems menuItem = new MenuItems();
+            ArrayList<MenuItems> orderedItems = new ArrayList<MenuItems>();
+            DefaultTableModel model1 = (DefaultTableModel) tblCart.getModel();
+            for(int acrossRow = 0; acrossRow < model1.getRowCount(); acrossRow++)
             {
-                orderedItem = system.getOrderDirectory().createOrder(orderedItems, userAccount.getUsername(), 
-                    assignedDeliveryMan, totalOrderAmount, searchedRestaurant);
-                assignedDeliveryMan.setStatus("Busy");
-                JOptionPane.showMessageDialog(this, "Order successfully placed! Total amount is: $"+totalOrderAmount
-                +" and will be delivered by: "+assignedDeliveryMan.getDeliveryManName());
+                menuItem.setItemName(model1.getValueAt(acrossRow, 0).toString());
+                double price = Double.parseDouble(model1.getValueAt(acrossRow, 1).toString());
+                menuItem.setItemPrice(price);
+                totalOrderAmount += price;
+            }
+            DeliveryMan assignedDeliveryMan = new DeliveryMan();
+            int upperbound = system.getDeliveryManDirectory().getDeliveryMan().size();
+            if(upperbound != 0)
+            {
+                assignedDeliveryMan = system.getDeliveryManDirectory().findAvailableDeliveryMan();
+                if(assignedDeliveryMan == null)
+                {
+                    JOptionPane.showMessageDialog(this, "All Delivery boys are busy! Try ordering after a while!");
+                }
+                else{
+                     orderedItems.add(menuItem);
+                    if(!assignedDeliveryMan.getStatus().equals("Busy"))
+                    {
+
+                        Order orderedItem = system.getOrderDirectory().createOrder(orderedItems, userAccount.getUsername(), 
+                        assignedDeliveryMan, totalOrderAmount, searchedRestaurant);
+                        assignedDeliveryMan.setStatus("Busy");
+                        JOptionPane.showMessageDialog(this, "Order successfully placed! Total amount is: $"+totalOrderAmount
+                        +" and will be delivered by: "+assignedDeliveryMan.getDeliveryManName());
+                        txtTotalPrice.setText("");
+                    }
+                }  
             }
             else{
-                JOptionPane.showMessageDialog(this, "All Delivery boys are busy! Try ordering after a while!");
-            }
-            
-        }
-        else{
             JOptionPane.showMessageDialog(this, "Order cannot be placed if there is no delivery person in system! "
                     + "Please add one before proceding!");
+            }   
         }
-        txtTotalPrice.setText("");
-        btnOrder.setEnabled(false);
+    }
+    catch(Exception e){
+            
+    }
     }//GEN-LAST:event_btnOrderActionPerformed
 
     private void btnAddToCartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddToCartActionPerformed
@@ -332,10 +344,15 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
             txtTotalPrice.setText(String.valueOf(totalOrderAmount));
     }//GEN-LAST:event_btnAddToCartActionPerformed
 
+    private void ddRestaurantsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ddRestaurantsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ddRestaurantsActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddToCart;
     private javax.swing.JToggleButton btnOrder;
     private javax.swing.JButton btnSearch;
+    private javax.swing.JComboBox<String> ddRestaurants;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -346,7 +363,6 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblName;
     private javax.swing.JTable tblCart;
     private javax.swing.JTable tblMenuItems;
-    private javax.swing.JTextField txtRestaurantName;
     private javax.swing.JTextField txtTotalPrice;
     // End of variables declaration//GEN-END:variables
 
@@ -362,4 +378,10 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
             model1.addRow(row);
         }
     }
+    
+    private void populateComboBox(){
+         for(Restaurant res: system.getRestaurantDirectory().getRestaurantList()){
+            ddRestaurants.addItem(res.getName());
+        }
+}
 }

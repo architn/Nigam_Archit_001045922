@@ -42,10 +42,21 @@ public class DeliveryManDirectory {
        return dm;      
    }
    
-   public DeliveryMan findDeliveryMan(String name){
+   public DeliveryMan findDeliveryManByName(String name){
        for(DeliveryMan dm :deliveryMan ){
            
            if(dm.getDeliveryManName().equals(name)){
+               return dm;
+           }
+       }
+       return null;
+   }
+   
+   public DeliveryMan findAvailableDeliveryMan()
+   {
+       for(DeliveryMan dm :deliveryMan ){
+           
+           if(!dm.getStatus().equals("Busy")){
                return dm;
            }
        }

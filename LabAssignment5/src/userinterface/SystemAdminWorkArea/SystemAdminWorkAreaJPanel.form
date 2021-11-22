@@ -81,14 +81,10 @@
                           <Component id="btnAddCustomer" min="-2" max="-2" attributes="0"/>
                           <Component id="btnAddRestaurant" min="-2" max="-2" attributes="0"/>
                           <Component id="btnAddMenuItem" min="-2" pref="165" max="-2" attributes="0"/>
-                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                              <Component id="btnAddDeliveryMan" min="-2" pref="165" max="-2" attributes="0"/>
-                              <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                                  <Component id="btnManageOrders" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btnManageRestaurant" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btnManageDeliveryMan" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
+                          <Component id="btnManageOrders" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnManageRestaurant" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnManageDeliveryMan" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnAddDeliveryMan" alignment="0" min="-2" pref="165" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="355" max="32767" attributes="0"/>
                   </Group>
@@ -108,9 +104,9 @@
                       <Component id="btnManageRestaurant" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btnManageOrders" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btnManageDeliveryMan" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="186" max="32767" attributes="0"/>
+                      <EmptySpace pref="198" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>

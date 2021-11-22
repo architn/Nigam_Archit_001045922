@@ -31,6 +31,8 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
         this.account = account;
         this.ecosystem = ecosystem;
         this.organization = organization;
+        String restaurantName = findRestaurantName(account.getUsername());
+        lblRestaurantName.setText(restaurantName);
         
         //valueLabel.setText();
     }
@@ -49,11 +51,13 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
         btnManageOrders = new javax.swing.JButton();
         enterpriseLabel = new javax.swing.JLabel();
         valueLabel = new javax.swing.JLabel();
+        lblRestaurantName = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel1.setText("My Work Area -Adminstrative Role");
+        jLabel1.setText("Restaurant Administration");
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, -1, -1));
 
         btnManageRestaurants.setText("Manage Restaurant Info");
@@ -84,6 +88,7 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
         enterpriseLabel.setText("Restaurant :");
         add(enterpriseLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 120, 30));
         add(valueLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 100, 130, -1));
+        add(lblRestaurantName, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 90, 110, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnManageRestaurantsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageRestaurantsActionPerformed
@@ -125,6 +130,7 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnMenu;
     private javax.swing.JLabel enterpriseLabel;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel lblRestaurantName;
     private javax.swing.JLabel valueLabel;
     // End of variables declaration//GEN-END:variables
     
