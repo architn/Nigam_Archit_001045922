@@ -11,6 +11,7 @@ import Business.Order.OrderDirectory;
 import Business.Organization;
 
 import Business.UserAccount.UserAccount;
+import java.awt.Font;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -35,6 +36,10 @@ public class DeliveryManWorkAreaJPanel extends javax.swing.JPanel {
         this.userProcessContainer = userProcessContainer;
         this.userAccount = userAccount;
         this.business = business;
+        Font font = new Font("Helvetica", Font.BOLD,12);
+        jLabel1.setFont(font);
+        jLabel2.setFont(font);
+        jLabel3.setFont(font);
       
         populateTable();
     }
@@ -63,7 +68,8 @@ public class DeliveryManWorkAreaJPanel extends javax.swing.JPanel {
                 ordersHistory = business.getOrderDirectory().getOrderhist().get(index);
                 Organization customer = findCustomer(ordersHistory.getCustomerUsername());
                 Object[] row = new Object[7];
-                if(ordersHistory.getDeliveryMan().getDeliveryManName().equals(deliveryManName))
+                if(ordersHistory.getDeliveryMan().getDeliveryManName().equals(deliveryManName)
+                        && !ordersHistory.isIsOrderDelivered())
                 {
                     row[0] = ordersHistory.getOrderID();
                     row[1] = customer.getName();
@@ -113,7 +119,7 @@ public class DeliveryManWorkAreaJPanel extends javax.swing.JPanel {
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setText("Orders assigned to me: ");
+        jLabel1.setText("Pending orders assigned to me: ");
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, -1, -1));
 
         tblOrdersAssigned.setModel(new javax.swing.table.DefaultTableModel(
